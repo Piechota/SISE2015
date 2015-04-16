@@ -33,7 +33,7 @@ void GameController::Turn()
 {
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
-		players[i]->ProcessAI();
+		players[i]->ProcessAI(NULL);
 	}
 }
 

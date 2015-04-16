@@ -69,7 +69,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Command.cpp" />
     <ClCompile Include="ExamplePlayer.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Globals.cpp" />
@@ -82,7 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
-    <ClInclude Include="Command.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ExamplePlayer.h" />
     <ClInclude Include="GameController.h" />
