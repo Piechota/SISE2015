@@ -1,8 +1,12 @@
 #ifndef _GLOBALS_H_
 #define _GLOBALS_H_
 
+struct SDL_Window;
+struct SDL_Renderer;
+
 extern int screen_width;
 extern int screen_height;
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
+
 #endif

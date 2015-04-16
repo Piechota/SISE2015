@@ -2,7 +2,7 @@
 #define _HEADERS_H_
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <SDL.h>
 #include <ctime>
 #include <vector>
@@ -11,8 +11,6 @@
 #include "DataStructures.h"
 
 #include "Globals.h"
-#include "Color.h"
-#include "Renderer.h"
 
 #include "Node.h"
 #include "Pawn.h"
@@ -25,8 +23,5 @@
 #include "Graph.h"
 
 using namespace std;
-
-const int windowWidth = 700;
-const int windowHeight = 700;
 
 #endif

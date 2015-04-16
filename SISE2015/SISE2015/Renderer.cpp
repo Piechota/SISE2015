@@ -1,4 +1,8 @@
-#include "Headers.h"
+#include <cmath>
+#include <SDL.h>
+#include "Globals.h"
+#include "Renderer.h"
+#include "Color.h"
 
 int length(const int& x0, const int& y0, const int& x1, const int& y1)
 {
@@ -23,11 +27,12 @@ void DrawLine(const Color& color, const int& x0, const int& y0, const int& x1, c
 void DrawLine(const Color& color, const float& x0, const float& y0, const float& x1, const float& y1)
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0xFF);
-	SDL_RenderDrawLine(renderer, (int)(x0 * screen_width), (int)(y0 * screen_height), (int)(x1 * screen_width), (int)(y1 * screen_height));
+	//SDL_RenderDrawLine(renderer, (int)(x0 * screen_width), (int)(y0 * screen_height), (int)(x1 * screen_width), (int)(y1 * screen_height));
+	SDL_RenderDrawLine(renderer, (int)(x0), (int)(y0), (int)(x1), (int)(y1));
 }
 
 
-void DrawCircle(const Color& color, const int& x, const int& y, const int& radius)
+void DrawCircleImpl(const Color& color, const int& x, const int& y, const int& radius)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 	const Uint32 rmask = 0xff000000;
@@ -80,17 +85,23 @@ void DrawCircle(const Color& color, const int& x, const int& y, const int& radiu
 	SDL_DestroyTexture(tCircle);
 }
 
+void DrawCircle(const Color& color, const int& x, const int& y, const int& radius)
+{
+	DrawCircleImpl(color, x, y, radius);
+}
+
 void DrawCircle(const Color& color, const SDL_Point& p, const int& radius)
 {
-	DrawCircle(color, p.x, p.y, radius);
+	DrawCircleImpl(color, p.x, p.y, radius);
 }
 
 void DrawCircle(const Color& color, const float& x, const float& y, const float& radius)
 {
-	DrawCircle(color, x * screen_width, y * screen_height, fmax(radius * screen_height, radius * screen_width));
+	//DrawCircleImpl(color, x * screen_width, y * screen_height, fmax(radius * screen_height, radius * screen_width));
+	DrawCircleImpl(color, x, y, radius);
 }
 
-void DrawCircle(const Color& fillColor, const Color& borderColor, const int& x, const int& y, const int& radius, const int& borderSize)
+void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int& x, const int& y, const int& radius, const int& borderSize)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 	const Uint32 rmask = 0xff000000;
@@ -154,11 +165,19 @@ void DrawCircle(const Color& fillColor, const Color& borderColor, const int& x, 
 	SDL_FreeSurface(sCircle);
 	SDL_DestroyTexture(tCircle);
 }
+
+void DrawCircle(const Color& fillColor, const Color& borderColor, const int& x, const int& y, const int& radius, const int& borderSize)
+{
+	DrawCircleImpl(fillColor, borderColor, x, y, radius, borderSize);
+}
+
 void DrawCircle(const Color& fillColor, const Color& borderColor, const SDL_Point& p, const int& radius, const int& borderSize)
 {
-	DrawCircle(fillColor, borderColor, p.x, p.y, radius, borderSize);
+	DrawCircleImpl(fillColor, borderColor, p.x, p.y, radius, borderSize);
 }
+
 void DrawCircle(const Color& fillColor, const Color& borderColor, const float& x, const float& y, const float& radius, const float& borderSize)
 {
-	DrawCircle(fillColor, borderColor, x * screen_width, y * screen_height, radius * screen_height, borderSize * screen_height);
+	//DrawCircleImpl(fillColor, borderColor, x * screen_width, y * screen_height, radius * screen_height, borderSize * screen_height);
+	DrawCircleImpl(fillColor, borderColor, x, y, radius, borderSize);
 }

@@ -1,4 +1,4 @@
-#include "Headers.h"
+#include "Color.h"
 
 Color::Color(Uint8 r, Uint8 g, Uint8 b)
 {
@@ -6,6 +6,7 @@ Color::Color(Uint8 r, Uint8 g, Uint8 b)
 	this->g = g;
 	this->b = b;
 }
+
 Color::Color()
 {
 	this->r = 0;

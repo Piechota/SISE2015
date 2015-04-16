@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include "Node.h"
+#include "Globals.h"
 
 Graph::Graph(int depth, int players, float distance)
 {
@@ -44,8 +45,10 @@ void Graph::Generate()
 
 	root = nullptr;
 
-	float rootPosX = 0.0f;
-	float rootPosY = 0.0f;
+	float rootPosX = screen_width / 2.0f;
+	float rootPosY = screen_height / 2.0f;
+	//rootPosX = 0.5f;
+	//rootPosY = 0.5f;
 
 	// initial node
 	root = new Node(rootPosX, rootPosY);
@@ -54,17 +57,23 @@ void Graph::Generate()
 	// ring-shaped nodes
 	float currDistance = distance;
 	float angle = 360.0f / players;
+	angle *= 0.01745f;
 
 	for (int i = 0; i < depth; ++i)
 	{
+		float nodeX = rootPosX + currDistance;
+		float nodeY = rootPosY;
+
 		// spawn nodes
 		for (int j = 0; j < players; ++j) 
 		{
-			float nodeX = currDistance;
-			float nodeY = 0.0f;
-
 			float newNodeX = (nodeX - rootPosX) * cos(angle) - (nodeY - rootPosY) * sin(angle) + rootPosX;
 			float newNodeY = (nodeX - rootPosX) * sin(angle) + (nodeY - rootPosY) * cos(angle) + rootPosY;
+			//float newNodeX = rootPosX + (nodeX - rootPosX)*cos(angle) - (nodeY - rootPosY)*sin(angle);
+			//float newNodeY = rootPosY + (nodeX - rootPosX)*sin(angle) + (nodeY - rootPosY)*cos(angle);
+
+			nodeX = newNodeX;
+			nodeY = newNodeY;
 
 			Node* node = new Node(newNodeX, newNodeY);
 			nodes.push_back(node);

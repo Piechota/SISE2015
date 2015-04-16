@@ -1,4 +1,6 @@
 #include "Headers.h"
+#include "Renderer.h"
+#include "GraphRenderer.h"
 
 bool Init(const int& w, const int& h)
 {
@@ -34,7 +36,7 @@ void Close()
 }
 int main(int argc, char* args[])
 {
-	if (!Init(windowWidth, windowHeight))
+	if (!Init(screen_width, screen_height))
 		return 1;
 
 	bool run = true;
@@ -62,6 +64,9 @@ int main(int argc, char* args[])
 	int currentTime = lastTime;
 	Decision tmpDecision;
 
+	Graph* graph = new Graph(2, 6, 100.0f);
+	graph->Generate();
+
 	while (run)
 	{
 		while (SDL_PollEvent(&event))
@@ -84,7 +89,7 @@ int main(int argc, char* args[])
 				case Decision::DO_NTH:
 					break;
 				case Decision::MOVE_UP:
-					if (posY[i] < windowHeight - stepValue)
+					if (posY[i] < screen_height - stepValue)
 						posY[i] += stepValue;
 					break;
 				case Decision::MOVE_DOWN:
@@ -96,7 +101,7 @@ int main(int argc, char* args[])
 						posX[i] -= stepValue;
 					break;
 				case Decision::MOVE_RIGHT:
-					if (posX[i] < windowWidth - stepValue)
+					if (posX[i] < screen_width - stepValue)
 						posY[i] += stepValue;
 					break;
 				}
@@ -112,9 +117,11 @@ int main(int argc, char* args[])
 		}
 
 		//Here graph render function
-		DrawCircle(Colors::green, Colors::white, 50, 50, 50, 5);
-		DrawCircle(Colors::blue, 50, 100, 50);
-		DrawLine(Colors::red, 50, 50, 50, 100);
+		//DrawCircle(Colors::green, Colors::white, 50, 50, 50, 5);
+		//DrawCircle(Colors::blue, 50, 100, 50);
+		//DrawLine(Colors::red, 50, 50, 50, 100);
+
+		GraphRenderer::RenderGraph(graph);
 
 		SDL_RenderPresent(renderer);
 	}
@@ -127,6 +134,8 @@ int main(int argc, char* args[])
 	delete colors;
 	delete posX;
 	delete posY;
+
+	delete graph;
 
 	return 0;
 }

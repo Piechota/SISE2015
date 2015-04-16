@@ -2,6 +2,7 @@
 #define _PAWN_H_
 
 #include "Headers.h"
+#include "Color.h"
 
 class Pawn
 {
