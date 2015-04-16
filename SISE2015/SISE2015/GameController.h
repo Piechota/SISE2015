@@ -2,6 +2,7 @@
 #define _GAMECONTROLLER_H_
 
 #include "Headers.h"
+#include "Graph.h"
 
 class GameController
 {

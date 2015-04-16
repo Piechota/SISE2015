@@ -39,5 +39,5 @@ void GameController::RenewData()
 		delete graphData;
 	}
 
-	graphData = new Graph(graph);
+	graphData = new Graph(*graph);
 }
