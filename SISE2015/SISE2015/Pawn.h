@@ -15,9 +15,9 @@ public:
 	~Pawn();
 
 	void CommitSuicide();
-
 	Node* GetNode() const;
 	void SetNode(Node* const node);
+
 	bool isAlive = true;
 	int radius;
 	Color color;

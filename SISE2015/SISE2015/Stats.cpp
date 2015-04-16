@@ -71,6 +71,11 @@ Stats::~Stats()
 
 		file.flush();
 		file.close();
+
+		for (auto& kv : stats)
+		{
+			delete kv.second;
+		}
 	}
 }
 

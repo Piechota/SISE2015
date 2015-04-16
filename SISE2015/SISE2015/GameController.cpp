@@ -1,10 +1,11 @@
 #include "GameController.h"
+#include "Pawn.h"
+#include "Graph.h"
 
 GameController::GameController()
 {
 	numberOfPlayers = 0;
 }
-
 
 GameController::~GameController()
 {
@@ -44,6 +45,7 @@ void GameController::Turn()
 void GameController::EndTurn()
 {
 	PlayerInfo* pPlayer;
+
 	//Suicides
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
