@@ -11,8 +11,18 @@ private:
 		Pawn* pawn;
 		Player* player;
 	};
+	Graph* graph;
+
+	void StartTurn();
+	void Turn();
+	void EndTurn();
+	void RenewData();
 public:
 	GameController();
+
+	void MainLoop();
+	Graph* graphData;
+
 	~GameController();
 };
 
