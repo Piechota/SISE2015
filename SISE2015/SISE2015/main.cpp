@@ -2,7 +2,6 @@
 #include <cmath>
 #include <ctime>
 #include <vector>
-#include <exception>
 #include <SDL.h>
 
 #include "DataStructures.h"
@@ -29,29 +28,32 @@ bool Init(const int& w, const int& h)
 	}
 
 	window = SDL_CreateWindow("SISE2015", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
-	if (window == NULL)
+	if (window == nullptr)
 	{
 		printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (renderer == NULL)
+	if (renderer == nullptr)
 	{
 		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
+
 	return true;
 }
+
 void Close()
 {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
+
 int main(int argc, char* args[])
 {
-	if (!Init(screen_width, screen_height))
+	if (!Init(640, 640))
 		return 1;
 
 	bool run = true;
