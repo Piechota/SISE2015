@@ -1,6 +1,7 @@
-#pragma once
-#include <vector>
-#include <exception>
+#ifndef _NODE_H_
+#define _NODE_H_
+
+#include "Headers.h"
 
 class Node
 {	
@@ -20,3 +21,4 @@ public:
 	~Node();
 };
 
+#endif

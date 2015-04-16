@@ -1,4 +1,8 @@
-#pragma once
+#ifndef _GRAPH_H_
+#define _GRAPH_H_
+
+#include "Headers.h"
+
 class Graph
 {
 public:
@@ -11,3 +15,4 @@ public:
 	~Graph();
 };
 
+#endif

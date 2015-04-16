@@ -1,6 +1,7 @@
-#pragma once
-#include "Pawn"
-#include "Player.h"
+#ifndef _GAMECONTROLLER_H_
+#define _GAMECONTROLLER_H_
+
+#include "Headers.h"
 
 class GameController
 {
@@ -9,7 +10,7 @@ private:
 	{
 		bool currentlyMoving = false;
 		Pawn* pawn;
-		Player* player;
+		//Player* player;
 	};
 	Graph* graph;
 
@@ -26,3 +27,4 @@ public:
 	~GameController();
 };
 
+#endif
