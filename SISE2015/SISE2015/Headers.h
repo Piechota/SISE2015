@@ -20,7 +20,6 @@
 #include "Player.h"
 #include "ExamplePlayer.h"
 
-#include "Command.h"
 #include "GameController.h"
 
 #include "Graph.h"
