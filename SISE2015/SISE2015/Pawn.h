@@ -1,8 +1,9 @@
 #ifndef _PAWN_H_
 #define _PAWN_H_
 
-#include "Headers.h"
 #include "Color.h"
+
+class Node;
 
 class Pawn
 {

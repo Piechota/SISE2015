@@ -109,6 +109,7 @@ int main(int argc, char* args[])
 				
 			}
 		}
+
 		lastTime = currentTime;
 
 		for (int i = 0; i < testAmount; ++i)
@@ -125,15 +126,18 @@ int main(int argc, char* args[])
 
 		SDL_RenderPresent(renderer);
 	}
+
 	Close();
 
 	for (int i = 0; i < testAmount; ++i)
 	{
 		delete pawns[i];
+		delete colors[i];
 	}
-	delete colors;
-	delete posX;
-	delete posY;
+	delete[] pawns;
+	delete[] colors;
+	delete[] posX;
+	delete[] posY;
 
 	delete graph;
 

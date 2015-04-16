@@ -85,7 +85,6 @@
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ExamplePlayer.h" />
     <ClInclude Include="GameController.h" />
-    <ClInclude Include="Game\common.hpp" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphRenderer.h" />
