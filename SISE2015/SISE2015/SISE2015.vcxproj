@@ -69,14 +69,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="GameController.h" />
+    <ClInclude Include="Game\common.hpp" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="Headers.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
