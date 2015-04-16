@@ -15,6 +15,7 @@
 #include "Graph.h"
 #include "Renderer.h"
 #include "GraphRenderer.h"
+#include "Stats.h"
 
 bool Init(const int& w, const int& h)
 {
@@ -59,13 +60,16 @@ int main(int argc, char* args[])
 	bool run = true;
 	SDL_Event event;
 
+	Stats* stats = new Stats("stats.csv");
+
 	int testAmount = 4;
 	Player** pawns = new Player*[testAmount];
 	for (int i = 0; i < testAmount; ++i)
 	{
-		pawns[i] = new ExamplePlayer("ExamplePlayer" + i);
+		pawns[i] = new ExamplePlayer("ExamplePlayer");
+		stats->AddPlayer(pawns[i]);
 	}
-
+	
 	int tmpRadius = 10;
 	Color** colors = new Color*[testAmount];
 	int* posX = new int[testAmount];
@@ -99,7 +103,7 @@ int main(int argc, char* args[])
 		{
 			for (int i = 0; i < testAmount; ++i)
 			{
-				tmpDecision = pawns[i]->ProcessAI(currentTime);
+				//tmpDecision = pawns[i]->ProcessAI(currentTime);
 
 				//switch (tmpDecision)
 				//{
@@ -145,6 +149,8 @@ int main(int argc, char* args[])
 	}
 
 	Close();
+
+	delete stats;
 
 	for (int i = 0; i < testAmount; ++i)
 	{
