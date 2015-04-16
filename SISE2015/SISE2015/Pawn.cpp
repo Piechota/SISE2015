@@ -10,3 +10,18 @@ Pawn::~Pawn()
 {
 
 }
+
+Node* Pawn::GetNode()
+{
+	return this->node;
+}
+
+void Pawn::SetNode(Node* node)
+{
+	this->node = node;
+}
+
+void Pawn::CommitSuicide()
+{
+	this->node->GetNode()->pawn;
+}

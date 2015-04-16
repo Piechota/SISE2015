@@ -14,5 +14,6 @@ ExamplePlayer::ExamplePlayer(const ExamplePlayer& other) : Player(other)
 
 DecisionInfo ExamplePlayer::ProcessAI(GraphInfo grapthInfo)
 {
-	return (Decision) ( (rand() % 10 + time(NULL) % 25 + grapthInfo ) % (int)(Decision::DECISION_COUNT) );
+	throw 0;
+	//return (Decision) ( (rand() % 10 + time(NULL) % 25 + grapthInfo ) % (int)(Decision::DECISION_COUNT) );
 }

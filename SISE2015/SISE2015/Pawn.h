@@ -7,13 +7,18 @@ class Node;
 
 class Pawn
 {
+private:
+	Node* node;
 public:
 	Pawn();
 	~Pawn();
+	bool isAlive = true;
 
-	Node* node;
+	Node* GetNode();
+	void SetNode(Node* node);
 	int radius;
 	Color color;
+	void CommitSuicide();
 };
 
 #endif
