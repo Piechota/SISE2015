@@ -1,8 +1,8 @@
 #ifndef _GAMECONTROLLER_H_
 #define _GAMECONTROLLER_H_
 
-#include "Headers.h"
-#include "Graph.h"
+class Pawn;
+class Player;
 
 class GameController
 {

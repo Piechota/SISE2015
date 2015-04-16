@@ -1,4 +1,4 @@
-#include "Headers.h"
+#include "Globals.h"
 
 int screen_width = 700;
 int screen_height = 700;

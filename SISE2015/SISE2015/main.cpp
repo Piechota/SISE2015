@@ -1,4 +1,19 @@
-#include "Headers.h"
+#include <iostream>
+#include <cmath>
+#include <ctime>
+#include <vector>
+#include <exception>
+#include <SDL.h>
+
+#include "DataStructures.h"
+#include "Globals.h"
+
+#include "Pawn.h"
+#include "Player.h"
+#include "ExamplePlayer.h"
+#include "GameController.h"
+
+#include "Graph.h"
 #include "Renderer.h"
 #include "GraphRenderer.h"
 

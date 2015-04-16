@@ -88,7 +88,6 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphRenderer.h" />
-    <ClInclude Include="Headers.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />

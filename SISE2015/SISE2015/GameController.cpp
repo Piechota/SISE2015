@@ -1,11 +1,10 @@
-#include "Headers.h"
-
+#include "GameController.h"
+#include "Player.h"
 
 GameController::GameController()
 {
 	numberOfPlayers = 0;
 }
-
 
 GameController::~GameController()
 {
@@ -33,7 +32,7 @@ void GameController::Turn()
 {
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
-		players[i]->ProcessAI(NULL);
+		players[i]->ProcessAI(0);
 	}
 }
 

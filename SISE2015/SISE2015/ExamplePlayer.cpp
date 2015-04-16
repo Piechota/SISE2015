@@ -1,4 +1,6 @@
-#include "Headers.h"
+#include <iostream>
+#include <ctime>
+#include "ExamplePlayer.h"
 
 ExamplePlayer::ExamplePlayer() : Player()
 {
