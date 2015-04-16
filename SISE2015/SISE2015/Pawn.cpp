@@ -1,4 +1,5 @@
 #include "Pawn.h"
+#include "Node.h"
 
 Pawn::Pawn()
 {
@@ -11,17 +12,17 @@ Pawn::~Pawn()
 
 }
 
-Node* Pawn::GetNode()
+Node* Pawn::GetNode() const
 {
 	return this->node;
 }
 
-void Pawn::SetNode(Node* node)
+void Pawn::SetNode(Node* const node)
 {
 	this->node = node;
 }
 
 void Pawn::CommitSuicide()
 {
-	this->node->GetNode()->pawn;
+	this->node->GetPawn();
 }

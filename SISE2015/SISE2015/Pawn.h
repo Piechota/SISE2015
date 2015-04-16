@@ -9,16 +9,18 @@ class Pawn
 {
 private:
 	Node* node;
+
 public:
 	Pawn();
 	~Pawn();
-	bool isAlive = true;
 
-	Node* GetNode();
-	void SetNode(Node* node);
+	void CommitSuicide();
+
+	Node* GetNode() const;
+	void SetNode(Node* const node);
+	bool isAlive = true;
 	int radius;
 	Color color;
-	void CommitSuicide();
 };
 
 #endif
