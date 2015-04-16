@@ -1,20 +1,28 @@
 #include "Node.h"
 
-Node::Node(float x, float y)
+Node::Node(int id, float x, float y)
 {
+	this->id = id;
 	positionX = x;
 	positionY = y;
 }
 
 Node::Node(Node& other)
 {
+	id = other.GetId();
 	neighbors = std::vector<Node*>(*other.GetConnections());
-	positionX = other.getPositionX();
-	positionY = other.getPositionY();
+	positionX = other.GetPositionX();
+	positionY = other.GetPositionY();
+	pawn = other.GetPawn();
 }
 
 Node::~Node()
 {
+}
+
+int Node::GetId() const
+{
+	return id;
 }
 
 std::vector<Node*>* Node::GetConnections()
@@ -39,12 +47,22 @@ bool Node::IsConnectedTo(Node* const node) const
 	return false;
 }
 
-float Node::getPositionX() const
+float Node::GetPositionX() const
 {
 	return positionX;
 }
 
-float Node::getPositionY() const
+float Node::GetPositionY() const
 {
 	return positionY;
+}
+
+void Node::SetPawn(Pawn* const pawn)
+{
+	this->pawn = pawn;
+}
+
+Pawn* Node::GetPawn() const
+{
+	return pawn;
 }

@@ -21,4 +21,5 @@ namespace Colors
 	extern const Color green;
 	extern const Color blue;
 }
+
 #endif

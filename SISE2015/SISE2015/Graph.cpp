@@ -2,6 +2,8 @@
 #include "Node.h"
 #include "Globals.h"
 
+int Graph::nodeIdCounter = 0;
+
 Graph::Graph(int depth, int players, float distance)
 {
 	this->depth = depth;
@@ -34,6 +36,8 @@ Graph::~Graph()
 
 void Graph::Generate()
 {
+	Graph::nodeIdCounter = 0;
+
 	for (Node* n : nodes)
 	{
 		if (n != nullptr)
@@ -49,7 +53,7 @@ void Graph::Generate()
 	float rootPosY = screen_height / 2.0f;
 
 	// initial node
-	root = new Node(rootPosX, rootPosY);
+	root = new Node(Graph::nodeIdCounter++, rootPosX, rootPosY);
 	nodes.push_back(root);
 
 	// ring-shaped nodes
@@ -73,7 +77,7 @@ void Graph::Generate()
 			nodeX = newNodeX;
 			nodeY = newNodeY;
 
-			Node* node = new Node(newNodeX, newNodeY);
+			Node* node = new Node(Graph::nodeIdCounter++, newNodeX, newNodeY);
 			nodes.push_back(node);
 		}
 
