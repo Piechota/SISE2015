@@ -1,10 +1,10 @@
 #include "GameController.h"
-#include "Player.h"
 
 GameController::GameController()
 {
 	numberOfPlayers = 0;
 }
+
 
 GameController::~GameController()
 {
@@ -19,7 +19,9 @@ void GameController::MainLoop()
 
 void GameController::SubmitPlayer(Player* player)
 {
-	players[numberOfPlayers] = player;
+	
+	players[numberOfPlayers]->player = player;
+	
 	numberOfPlayers++;
 }
 
@@ -32,7 +34,8 @@ void GameController::Turn()
 {
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
-		players[i]->ProcessAI(0);
+		RenewData();
+		players[i]->player->ProcessAI();		
 	}
 }
 

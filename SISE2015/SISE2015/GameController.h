@@ -1,8 +1,7 @@
 #ifndef _GAMECONTROLLER_H_
 #define _GAMECONTROLLER_H_
 
-class Pawn;
-class Player;
+#include "Player.h"
 
 class GameController
 {
@@ -10,13 +9,12 @@ private:
 	struct PlayerInfo
 	{
 		bool currentlyMoving = false;
-
-		Pawn* pawn;
 		Player* player;
-
+		DecisionInfo currentDecision;
 	};
+
 	int numberOfPlayers;
-	Player* players[6];
+	PlayerInfo* players[6];
 
 	void StartTurn();
 	void Turn();
