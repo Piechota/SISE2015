@@ -70,19 +70,21 @@
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="ExamplePawn.cpp" />
+    <ClCompile Include="ExamplePlayer.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
     <ClInclude Include="Command.h" />
-    <ClInclude Include="ExamplePawn.h" />
+    <ClInclude Include="DataStructures.h" />
+    <ClInclude Include="ExamplePlayer.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Game\common.hpp" />
     <ClInclude Include="Globals.h" />
@@ -90,6 +92,7 @@
     <ClInclude Include="Headers.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -41,10 +41,10 @@ int main(int argc, char* args[])
 	SDL_Event event;
 
 	int testAmount = 4;
-	Pawn** pawns = new Pawn*[testAmount];
+	Player** pawns = new Player*[testAmount];
 	for (int i = 0; i < testAmount; ++i)
 	{
-		pawns[i] = new ExamplePawn();
+		pawns[i] = new ExamplePlayer();
 	}
 
 	int tmpRadius = 10;

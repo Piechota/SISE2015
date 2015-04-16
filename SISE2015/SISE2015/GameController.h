@@ -10,7 +10,7 @@ private:
 	{
 		bool currentlyMoving = false;
 		Pawn* pawn;
-		//Player* player;
+		Player* player;
 	};
 public:
 	GameController();
