@@ -36,8 +36,10 @@ void GameController::Turn()
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
 		currentPlayer = players[i];
+		currentPlayer->currentlyMoving = true;
 		RenewData();
 		currentPlayer->currentDecision = currentPlayer->player->ProcessAI(0);
+		currentPlayer->currentlyMoving = false;
 	}
 }
 
@@ -48,10 +50,10 @@ void GameController::EndTurn()
 
 void GameController::RenewData()
 {
-	if (graph != nullptr)
-	{
-		delete graph;
-	}
+	//if (graphData != nullptr)
+	//{
+	//	delete graphData;
+	//}
 
-	graph = new Graph(*currentGraph);
+	//graphData = new Graph(graph);
 }

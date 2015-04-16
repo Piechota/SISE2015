@@ -2,19 +2,22 @@
 #define _GAMECONTROLLER_H_
 
 #include "Player.h"
+#include "Graph.h"
+#include "Pawn.h"
 
 class GameController
 {
 private:
 	struct PlayerInfo
 	{
-		bool currentlyMoving = false;
 		Player* player;
+		Pawn* pawn;
 		DecisionInfo currentDecision;
 	};
 
 	int numberOfPlayers;
 	PlayerInfo* players[6];
+	Graph* currentGraph;
 
 	void StartTurn();
 	void Turn();
@@ -24,6 +27,7 @@ private:
 public:
 	GameController();
 	void SubmitPlayer(Player* player);
+	Graph* graph;
 
 	void MainLoop();
 
