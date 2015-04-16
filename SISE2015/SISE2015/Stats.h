@@ -4,13 +4,21 @@
 #include <fstream>
 #include <map>
 #include <string>
-#include "Player.h"
+
+class Player;
 
 class Stats
 {
 public:
 	Stats(std::string filename);
 	~Stats();
+
+	void AddPlayer(Player* player);
+	void AddKill(Player* player);
+	void AddDeath(Player* player);
+	void AddSurvival(Player* player);
+	void AddProcessingTime(Player* player, float time);
+	void AddTurn(Player* player);
 
 private:
 	struct PerPlayerStats
@@ -19,7 +27,6 @@ private:
 		int deaths;
 		int survival;
 		float processingTimeSum;
-		float processingTimeAvg;
 		int turns;
 	};
 
