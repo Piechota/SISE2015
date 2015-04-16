@@ -1,5 +1,4 @@
-#include "Headers.h"
-
+#include "GameController.h"
 
 GameController::GameController()
 {
@@ -21,7 +20,7 @@ void GameController::MainLoop()
 void GameController::SubmitPlayer(Player* player)
 {
 	
-	players[numberOfPlayers].player = player;
+	players[numberOfPlayers]->player = player;
 	
 	numberOfPlayers++;
 }
@@ -36,7 +35,7 @@ void GameController::Turn()
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
 		RenewData();
-		players[i]->ProcessAI();		
+		players[i]->player->ProcessAI();		
 	}
 }
 
