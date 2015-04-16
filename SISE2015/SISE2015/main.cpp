@@ -63,7 +63,7 @@ int main(int argc, char* args[])
 	Player** pawns = new Player*[testAmount];
 	for (int i = 0; i < testAmount; ++i)
 	{
-		pawns[i] = new ExamplePlayer();
+		pawns[i] = new ExamplePlayer("ExamplePlayer" + i);
 	}
 
 	int tmpRadius = 10;

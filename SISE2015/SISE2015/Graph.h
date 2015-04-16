@@ -24,6 +24,8 @@ private:
 	int depth;
 	int players;
 	float distance;
+
+	static int nodeIdCounter;
 };
 
 #endif

@@ -6,8 +6,8 @@
 class ExamplePlayer : public Player
 {
 public:
-	ExamplePlayer();
-	ExamplePlayer(const ExamplePlayer &other);
+	ExamplePlayer(std::string name);
+	ExamplePlayer(const ExamplePlayer& other);
 
 	virtual DecisionInfo ProcessAI(GraphInfo grapthInfo) override;
 };

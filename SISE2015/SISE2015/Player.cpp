@@ -2,14 +2,16 @@
 
 int Player::idCounter = 0;
 
-Player::Player()
+Player::Player(std::string name)
 {
 	this->id = Player::idCounter++;
+	this->name = name;
 }
 
 Player::Player(const Player &other)
 {
 	this->id = other.id;
+	this->name = other.name;
 }
 
 Player::~Player()
@@ -19,10 +21,15 @@ Player::~Player()
 
 void Player::ResetIdIndexing()
 {
-	Player::idCounter;
+	Player::idCounter = 0;
 }
 
-int Player::GetId()
+int Player::GetId() const
 {
-	return this->id;
+	return id;
+}
+
+std::string Player::GetName() const
+{
+	return name;
 }

@@ -1,6 +1,8 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include <string>
+
 //this is temporary, we'll need sth more complex, and not just 4 directions -> waiting for grapth
 enum Decision
 {
@@ -23,15 +25,17 @@ class Player
 private:
 	static int idCounter;
 	int id;
+	std::string name;
 
 public:
 	static void ResetIdIndexing();
 
-	Player();
+	Player(std::string name);
 	Player(const Player &other);
 	~Player();
 
-	int GetId();
+	int GetId() const;
+	std::string GetName() const;
 
 	//method called to launch thought process of the pawn, returns decision
 	virtual DecisionInfo ProcessAI(GraphInfo grapthInfo) = 0;

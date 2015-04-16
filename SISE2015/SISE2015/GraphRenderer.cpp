@@ -22,15 +22,15 @@ void GraphRenderer::RenderGraph(Graph* const graph)
 		if (n != nullptr)
 		{
 			std::vector<Node*>* const connections = n->GetConnections();
-			float nx = n->getPositionX();
-			float ny = n->getPositionY();
+			float nx = n->GetPositionX();
+			float ny = n->GetPositionY();
 
 			for (Node* const c : *connections)
 			{
 				if (c != nullptr)
 				{
-					float cx = c->getPositionX();
-					float cy = c->getPositionY();
+					float cx = c->GetPositionX();
+					float cy = c->GetPositionY();
 
 					DrawLine(Colors::red, nx, ny, cx, cy);
 				}
@@ -42,8 +42,8 @@ void GraphRenderer::RenderGraph(Graph* const graph)
 	{
 		if (n != nullptr)
 		{
-			float nx = n->getPositionX();
-			float ny = n->getPositionY();
+			float nx = n->GetPositionX();
+			float ny = n->GetPositionY();
 
 			DrawCircle(Colors::green, Colors::white, nx, ny, 50.0f, 5.0f);
 		}
