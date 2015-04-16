@@ -4,4 +4,5 @@
 extern int screen_width;
 extern int screen_height;
 extern SDL_Window* window;
+extern SDL_Renderer* renderer;
 #endif
