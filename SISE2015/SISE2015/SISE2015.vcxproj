@@ -69,6 +69,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -78,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Game\common.hpp" />
     <ClInclude Include="Globals.h" />
