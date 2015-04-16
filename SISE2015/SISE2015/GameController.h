@@ -10,20 +10,24 @@ private:
 	struct PlayerInfo
 	{
 		bool currentlyMoving = false;
+
 		Pawn* pawn;
-		//Player* player;
+		Player* player;
+
 	};
-	Graph* graph;
+	int numberOfPlayers;
+	Player* players[6];
 
 	void StartTurn();
 	void Turn();
 	void EndTurn();
 	void RenewData();
+	
 public:
 	GameController();
+	void SubmitPlayer(Player* player);
 
 	void MainLoop();
-	Graph* graphData;
 
 	~GameController();
 };

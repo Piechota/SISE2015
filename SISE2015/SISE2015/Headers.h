@@ -8,15 +8,20 @@
 #include <vector>
 #include <exception>
 
+#include "DataStructures.h"
+
 #include "Globals.h"
 #include "Color.h"
 #include "Renderer.h"
 
+#include "Node.h"
 #include "Pawn.h"
-#include "ExamplePawn.h"
 
-#include "Command.h"
+#include "Player.h"
+#include "ExamplePlayer.h"
+
 #include "GameController.h"
+
 #include "Graph.h"
 
 using namespace std;
