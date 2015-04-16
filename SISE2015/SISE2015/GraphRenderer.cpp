@@ -35,6 +35,15 @@ void GraphRenderer::RenderGraph(Graph* const graph)
 					DrawLine(Colors::red, nx, ny, cx, cy);
 				}
 			}
+		}
+	}
+
+	for (Node* const n : *nodes)
+	{
+		if (n != nullptr)
+		{
+			float nx = n->getPositionX();
+			float ny = n->getPositionY();
 
 			DrawCircle(Colors::green, Colors::white, nx, ny, 50.0f, 5.0f);
 		}

@@ -47,8 +47,6 @@ void Graph::Generate()
 
 	float rootPosX = screen_width / 2.0f;
 	float rootPosY = screen_height / 2.0f;
-	//rootPosX = 0.5f;
-	//rootPosY = 0.5f;
 
 	// initial node
 	root = new Node(rootPosX, rootPosY);

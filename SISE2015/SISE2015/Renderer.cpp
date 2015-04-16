@@ -9,7 +9,7 @@ int length(const int& x0, const int& y0, const int& x1, const int& y1)
 	const int w2 = (x1 - x0) * (x1 - x0);
 	const int h2 = (y1 - y0) * (y1 - y0);
 
-	return (int)sqrt((float)w2 + (float)h2);
+	return (int)sqrt(w2 + h2);
 }
 
 void DrawLine(const Color& color, const SDL_Point& p0, const SDL_Point& p1)
@@ -28,7 +28,7 @@ void DrawLine(const Color& color, const float& x0, const float& y0, const float&
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0xFF);
 	//SDL_RenderDrawLine(renderer, (int)(x0 * screen_width), (int)(y0 * screen_height), (int)(x1 * screen_width), (int)(y1 * screen_height));
-	SDL_RenderDrawLine(renderer, (int)(x0), (int)(y0), (int)(x1), (int)(y1));
+	SDL_RenderDrawLine(renderer, (int)x0, (int)y0, (int)x1, (int)y1);
 }
 
 
@@ -98,7 +98,7 @@ void DrawCircle(const Color& color, const SDL_Point& p, const int& radius)
 void DrawCircle(const Color& color, const float& x, const float& y, const float& radius)
 {
 	//DrawCircleImpl(color, x * screen_width, y * screen_height, fmax(radius * screen_height, radius * screen_width));
-	DrawCircleImpl(color, x, y, radius);
+	DrawCircleImpl(color, (int)x, (int)y, (int)radius);
 }
 
 void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int& x, const int& y, const int& radius, const int& borderSize)
@@ -179,5 +179,5 @@ void DrawCircle(const Color& fillColor, const Color& borderColor, const SDL_Poin
 void DrawCircle(const Color& fillColor, const Color& borderColor, const float& x, const float& y, const float& radius, const float& borderSize)
 {
 	//DrawCircleImpl(fillColor, borderColor, x * screen_width, y * screen_height, radius * screen_height, borderSize * screen_height);
-	DrawCircleImpl(fillColor, borderColor, x, y, radius, borderSize);
+	DrawCircleImpl(fillColor, borderColor, (int)x, (int)y, (int)radius, (int)borderSize);
 }
