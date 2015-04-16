@@ -10,3 +10,8 @@ Pawn::~Pawn()
 {
 
 }
+
+void Pawn::CommitSuicide()
+{
+	this->node->pawn = nullptr;
+}

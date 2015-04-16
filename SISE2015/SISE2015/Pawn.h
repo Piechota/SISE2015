@@ -10,10 +10,11 @@ class Pawn
 public:
 	Pawn();
 	~Pawn();
-
+	bool isAlive = true;
 	Node* node;
 	int radius;
 	Color color;
+	void CommitSuicide();
 };
 
 #endif

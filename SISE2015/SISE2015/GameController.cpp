@@ -18,10 +18,10 @@ void GameController::MainLoop()
 }
 
 void GameController::SubmitPlayer(Player* player)
-{
-	
-	players[numberOfPlayers]->player = player;
-	
+{	
+	PlayerInfo* pPlayer = players[numberOfPlayers];	
+	pPlayer->player = player;
+	pPlayer->pawn = new Pawn();
 	numberOfPlayers++;
 }
 
@@ -43,6 +43,36 @@ void GameController::Turn()
 
 void GameController::EndTurn()
 {
+	PlayerInfo* pPlayer;
+	//Suicides
+	for (int i = 0; i < numberOfPlayers; i++)
+	{
+		pPlayer = players[i];
+		if (pPlayer->currentDecision.type == Decision::Type::SUICIDE)
+		{
+			pPlayer->pawn->isAlive = false;
+			//pPlayer->pawn->node->pawn = nullptr;
+		}
+	}
+
+	//Moves
+	for (int i = 0; i < numberOfPlayers; i++)
+	{
+		if (players[i]->currentDecision.type == Decision::Type::SHOOT)
+		{
+
+		}
+	}
+
+	//Shots
+	for (int i = 0; i < numberOfPlayers; i++)
+	{
+		if (players[i]->currentDecision.type == Decision::Type::MOVE)
+		{
+
+		}
+	}
+
 	
 }
 
