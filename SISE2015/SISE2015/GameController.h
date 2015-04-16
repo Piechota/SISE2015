@@ -10,10 +10,11 @@ private:
 	{
 		bool currentlyMoving = false;
 		Player* player;
-		//Player* player;
+		DecisionInfo currentDecision;
 	};
+
 	int numberOfPlayers;
-	Player* players[6];
+	PlayerInfo* players[6];
 
 	void StartTurn();
 	void Turn();

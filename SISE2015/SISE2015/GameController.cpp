@@ -20,7 +20,9 @@ void GameController::MainLoop()
 
 void GameController::SubmitPlayer(Player* player)
 {
-	players[numberOfPlayers] = player;
+	
+	players[numberOfPlayers].player = player;
+	
 	numberOfPlayers++;
 }
 
@@ -33,7 +35,8 @@ void GameController::Turn()
 {
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
-		players[i]->ProcessAI();
+		RenewData();
+		players[i]->ProcessAI();		
 	}
 }
 
