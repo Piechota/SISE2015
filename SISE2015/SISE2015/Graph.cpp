@@ -112,6 +112,26 @@ Node* Graph::GetRoot()
 	return root;
 }
 
+Node* Graph::GetNodeById(const int id)
+{
+	Node* node = nullptr;
+
+	for (Node* const n : nodes)
+	{
+		if (n != nullptr)
+		{
+			int nid = n->GetId();
+			if (nid == id)
+			{
+				node = n;
+				break;
+			}
+		}
+	}
+
+	return node;
+}
+
 int Graph::GetDepth() const
 {
 	return depth;

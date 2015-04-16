@@ -14,6 +14,7 @@ public:
 	void Generate();
 	std::vector<Node*>* GetNodes();
 	Node* GetRoot();
+	Node* GetNodeById(const int id);
 	int GetDepth() const;
 	int GetPlayers() const;
 	float GetDistance() const;
