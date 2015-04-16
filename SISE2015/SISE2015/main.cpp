@@ -1,4 +1,20 @@
-#include "Headers.h"
+#include <iostream>
+#include <cmath>
+#include <ctime>
+#include <vector>
+#include <SDL.h>
+
+#include "DataStructures.h"
+#include "Globals.h"
+
+#include "Pawn.h"
+#include "Player.h"
+#include "ExamplePlayer.h"
+#include "GameController.h"
+
+#include "Graph.h"
+#include "Renderer.h"
+#include "GraphRenderer.h"
 
 bool Init(const int& w, const int& h)
 {
@@ -12,39 +28,42 @@ bool Init(const int& w, const int& h)
 	}
 
 	window = SDL_CreateWindow("SISE2015", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
-	if (window == NULL)
+	if (window == nullptr)
 	{
 		printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (renderer == NULL)
+	if (renderer == nullptr)
 	{
 		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 		return false;
 	}
+
 	return true;
 }
+
 void Close()
 {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
+
 int main(int argc, char* args[])
 {
-	if (!Init(windowWidth, windowHeight))
+	if (!Init(640, 640))
 		return 1;
 
 	bool run = true;
 	SDL_Event event;
 
 	int testAmount = 4;
-	Pawn** pawns = new Pawn*[testAmount];
+	Player** pawns = new Player*[testAmount];
 	for (int i = 0; i < testAmount; ++i)
 	{
-		pawns[i] = new ExamplePawn();
+		pawns[i] = new ExamplePlayer();
 	}
 
 	int tmpRadius = 10;
@@ -61,6 +80,9 @@ int main(int argc, char* args[])
 	int lastTime = time(NULL);
 	int currentTime = lastTime;
 	Decision tmpDecision;
+
+	Graph* graph = new Graph(2, 6, 100.0f);
+	graph->Generate();
 
 	while (run)
 	{
@@ -84,7 +106,7 @@ int main(int argc, char* args[])
 				case Decision::DO_NTH:
 					break;
 				case Decision::MOVE_UP:
-					if (posY[i] < windowHeight - stepValue)
+					if (posY[i] < screen_height - stepValue)
 						posY[i] += stepValue;
 					break;
 				case Decision::MOVE_DOWN:
@@ -96,7 +118,7 @@ int main(int argc, char* args[])
 						posX[i] -= stepValue;
 					break;
 				case Decision::MOVE_RIGHT:
-					if (posX[i] < windowWidth - stepValue)
+					if (posX[i] < screen_width - stepValue)
 						posY[i] += stepValue;
 					break;
 				}
@@ -104,6 +126,7 @@ int main(int argc, char* args[])
 				
 			}
 		}
+
 		lastTime = currentTime;
 
 		for (int i = 0; i < testAmount; ++i)
@@ -112,21 +135,28 @@ int main(int argc, char* args[])
 		}
 
 		//Here graph render function
-		DrawCircle(Colors::green, Colors::white, 50, 50, 50, 5);
-		DrawCircle(Colors::blue, 50, 100, 50);
-		DrawLine(Colors::red, 50, 50, 50, 100);
+		//DrawCircle(Colors::green, Colors::white, 50, 50, 50, 5);
+		//DrawCircle(Colors::blue, 50, 100, 50);
+		//DrawLine(Colors::red, 50, 50, 50, 100);
+
+		GraphRenderer::RenderGraph(graph);
 
 		SDL_RenderPresent(renderer);
 	}
+
 	Close();
 
 	for (int i = 0; i < testAmount; ++i)
 	{
 		delete pawns[i];
+		delete colors[i];
 	}
-	delete colors;
-	delete posX;
-	delete posY;
+	delete[] pawns;
+	delete[] colors;
+	delete[] posX;
+	delete[] posY;
+
+	delete graph;
 
 	return 0;
 }

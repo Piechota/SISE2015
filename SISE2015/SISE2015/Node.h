@@ -1,24 +1,25 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
-#include "Headers.h"
+#include <vector>
 
 class Node
 {	
 public:
-	std::vector<Node>* GetConnections()
-	{
-		throw 0;
-	}
-
-	Node(const Node& source)
-	{
-		//copy node
-		throw 0;
-	}
-
-	Node();
+	Node(float x, float y);
+	Node(Node& other);
 	~Node();
+
+	std::vector<Node*>* GetConnections();
+	void AddConnection(Node* const node);
+	bool IsConnectedTo(Node* const node) const;
+	float getPositionX() const;
+	float getPositionY() const;
+
+private:
+	std::vector<Node*> neighbors;
+	float positionX;
+	float positionY;
 };
 
 #endif

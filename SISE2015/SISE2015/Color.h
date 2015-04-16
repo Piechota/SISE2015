@@ -1,7 +1,7 @@
 #ifndef _COLOR_H
 #define _COLOR_H
 
-#include "Headers.h"
+#include <SDL.h>
 
 struct Color
 {
@@ -9,6 +9,7 @@ struct Color
 	Uint8 g;
 	Uint8 b;
 
+	Color();
 	Color(Uint8 r, Uint8 g, Uint8 b);
 };		  
 

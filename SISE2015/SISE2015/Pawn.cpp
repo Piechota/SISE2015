@@ -1,24 +1,12 @@
-#include "Headers.h"
-
-int Pawn::idCounter = 0;
+#include "Pawn.h"
 
 Pawn::Pawn()
 {
-	this->id = Pawn::idCounter++;
+	this->color = Colors::white;
+	radius = 10;
 }
-Pawn::Pawn(const Pawn &other)
-{
-	this->id = other.id;
-}
+
 Pawn::~Pawn()
 {
 
-}
-void Pawn::ResetIdIndexing()
-{
-	Pawn::idCounter;
-}
-int Pawn::GetId()
-{
-	return this->id;
 }
