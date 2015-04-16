@@ -5,6 +5,8 @@
 #include <math.h>
 #include <SDL.h>
 #include <ctime>
+#include <vector>
+#include <exception>
 
 #include "Globals.h"
 #include "Color.h"
@@ -12,6 +14,10 @@
 
 #include "Pawn.h"
 #include "ExamplePawn.h"
+
+#include "Command.h"
+#include "GameController.h"
+#include "Graph.h"
 
 using namespace std;
 

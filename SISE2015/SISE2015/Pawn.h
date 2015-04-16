@@ -3,11 +3,6 @@
 
 #include "Headers.h"
 
-//TODO: swap int with some real type later on
-#define GraphInfo int
-//this depends on the structure of graph
-#define DecisionInfo Decision
-
 //this is temporary, we'll need sth more complex, and not just 4 directions -> waiting for grapth
 enum Decision
 {
@@ -19,6 +14,11 @@ enum Decision
 
 	DECISION_COUNT
 };
+
+//TODO: swap int with some real type later on
+#define GraphInfo int
+//this depends on the structure of graph
+#define DecisionInfo Decision
 
 class Pawn
 {
