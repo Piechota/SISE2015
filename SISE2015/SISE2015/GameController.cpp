@@ -50,24 +50,60 @@ void GameController::EndTurn()
 		pPlayer = players[i];
 		if (pPlayer->currentDecision.type == Decision::Type::SUICIDE)
 		{
-			pPlayer->pawn->isAlive = false;
-			//BpPlayer->pawn->node->pawn = nullptr;
+			pPlayer->pawn->CommitSuicide();
 		}
 	}
 
 	//Moves
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
-		if (players[i]->currentDecision.type == Decision::Type::SHOOT)
+		pPlayer = players[i];
+		if (pPlayer->currentDecision.type == Decision::Type::MOVE)
 		{
+			bool denyMove = false;
+			Node* targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
 
+			if (pPlayer->pawn->GetNode()->IsConnectedTo(targetNode) == false) //if target is connected to current node
+			{
+				denyMove = true;
+			}
+			else
+			{
+				if (targetNode->GetPawn() == nullptr) //if no one is on the node
+				{
+					for (int j = 0; j < numberOfPlayers; j++) //two pawns try to go to the same node
+					{
+						if ((i != j) && (players[j]->currentDecision.type == Decision::Type::MOVE))
+						{
+							Node* pNodeTrg = players[j]->currentDecision.target;
+							if (pNodeTrg->GetId() == pPlayer->currentDecision.target->GetId())
+							{
+								denyMove = true;
+								break;
+							}
+						}
+					}
+				}
+				else
+				{
+					denyMove = true; //another pawn is on the node
+				}
+			}
+			
+			if (!denyMove)
+			{
+				pPlayer->pawn->GetNode()->SetPawn(nullptr);
+				pPlayer->pawn->SetNode(targetNode);
+				targetNode->SetPawn(pPlayer->pawn);
+			}
 		}
 	}
 
 	//Shots
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
-		if (players[i]->currentDecision.type == Decision::Type::MOVE)
+		pPlayer = players[i];
+		if (pPlayer->currentDecision.type == Decision::Type::SHOOT)
 		{
 
 		}
