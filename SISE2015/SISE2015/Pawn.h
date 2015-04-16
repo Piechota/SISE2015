@@ -14,7 +14,7 @@ public:
 	Pawn();
 	~Pawn();
 
-	void CommitSuicide();
+	void Die();
 	Node* GetNode() const;
 	void SetNode(Node* const node);
 

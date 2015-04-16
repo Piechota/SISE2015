@@ -150,7 +150,7 @@ int main(int argc, char* args[])
 
 	Close();
 
-	delete stats;
+	stats->SaveToFile();
 
 	for (int i = 0; i < testAmount; ++i)
 	{
@@ -163,6 +163,8 @@ int main(int argc, char* args[])
 	delete[] posY;
 
 	delete graph;
+
+	delete stats;
 
 	return 0;
 }

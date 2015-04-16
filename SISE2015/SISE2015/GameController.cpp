@@ -2,7 +2,7 @@
 #include "Pawn.h"
 #include "Graph.h"
 
-GameController::GameController()
+GameController::GameController() : stats("stats1.csv")
 {
 	numberOfPlayers = 0;
 }
@@ -13,9 +13,12 @@ GameController::~GameController()
 
 void GameController::MainLoop()
 {
-	StartTurn();
-	Turn();
-	EndTurn();
+	if (!isGameOver)
+	{
+		StartTurn();
+		Turn();
+		EndTurn();
+	}
 }
 
 void GameController::SubmitPlayer(Player* player)
@@ -24,25 +27,25 @@ void GameController::SubmitPlayer(Player* player)
 	pPlayer->player = player;
 	pPlayer->pawn = new Pawn();
 	numberOfPlayers++;
+	stats.AddPlayer(player);
 }
 
 void GameController::StartTurn()
-{
-	
-}
-
-void GameController::Turn()
 {
 	PlayerInfo* currentPlayer;
 	for (unsigned char i = 0; i < numberOfPlayers; ++i)
 	{
 		currentPlayer = players[i];
-		RenewData();
-		currentPlayer->currentDecision = currentPlayer->player->ProcessAI(0);
+		if (currentPlayer->pawn->isAlive)
+		{
+			RenewData();
+			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(0);
+			stats.AddSurvival(currentPlayer->player);
+		}
 	}
 }
 
-void GameController::EndTurn()
+void GameController::Turn()
 {
 	PlayerInfo* pPlayer;
 
@@ -50,9 +53,10 @@ void GameController::EndTurn()
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
 		pPlayer = players[i];
-		if (pPlayer->currentDecision.type == Decision::Type::SUICIDE)
+		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
 		{
-			pPlayer->pawn->CommitSuicide();
+			pPlayer->pawn->Die();
+			stats.AddDeath(pPlayer->player);
 		}
 	}
 
@@ -60,39 +64,11 @@ void GameController::EndTurn()
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
 		pPlayer = players[i];
-		if (pPlayer->currentDecision.type == Decision::Type::MOVE)
+		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::MOVE)
 		{
-			bool denyMove = false;
 			Node* targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
 
-			if (pPlayer->pawn->GetNode()->IsConnectedTo(targetNode) == false) //if target is connected to current node
-			{
-				denyMove = true;
-			}
-			else
-			{
-				if (targetNode->GetPawn() == nullptr) //if no one is on the node
-				{
-					for (int j = 0; j < numberOfPlayers; j++) //two pawns try to go to the same node
-					{
-						if ((i != j) && (players[j]->currentDecision.type == Decision::Type::MOVE))
-						{
-							Node* pNodeTrg = players[j]->currentDecision.target;
-							if (pNodeTrg->GetId() == pPlayer->currentDecision.target->GetId())
-							{
-								denyMove = true;
-								break;
-							}
-						}
-					}
-				}
-				else
-				{
-					denyMove = true; //another pawn is on the node
-				}
-			}
-			
-			if (!denyMove)
+			if (CanMoveTo(targetNode, pPlayer))
 			{
 				pPlayer->pawn->GetNode()->SetPawn(nullptr);
 				pPlayer->pawn->SetNode(targetNode);
@@ -105,13 +81,62 @@ void GameController::EndTurn()
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
 		pPlayer = players[i];
-		if (pPlayer->currentDecision.type == Decision::Type::SHOOT)
-		{
 
+		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SHOOT)
+		{
+			Node* targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
+
+			if (pPlayer->pawn->GetNode()->IsConnectedTo(targetNode) == true) //if target is connected to current node
+			{
+				if (targetNode->GetPawn() != nullptr)
+				{
+					for (int j = 0; j < numberOfPlayers; j++)
+					{
+						if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
+						{
+							players[j]->die = true;
+							stats.AddKill(pPlayer->player);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void GameController::EndTurn()
+{
+	PlayerInfo* pPlayer;
+
+	//Finish shots
+	for (int i = 0; i < numberOfPlayers; i++)
+	{
+		pPlayer = players[i];
+		if (pPlayer->pawn->isAlive)
+		{
+			if (pPlayer->die)
+			{
+				pPlayer->pawn->Die();
+				stats.AddDeath(pPlayer->player);				
+			}
 		}
 	}
 
-	
+	int countAlive = 0;
+	for (int i = 0; i < numberOfPlayers; i++)
+	{
+		if (players[i]->pawn->isAlive)
+			countAlive++;
+	}
+
+	if (countAlive <= 1)
+		GameOver();
+}
+
+void GameController::GameOver()
+{
+	isGameOver = true;
 }
 
 void GameController::RenewData()
@@ -122,4 +147,35 @@ void GameController::RenewData()
 	}
 
 	graph = new Graph(*currentGraph);
+}
+
+bool GameController::CanMoveTo(Node* node, PlayerInfo* player) const
+{
+	if (player->pawn->GetNode()->IsConnectedTo(node) == false) //if target is connected to current node
+	{
+		return false;
+	}
+	else
+	{
+		if (node->GetPawn() == nullptr) //if no one is on the node
+		{
+			for (int j = 0; j < numberOfPlayers; j++) //two pawns try to go to the same node
+			{
+				if ((player != players[j]) && (players[j]->currentDecision.type == Decision::Type::MOVE))
+				{
+					Node* pNodeTrg = players[j]->currentDecision.target;
+					if (pNodeTrg->GetId() == player->currentDecision.target->GetId())
+					{
+						return false;
+					}
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	return true;
 }

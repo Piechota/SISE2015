@@ -22,8 +22,8 @@ void Pawn::SetNode(Node* const node)
 	this->node = node;
 }
 
-void Pawn::CommitSuicide()
+void Pawn::Die()
 {
-	node->SetPawn(nullptr);
 	isAlive = false;
+	node->SetPawn(nullptr);
 }
