@@ -11,7 +11,17 @@ Pawn::~Pawn()
 
 }
 
+Node* Pawn::GetNode()
+{
+	return this->node;
+}
+
+void Pawn::SetNode(Node* node)
+{
+	this->node = node;
+}
+
 void Pawn::CommitSuicide()
 {
-	this->node->pawn = nullptr;
+	this->node->GetNode()->pawn;
 }

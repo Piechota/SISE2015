@@ -51,7 +51,7 @@ void GameController::EndTurn()
 		if (pPlayer->currentDecision.type == Decision::Type::SUICIDE)
 		{
 			pPlayer->pawn->isAlive = false;
-			//pPlayer->pawn->node->pawn = nullptr;
+			//BpPlayer->pawn->node->pawn = nullptr;
 		}
 	}
 

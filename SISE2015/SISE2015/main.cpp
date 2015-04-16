@@ -101,27 +101,27 @@ int main(int argc, char* args[])
 			{
 				tmpDecision = pawns[i]->ProcessAI(currentTime);
 
-				switch (tmpDecision)
-				{
-				case Decision::DO_NTH:
-					break;
-				case Decision::MOVE_UP:
-					if (posY[i] < screen_height - stepValue)
-						posY[i] += stepValue;
-					break;
-				case Decision::MOVE_DOWN:
-					if (posY[i] > stepValue)
-						posY[i] -= stepValue;
-					break;
-				case Decision::MOVE_LEFT:
-					if (posX[i] > stepValue)
-						posX[i] -= stepValue;
-					break;
-				case Decision::MOVE_RIGHT:
-					if (posX[i] < screen_width - stepValue)
-						posY[i] += stepValue;
-					break;
-				}
+				//switch (tmpDecision)
+				//{
+				//case Decision::DO_NTH:
+				//	break;
+				//case Decision::MOVE_UP:
+				//	if (posY[i] < screen_height - stepValue)
+				//		posY[i] += stepValue;
+				//	break;
+				//case Decision::MOVE_DOWN:
+				//	if (posY[i] > stepValue)
+				//		posY[i] -= stepValue;
+				//	break;
+				//case Decision::MOVE_LEFT:
+				//	if (posX[i] > stepValue)
+				//		posX[i] -= stepValue;
+				//	break;
+				//case Decision::MOVE_RIGHT:
+				//	if (posX[i] < screen_width - stepValue)
+				//		posY[i] += stepValue;
+				//	break;
+				//}
 
 				
 			}
