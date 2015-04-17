@@ -10,6 +10,7 @@
 #include "Pawn.h"
 #include "Player.h"
 #include "ExamplePlayer.h"
+#include "HumanPlayer.h"
 #include "GameController.h"
 
 #include "Graph.h"
@@ -60,33 +61,13 @@ int main(int argc, char* args[])
 	bool run = true;
 	SDL_Event event;
 
-	Stats* stats = new Stats("stats.csv");
+	//Stats* stats = new Stats("stats.csv");
 
-	int testAmount = 4;
-	Player** pawns = new Player*[testAmount];
-	for (int i = 0; i < testAmount; ++i)
-	{
-		pawns[i] = new ExamplePlayer("ExamplePlayer");
-		stats->AddPlayer(pawns[i]);
-	}
 	
-	int tmpRadius = 10;
-	Color** colors = new Color*[testAmount];
-	int* posX = new int[testAmount];
-	int* posY = new int[testAmount];
-	for (int i = 0; i < testAmount; ++i)
-	{
-		colors[i] = new Color(50 * i, 100, 255 - 50 * i);
-		posX[i] = 300;
-		posY[i] = 300;
-	}
-	int stepValue = 50;
-	int lastTime = time(NULL);
-	int currentTime = lastTime;
-	Decision tmpDecision;
-
-	Graph* graph = new Graph(2, 6, 100.0f);
-	graph->Generate();
+	GameController* game = new GameController();
+	game->Init();
+	game->SubmitPlayer(new ExamplePlayer("Bot"));
+	game->SubmitPlayer(new HumanPlayer("Mateusz"));
 
 	while (run)
 	{
@@ -96,75 +77,30 @@ int main(int argc, char* args[])
 				run = false;
 		}
 
+
 		SDL_SetRenderDrawColor(renderer, Colors::black.r, Colors::black.g, Colors::black.b, 0xFF);
 		SDL_RenderClear(renderer);
 
-		if (lastTime != (currentTime = time(NULL)))
-		{
-			for (int i = 0; i < testAmount; ++i)
-			{
-				//tmpDecision = pawns[i]->ProcessAI(currentTime);
+		game->MainLoop();
 
-				//switch (tmpDecision)
-				//{
-				//case Decision::DO_NTH:
-				//	break;
-				//case Decision::MOVE_UP:
-				//	if (posY[i] < screen_height - stepValue)
-				//		posY[i] += stepValue;
-				//	break;
-				//case Decision::MOVE_DOWN:
-				//	if (posY[i] > stepValue)
-				//		posY[i] -= stepValue;
-				//	break;
-				//case Decision::MOVE_LEFT:
-				//	if (posX[i] > stepValue)
-				//		posX[i] -= stepValue;
-				//	break;
-				//case Decision::MOVE_RIGHT:
-				//	if (posX[i] < screen_width - stepValue)
-				//		posY[i] += stepValue;
-				//	break;
-				//}
-
-				
-			}
-		}
-
-		lastTime = currentTime;
-
-		for (int i = 0; i < testAmount; ++i)
-		{
-			DrawCircle(*colors[i], posX[i], posY[i], tmpRadius);
-		}
+		//for (int i = 0; i < testAmount; ++i)
+		//{
+		//	DrawCircle(*colors[i], posX[i], posY[i], tmpRadius);
+		//}
 
 		//Here graph render function
 		//DrawCircle(Colors::green, Colors::white, 50, 50, 50, 5);
 		//DrawCircle(Colors::blue, 50, 100, 50);
 		//DrawLine(Colors::red, 50, 50, 50, 100);
 
-		GraphRenderer::RenderGraph(graph);
-
 		SDL_RenderPresent(renderer);
 	}
 
 	Close();
 
-	stats->SaveToFile();
+	//stats->SaveToFile();
 
-	for (int i = 0; i < testAmount; ++i)
-	{
-		delete pawns[i];
-		delete colors[i];
-	}
-	delete[] pawns;
-	delete[] colors;
-	delete[] posX;
-	delete[] posY;
-
-	delete graph;
-
-	delete stats;
+	//delete stats;
 
 	return 0;
 }

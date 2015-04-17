@@ -38,14 +38,31 @@ void GraphRenderer::RenderGraph(Graph* const graph)
 		}
 	}
 
-	for (Node* const n : *nodes)
+	int nodeCount = nodes->size();
+	for (int i = 0; i < nodeCount; ++i)
+	{
+		if ((*nodes)[i] != nullptr)
+		{
+			float nx = (*nodes)[i]->GetPositionX();
+			float ny = (*nodes)[i]->GetPositionY();
+
+			DrawCircle(Colors::green, Colors::white, nx, ny, 20.0f, 5.0f);
+
+			if ((*nodes)[i]->GetPawn() != nullptr)
+			{
+				DrawCircle(Colors::blue, nx, ny, 10.0f);
+			}
+		}
+	}
+	/*for (Node* const n : *nodes)
 	{
 		if (n != nullptr)
 		{
+			
 			float nx = n->GetPositionX();
 			float ny = n->GetPositionY();
 
-			DrawCircle(Colors::green, Colors::white, nx, ny, 50.0f, 5.0f);
+			DrawCircle(Colors::green, Colors::white, nx, ny, 20.0f, 5.0f);
 		}
-	}
+	}*/
 }

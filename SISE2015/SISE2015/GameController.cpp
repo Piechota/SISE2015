@@ -1,10 +1,19 @@
 #include "GameController.h"
 #include "Pawn.h"
 #include "Graph.h"
+#include "GraphRenderer.h"
 
-GameController::GameController() : stats("stats1.csv")
+//GameController::GameController()
+//{
+//	numberOfPlayers = 0;
+//	this->currentGraph = new Graph(4, 4, 40.0f);
+//}
+
+void GameController::Init()
 {
 	numberOfPlayers = 0;
+	this->currentGraph = new Graph(2, 6, 100.0f);
+	this->currentGraph->Generate();
 }
 
 GameController::~GameController()
@@ -18,16 +27,26 @@ void GameController::MainLoop()
 		StartTurn();
 		Turn();
 		EndTurn();
+		GraphRenderer::RenderGraph(this->currentGraph);
 	}
 }
 
 void GameController::SubmitPlayer(Player* player)
 {	
+	players[numberOfPlayers] = new PlayerInfo();
 	PlayerInfo* pPlayer = players[numberOfPlayers];	
+
 	pPlayer->player = player;
 	pPlayer->pawn = new Pawn();
 	numberOfPlayers++;
-	stats.AddPlayer(player);
+	//stats.AddPlayer(player);
+
+	std::vector<Node*>* nodes = this->currentGraph->GetNodes();
+	int nodeIndex = 0;
+	nodeIndex = ( rand() % (nodes->size() - 1) )  + 1;
+
+	pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
+	(*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
 }
 
 void GameController::StartTurn()
@@ -38,9 +57,9 @@ void GameController::StartTurn()
 		currentPlayer = players[i];
 		if (currentPlayer->pawn->isAlive)
 		{
-			RenewData();
-			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(currentPlayer->pawn->GetNode());
-			stats.AddSurvival(currentPlayer->player);
+			//RenewData();
+			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(this->graph,currentPlayer->pawn);
+			//stats.AddSurvival(currentPlayer->player);
 		}
 	}
 }
@@ -56,7 +75,7 @@ void GameController::Turn()
 		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
 		{
 			pPlayer->pawn->Die();
-			stats.AddDeath(pPlayer->player);
+			//stats.AddDeath(pPlayer->player);
 		}
 	}
 
@@ -95,7 +114,7 @@ void GameController::Turn()
 						if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
 						{
 							players[j]->die = true;
-							stats.AddKill(pPlayer->player);
+							//stats.AddKill(pPlayer->player);
 							break;
 						}
 					}
@@ -118,7 +137,7 @@ void GameController::EndTurn()
 			if (pPlayer->die)
 			{
 				pPlayer->pawn->Die();
-				stats.AddDeath(pPlayer->player);				
+				//stats.AddDeath(pPlayer->player);				
 			}
 		}
 	}

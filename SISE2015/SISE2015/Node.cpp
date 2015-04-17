@@ -5,6 +5,7 @@ Node::Node(int id, float x, float y)
 	this->id = id;
 	positionX = x;
 	positionY = y;
+	this->pawn = nullptr;
 }
 
 Node::Node(Node& other)

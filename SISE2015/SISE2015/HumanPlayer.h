@@ -6,9 +6,8 @@ class HumanPlayer :
     public Player
 {
 public:
-    virtual Decision ProcessAI(int grapthInfo) override;
+	virtual DecisionInfo ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn) override;
 
-    virtual Decision ProcessAI(Node * my_node) override;
     HumanPlayer(std::string name);
     ~HumanPlayer();
 };

@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Node.h"
+#include "Graph.h"
 
 //this is temporary, we'll need sth more complex, and not just 4 directions -> waiting for grapth
 
@@ -10,9 +11,11 @@ struct Decision
 {
 	enum Type
 	{		
-		MOVE,
+		MOVE = 0,
 		SHOOT,
-		SUICIDE
+		SUICIDE,
+
+		COUNT
 	};
 	Type type;
 
@@ -20,7 +23,7 @@ struct Decision
 };
 
 //TODO: swap int with some real type later on
-#define GraphInfo int
+#define GraphInfo Graph
 //this depends on the structure of graph
 #define DecisionInfo Decision
 
@@ -42,8 +45,7 @@ public:
 	std::string GetName() const;
 
 	//method called to launch thought process of the pawn, returns decision
-	virtual DecisionInfo ProcessAI(GraphInfo grapthInfo) = 0;
-    virtual DecisionInfo ProcessAI(Node * my_node) = 0;
+	virtual DecisionInfo ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn) = 0;
 };
 
 #endif //_PLAYER_H_
