@@ -6,6 +6,8 @@
 class ExamplePlayer : public Player
 {
 public:
+    virtual Decision ProcessAI(Node* my_node) override;
+
 	ExamplePlayer(std::string name);
 	ExamplePlayer(const ExamplePlayer& other);
 

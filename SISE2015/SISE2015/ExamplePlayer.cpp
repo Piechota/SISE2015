@@ -2,6 +2,11 @@
 #include <ctime>
 #include "ExamplePlayer.h"
 
+Decision ExamplePlayer::ProcessAI(Node* my_node)
+{
+    return Decision();
+}
+
 ExamplePlayer::ExamplePlayer(std::string name) : Player(name)
 {
 

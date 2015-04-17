@@ -43,6 +43,7 @@ public:
 
 	//method called to launch thought process of the pawn, returns decision
 	virtual DecisionInfo ProcessAI(GraphInfo grapthInfo) = 0;
+    virtual DecisionInfo ProcessAI(Node * my_node) = 0;
 };
 
 #endif //_PLAYER_H_

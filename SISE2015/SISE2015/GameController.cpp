@@ -38,7 +38,7 @@ void GameController::StartTurn()
 		if (currentPlayer->pawn->isAlive)
 		{
 			RenewData();
-			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(0);
+			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(currentPlayer->pawn->GetNode());
 			stats.AddSurvival(currentPlayer->player);
 		}
 	}
