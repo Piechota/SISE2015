@@ -9,6 +9,14 @@ Stats::Stats(std::string filename)
 
 Stats::~Stats()
 {
+	for (auto& kv : stats)
+	{
+		delete kv.second;
+	}
+}
+
+void Stats::SaveToFile()
+{
 	if (file.is_open())
 	{
 		file << "Statistics\n";

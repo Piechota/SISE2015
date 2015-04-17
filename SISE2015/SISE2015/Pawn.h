@@ -14,10 +14,11 @@ public:
 	Pawn();
 	~Pawn();
 
+	void Die();
 	Node* GetNode() const;
 	void SetNode(Node* const node);
+
 	bool isAlive = true;
-	void Die();
 	int radius;
 	Color color;
 };

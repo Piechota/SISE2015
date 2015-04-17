@@ -3,7 +3,7 @@
 
 Pawn::Pawn()
 {
-	this->color = Colors::white;
+	color = Colors::white;
 	radius = 10;
 }
 
@@ -14,7 +14,7 @@ Pawn::~Pawn()
 
 Node* Pawn::GetNode() const
 {
-	return this->node;
+	return node;
 }
 
 void Pawn::SetNode(Node* const node)
@@ -25,5 +25,5 @@ void Pawn::SetNode(Node* const node)
 void Pawn::Die()
 {
 	isAlive = false;
-	this->GetNode()->SetPawn(nullptr);
+	node->SetPawn(nullptr);
 }

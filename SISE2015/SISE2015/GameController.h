@@ -2,9 +2,9 @@
 #define _GAMECONTROLLER_H_
 
 #include "Player.h"
-#include "Graph.h"
-#include "Pawn.h"
 #include "Stats.h"
+class Pawn;
+class Graph;
 
 class GameController
 {

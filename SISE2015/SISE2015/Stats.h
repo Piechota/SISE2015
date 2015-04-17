@@ -13,6 +13,8 @@ public:
 	Stats(std::string filename);
 	~Stats();
 
+	void SaveToFile();
+
 	void AddPlayer(Player* player);
 	void AddKill(Player* player);
 	void AddDeath(Player* player);
