@@ -98,10 +98,9 @@ void Graph::Generate()
 			n->AddConnection(index > 0 ? nodes[index] : nodes[0]);
 		}
 
-		
-
 		currDistance += distance;
 	}
+
 	for (int i = 1; i <= players; ++i)
 	{
 		nodes[0]->AddConnection(nodes[i]);

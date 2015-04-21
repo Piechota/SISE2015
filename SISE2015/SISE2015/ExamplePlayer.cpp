@@ -1,7 +1,9 @@
 #include <iostream>
 #include <ctime>
+#include <vector>
 #include "ExamplePlayer.h"
 #include "Pawn.h"
+#include "Node.h"
 
 ExamplePlayer::ExamplePlayer(std::string name) : Player(name)
 {
@@ -15,7 +17,6 @@ ExamplePlayer::ExamplePlayer(const ExamplePlayer& other) : Player(other)
 
 DecisionInfo ExamplePlayer::ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn)
 {
-
 	//throw 0;
 	Decision dec;
 	//dec.type = (Decision::Type) ((rand() % 10 + time(NULL) % 25) % (int)(Decision::COUNT));

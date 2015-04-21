@@ -9,7 +9,7 @@ class Graph;
 class GameController
 {
 private:
-	/*Stats stats;*/
+	Stats stats;
 
 	struct PlayerInfo
 	{
@@ -32,14 +32,14 @@ private:
 	bool CanMoveTo(Node* node, PlayerInfo* player) const;
 
 public:
-	//GameController();
+	GameController();
+	~GameController();
+
 	void Init();
 	void SubmitPlayer(Player* player);
-	Graph* graph;
-
 	void MainLoop();
 
-	~GameController();
+	Graph* graph;
 };
 
 #endif

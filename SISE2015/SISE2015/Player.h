@@ -2,8 +2,10 @@
 #define _PLAYER_H_
 
 #include <string>
-#include "Node.h"
-#include "Graph.h"
+//#include "Node.h"
+class Pawn;
+class Node;
+class Graph;
 
 //this is temporary, we'll need sth more complex, and not just 4 directions -> waiting for grapth
 

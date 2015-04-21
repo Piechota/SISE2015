@@ -1,13 +1,12 @@
 #include "GameController.h"
 #include "Pawn.h"
+#include "Node.h"
 #include "Graph.h"
 #include "GraphRenderer.h"
 
-//GameController::GameController()
-//{
-//	numberOfPlayers = 0;
-//	this->currentGraph = new Graph(4, 4, 40.0f);
-//}
+GameController::GameController() : stats("stats1.csv")
+{
+}
 
 void GameController::Init()
 {
@@ -29,6 +28,8 @@ void GameController::MainLoop()
 		EndTurn();
 		GraphRenderer::RenderGraph(this->currentGraph);
 	}
+
+	stats.SaveToFile();
 }
 
 void GameController::SubmitPlayer(Player* player)
@@ -39,7 +40,7 @@ void GameController::SubmitPlayer(Player* player)
 	pPlayer->player = player;
 	pPlayer->pawn = new Pawn();
 	numberOfPlayers++;
-	//stats.AddPlayer(player);
+	stats.AddPlayer(player);
 
 	std::vector<Node*>* nodes = this->currentGraph->GetNodes();
 	int nodeIndex = 0;
@@ -59,7 +60,7 @@ void GameController::StartTurn()
 		{
 			//RenewData();
 			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(this->graph,currentPlayer->pawn);
-			//stats.AddSurvival(currentPlayer->player);
+			stats.AddSurvival(currentPlayer->player);
 		}
 	}
 }
@@ -75,7 +76,7 @@ void GameController::Turn()
 		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
 		{
 			pPlayer->pawn->Die();
-			//stats.AddDeath(pPlayer->player);
+			stats.AddDeath(pPlayer->player);
 		}
 	}
 
@@ -114,7 +115,7 @@ void GameController::Turn()
 						if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
 						{
 							players[j]->die = true;
-							//stats.AddKill(pPlayer->player);
+							stats.AddKill(pPlayer->player);
 							break;
 						}
 					}
@@ -137,7 +138,7 @@ void GameController::EndTurn()
 			if (pPlayer->die)
 			{
 				pPlayer->pawn->Die();
-				//stats.AddDeath(pPlayer->player);				
+				stats.AddDeath(pPlayer->player);				
 			}
 		}
 	}

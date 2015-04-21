@@ -63,7 +63,6 @@ int main(int argc, char* args[])
 
 	//Stats* stats = new Stats("stats.csv");
 
-	
 	GameController* game = new GameController();
 	game->Init();
 	game->SubmitPlayer(new ExamplePlayer("Bot"));
@@ -77,29 +76,19 @@ int main(int argc, char* args[])
 				run = false;
 		}
 
-
 		SDL_SetRenderDrawColor(renderer, Colors::black.r, Colors::black.g, Colors::black.b, 0xFF);
 		SDL_RenderClear(renderer);
 
 		game->MainLoop();
-
-		//for (int i = 0; i < testAmount; ++i)
-		//{
-		//	DrawCircle(*colors[i], posX[i], posY[i], tmpRadius);
-		//}
-
-		//Here graph render function
-		//DrawCircle(Colors::green, Colors::white, 50, 50, 50, 5);
-		//DrawCircle(Colors::blue, 50, 100, 50);
-		//DrawLine(Colors::red, 50, 50, 50, 100);
 
 		SDL_RenderPresent(renderer);
 	}
 
 	Close();
 
-	//stats->SaveToFile();
+	delete game;
 
+	//stats->SaveToFile();
 	//delete stats;
 
 	return 0;
