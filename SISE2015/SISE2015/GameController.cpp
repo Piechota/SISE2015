@@ -17,6 +17,48 @@ void GameController::Init()
 
 GameController::~GameController()
 {
+	if (graph != nullptr)
+	{
+		delete graph;
+		graph = nullptr;
+	}
+
+	if (currentGraph != nullptr)
+	{
+		delete currentGraph;
+		currentGraph = nullptr;
+	}
+
+	for (PlayerInfo* p : players)
+	{
+		if (p != nullptr)
+		{
+			if (p->player != nullptr)
+			{
+				delete p->player;
+				p->player = nullptr;
+			}
+
+			if (p->pawn != nullptr)
+			{
+				delete p->pawn;
+				p->pawn = nullptr;
+			}
+
+			delete p;
+			p = nullptr;
+		}
+	}
+}
+
+void GameController::Render() const
+{
+	GraphRenderer::RenderGraph(this->currentGraph);
+}
+
+void GameController::SaveStats()
+{
+	stats.SaveToFile();
 }
 
 void GameController::MainLoop()
@@ -26,10 +68,7 @@ void GameController::MainLoop()
 		StartTurn();
 		Turn();
 		EndTurn();
-		GraphRenderer::RenderGraph(this->currentGraph);
 	}
-
-	stats.SaveToFile();
 }
 
 void GameController::SubmitPlayer(Player* player)

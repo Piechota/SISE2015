@@ -2,7 +2,6 @@
 #define _PLAYER_H_
 
 #include <string>
-//#include "Node.h"
 class Pawn;
 class Node;
 class Graph;

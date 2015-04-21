@@ -2,7 +2,8 @@
 #define _GRAPH_H_
 
 #include <vector>
-class Node;
+#include "Globals.h"
+#include "Node.h"
 
 class Graph
 {
@@ -13,8 +14,8 @@ public:
 
 	void Generate();
 	std::vector<Node*>* GetNodes();
-	Node* GetRoot();
-	Node* GetNodeById(const int id);
+	Node* GetRoot() const;
+	Node* GetNodeById(const int id) const;
 	int GetDepth() const;
 	int GetPlayers() const;
 	float GetDistance() const;
@@ -28,5 +29,50 @@ private:
 
 	static int nodeIdCounter;
 };
+
+FORCEINLINE std::vector<Node*>* Graph::GetNodes()
+{
+	return &nodes;
+}
+
+FORCEINLINE Node* Graph::GetRoot() const
+{
+	return root;
+}
+
+FORCEINLINE Node* Graph::GetNodeById(const int id) const
+{
+	Node* node = nullptr;
+
+	for (Node* const n : nodes)
+	{
+		if (n != nullptr)
+		{
+			int nid = n->GetId();
+			if (nid == id)
+			{
+				node = n;
+				break;
+			}
+		}
+	}
+
+	return node;
+}
+
+FORCEINLINE int Graph::GetDepth() const
+{
+	return depth;
+}
+
+FORCEINLINE int Graph::GetPlayers() const
+{
+	return players;
+}
+
+FORCEINLINE float Graph::GetDistance() const
+{
+	return distance;
+}
 
 #endif

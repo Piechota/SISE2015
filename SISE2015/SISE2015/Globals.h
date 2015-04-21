@@ -9,4 +9,10 @@ extern int screen_height;
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 
+#ifdef _MSC_VER
+#define FORCEINLINE __forceinline
+#else
+#define FORCEINLINE __attribute__((always_inline))
+#endif
+
 #endif

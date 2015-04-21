@@ -9,6 +9,7 @@ class Graph;
 class GameController
 {
 private:
+	Graph* graph;
 	Stats stats;
 
 	struct PlayerInfo
@@ -38,8 +39,8 @@ public:
 	void Init();
 	void SubmitPlayer(Player* player);
 	void MainLoop();
-
-	Graph* graph;
+	void Render() const;
+	void SaveStats();
 };
 
 #endif

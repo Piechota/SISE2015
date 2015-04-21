@@ -13,6 +13,8 @@ Stats::~Stats()
 	{
 		delete kv.second;
 	}
+
+	file.close();
 }
 
 void Stats::SaveToFile()
@@ -78,7 +80,6 @@ void Stats::SaveToFile()
 		file << "\n";
 
 		file.flush();
-		file.close();
 	}
 }
 

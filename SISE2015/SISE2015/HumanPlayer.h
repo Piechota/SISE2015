@@ -2,14 +2,14 @@
 #define _HUMANPLAYER_H_
 
 #include "Player.h"
-class HumanPlayer :
-    public Player
+
+class HumanPlayer : public Player
 {
 public:
-	virtual DecisionInfo ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn) override;
+	HumanPlayer(std::string name);
+	~HumanPlayer();
 
-    HumanPlayer(std::string name);
-    ~HumanPlayer();
+	virtual DecisionInfo ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn) override;
 };
 
 #endif

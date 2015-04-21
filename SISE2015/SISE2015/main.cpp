@@ -79,13 +79,16 @@ int main(int argc, char* args[])
 		SDL_SetRenderDrawColor(renderer, Colors::black.r, Colors::black.g, Colors::black.b, 0xFF);
 		SDL_RenderClear(renderer);
 
-		game->MainLoop();
+		game->Render();
 
 		SDL_RenderPresent(renderer);
+
+		game->MainLoop();
 	}
 
 	Close();
 
+	game->SaveStats();
 	delete game;
 
 	//stats->SaveToFile();
