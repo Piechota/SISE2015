@@ -1,4 +1,4 @@
-#include "Color.h"
+#include "Headers.h"
 
 Color::Color(Uint8 r, Uint8 g, Uint8 b)
 {
