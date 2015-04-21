@@ -1,8 +1,4 @@
-#include "GameController.h"
-#include "Pawn.h"
-#include "Node.h"
-#include "Graph.h"
-#include "GraphRenderer.h"
+#include "Headers.h"
 
 GameController::GameController() : stats("stats1.csv")
 {
@@ -23,10 +19,11 @@ void GameController::MainLoop()
 {
 	if (!isGameOver)
 	{
+		GraphRenderer::RenderGraph(this->currentGraph);
+		SDL_RenderPresent(renderer);
 		StartTurn();
 		Turn();
 		EndTurn();
-		GraphRenderer::RenderGraph(this->currentGraph);
 	}
 
 	stats.SaveToFile();

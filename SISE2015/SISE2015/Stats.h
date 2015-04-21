@@ -1,11 +1,7 @@
 #ifndef _STATS_H_
 #define _STATS_H_
 
-#include <fstream>
-#include <map>
-#include <string>
-
-class Player;
+#include "Headers.h"
 
 class Stats
 {

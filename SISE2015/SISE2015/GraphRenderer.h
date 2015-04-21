@@ -1,7 +1,7 @@
 #ifndef _GRAOHRENDERER_H_
 #define _GRAOHRENDERER_H_
 
-class Graph;
+#include "Headers.h"
 
 class GraphRenderer
 {

@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DanceMat.cpp" />
     <ClCompile Include="ExamplePlayer.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Globals.cpp" />
@@ -85,12 +86,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="DanceMat.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ExamplePlayer.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphRenderer.h" />
+    <ClInclude Include="Headers.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pawn.h" />

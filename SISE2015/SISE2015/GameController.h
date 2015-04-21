@@ -1,10 +1,9 @@
 #ifndef _GAMECONTROLLER_H_
 #define _GAMECONTROLLER_H_
 
-#include "Player.h"
-#include "Stats.h"
-class Pawn;
-class Graph;
+#include "Headers.h"
+
+class Stats;
 
 class GameController
 {

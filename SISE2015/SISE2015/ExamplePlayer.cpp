@@ -1,10 +1,4 @@
-#include <iostream>
-#include <ctime>
-#include <vector>
-#include "ExamplePlayer.h"
-#include "Pawn.h"
-#include "Node.h"
-
+#include "Headers.h"
 ExamplePlayer::ExamplePlayer(std::string name) : Player(name)
 {
 

@@ -1,7 +1,7 @@
 #ifndef _EXAMPLEPLAYER_H_
 #define _EXAMPLEPLAYER_H_
 
-#include "Player.h"
+#include "Headers.h"
 
 class ExamplePlayer : public Player
 {

@@ -1,22 +1,4 @@
-#include <iostream>
-#include <cmath>
-#include <ctime>
-#include <vector>
-#include <SDL.h>
-
-#include "DataStructures.h"
-#include "Globals.h"
-
-#include "Pawn.h"
-#include "Player.h"
-#include "ExamplePlayer.h"
-#include "HumanPlayer.h"
-#include "GameController.h"
-
-#include "Graph.h"
-#include "Renderer.h"
-#include "GraphRenderer.h"
-#include "Stats.h"
+#include "Headers.h"
 
 bool Init(const int& w, const int& h)
 {
@@ -43,11 +25,15 @@ bool Init(const int& w, const int& h)
 		return false;
 	}
 
+	danceMat = DanceMat();
+
 	return true;
 }
 
 void Close()
 {
+	danceMat.CloseDanceMat();
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -81,7 +67,6 @@ int main(int argc, char* args[])
 
 		game->MainLoop();
 
-		SDL_RenderPresent(renderer);
 	}
 
 	Close();

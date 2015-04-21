@@ -1,7 +1,7 @@
 #ifndef _PAWN_H_
 #define _PAWN_H_
 
-#include "Color.h"
+#include "Headers.h"
 
 class Node;
 

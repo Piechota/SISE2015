@@ -1,6 +1,4 @@
-#include <utility>
-#include "Stats.h"
-#include "Player.h"
+#include "Headers.h"
 
 Stats::Stats(std::string filename)
 {

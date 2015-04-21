@@ -1,7 +1,4 @@
-#include <iostream>
-#include "HumanPlayer.h"
-#include "Pawn.h"
-#include "Node.h"
+#include "Headers.h"
 
 //Decision HumanPlayer::ProcessAI(Node * my_node)
 //{

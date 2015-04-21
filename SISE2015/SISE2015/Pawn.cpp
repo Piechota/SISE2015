@@ -1,5 +1,4 @@
-#include "Pawn.h"
-#include "Node.h"
+#include "Headers.h"
 
 Pawn::Pawn()
 {

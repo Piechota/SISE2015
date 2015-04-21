@@ -1,6 +1,4 @@
-#include "Graph.h"
-#include "Node.h"
-#include "Globals.h"
+#include "Headers.h"
 
 int Graph::nodeIdCounter = 0;
 
