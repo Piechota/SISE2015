@@ -1,4 +1,9 @@
-#include "Headers.h"
+#include <vector>
+#include "GraphRenderer.h"
+#include "Graph.h"
+#include "Node.h"
+#include "Renderer.h"
+#include "Color.h"
 
 GraphRenderer::GraphRenderer()
 {

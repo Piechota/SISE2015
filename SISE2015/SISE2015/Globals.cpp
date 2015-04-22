@@ -6,3 +6,4 @@ int screen_height;
 SDL_Window* window;
 SDL_Renderer* renderer;
 DanceMat danceMat;
+Audio* audio;

@@ -1,4 +1,8 @@
-#include "Headers.h"
+#include <cmath>
+#include <SDL.h>
+#include "Globals.h"
+#include "Renderer.h"
+#include "Color.h"
 
 int length(const int& x0, const int& y0, const int& x1, const int& y1)
 {

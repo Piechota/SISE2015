@@ -1,6 +1,5 @@
 #include "Headers.h"
 
-
 DanceMat::DanceMat()
 {
 	if (SDL_NumJoysticks() > 0)
@@ -8,6 +7,7 @@ DanceMat::DanceMat()
 		dance_mat = SDL_JoystickOpen(0);
 	}
 }
+
 void DanceMat::CloseDanceMat()
 {
 	if (dance_mat != nullptr)
@@ -18,6 +18,7 @@ bool DanceMat::IsDanceMat() const
 {
 	return dance_mat != nullptr;
 }
+
 bool DanceMat::IsKeyDown(const int& key) const
 {
 	return SDL_JoystickGetButton(dance_mat, key) == (Uint8)1;

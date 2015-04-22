@@ -1,11 +1,11 @@
 #include "Headers.h"
 
-bool Init(const int& w, const int& h)
+bool InitSDL(const int& w, const int& h)
 {
 	screen_width = w;
 	screen_height = h;
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		return false;
@@ -25,15 +25,18 @@ bool Init(const int& w, const int& h)
 		return false;
 	}
 
-	danceMat = DanceMat();
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) < 0)
+	{
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+		return false;
+	}
 
 	return true;
 }
 
-void Close()
+void CloseSDL()
 {
-	danceMat.CloseDanceMat();
-
+	Mix_Quit();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -41,18 +44,21 @@ void Close()
 
 int main(int argc, char* args[])
 {
-	if (!Init(640, 640))
+	if (!InitSDL(640, 640))
 		return 1;
 
 	bool run = true;
 	SDL_Event event;
 
-	//Stats* stats = new Stats("stats.csv");
+	danceMat = DanceMat();
+	audio = new Audio();
 
 	GameController* game = new GameController();
 	game->Init();
 	game->SubmitPlayer(new ExamplePlayer("Bot"));
 	game->SubmitPlayer(new HumanPlayer("Mateusz"));
+
+	audio->Play();
 
 	while (run)
 	{
@@ -72,13 +78,14 @@ int main(int argc, char* args[])
 		game->MainLoop();
 	}
 
-	Close();
-
 	game->SaveStats();
 	delete game;
 
-	//stats->SaveToFile();
-	//delete stats;
+	danceMat.CloseDanceMat();
+	audio->Stop();
+	delete audio;
+
+	CloseSDL();
 
 	return 0;
 }

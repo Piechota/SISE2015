@@ -5,11 +5,14 @@
 #include <cmath>
 #include <ctime>
 #include <vector>
-#include <SDL.h>
 #include <utility>
 #include <fstream>
 #include <map>
 #include <string>
+
+#include <SDL.h>
+#include <SDL_mixer.h>
+#include "Audio.h"
 
 #include "DanceMat.h"
 #include "DataStructures.h"

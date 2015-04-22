@@ -1,6 +1,9 @@
 #ifndef _RENDERER_H
 #define _RENDERER_H
 
+struct Color;
+struct SDL_Point;
+
 //Line
 extern void DrawLine(const Color& color, const SDL_Point& p0, const SDL_Point& p1);
 extern void DrawLine(const Color& color, const int& x0, const int& y0, const int& x1, const int& y1);
