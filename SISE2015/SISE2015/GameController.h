@@ -19,7 +19,7 @@ private:
 		bool die = false;		
 	};
 
-	int numberOfPlayers;
+	size_t numberOfPlayers;
 	PlayerInfo* players[6];
 	Graph* currentGraph;
 	bool isGameOver = false;
@@ -29,14 +29,14 @@ private:
 	void EndTurn();
 	void GameOver();
 	void RenewData();
-	bool CanMoveTo(Node* node, PlayerInfo* player) const;
+	bool CanMoveTo(Node* const node, PlayerInfo* const player) const;
 
 public:
 	GameController();
 	~GameController();
 
 	void Init();
-	void SubmitPlayer(Player* player);
+	void SubmitPlayer(Player* const player);
 	void MainLoop();
 	void Render() const;
 	void SaveStats();

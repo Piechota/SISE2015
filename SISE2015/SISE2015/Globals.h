@@ -10,7 +10,7 @@ extern int screen_width;
 extern int screen_height;
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
-extern DanceMat danceMat;
+extern DanceMat* danceMat;
 extern Audio* audio;
 
 #ifdef _MSC_VER

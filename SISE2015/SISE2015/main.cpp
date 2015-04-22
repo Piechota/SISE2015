@@ -50,7 +50,7 @@ int main(int argc, char* args[])
 	bool run = true;
 	SDL_Event event;
 
-	danceMat = DanceMat();
+	danceMat = new DanceMat();
 	audio = new Audio();
 
 	GameController* game = new GameController();
@@ -81,7 +81,8 @@ int main(int argc, char* args[])
 	game->SaveStats();
 	delete game;
 
-	danceMat.CloseDanceMat();
+	danceMat->CloseDanceMat();
+	delete danceMat;
 	audio->Stop();
 	delete audio;
 

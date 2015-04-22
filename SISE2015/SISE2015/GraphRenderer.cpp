@@ -4,6 +4,7 @@
 #include "Node.h"
 #include "Renderer.h"
 #include "Color.h"
+#include "Pawn.h"
 
 GraphRenderer::GraphRenderer()
 {
@@ -47,21 +48,12 @@ void GraphRenderer::RenderGraph(Graph* const graph)
 
 			DrawCircle(Colors::green, Colors::white, nx, ny, 20.0f, 5.0f);
 
-			if (n->GetPawn() != nullptr)
+			Pawn* const pawn = n->GetPawn();
+
+			if (pawn != nullptr)
 			{
-				DrawCircle(Colors::blue, nx, ny, 10.0f);
+				DrawCircle(pawn->color, nx, ny, 10.0f);
 			}
 		}
 	}
-
-	/*for (Node* const n : *nodes)
-	{
-		if (n != nullptr)
-		{
-			float nx = n->GetPositionX();
-			float ny = n->GetPositionY();
-
-			DrawCircle(Colors::green, Colors::white, nx, ny, 20.0f, 5.0f);
-		}
-	}*/
 }

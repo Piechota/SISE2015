@@ -1,6 +1,6 @@
 #include "Node.h"
 
-Node::Node(int id, float x, float y)
+Node::Node(size_t id, float x, float y)
 {
 	this->id = id;
 	positionX = x;

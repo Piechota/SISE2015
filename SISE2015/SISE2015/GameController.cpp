@@ -69,19 +69,23 @@ void GameController::MainLoop()
 	}
 }
 
-void GameController::SubmitPlayer(Player* player)
+void GameController::SubmitPlayer(Player* const player)
 {	
 	players[numberOfPlayers] = new PlayerInfo();
 	PlayerInfo* pPlayer = players[numberOfPlayers];	
 
 	pPlayer->player = player;
 	pPlayer->pawn = new Pawn();
-	numberOfPlayers++;
+	pPlayer->pawn->color.r = numberOfPlayers * 100;
+	pPlayer->pawn->color.g = 0;
+	pPlayer->pawn->color.b = (numberOfPlayers + 1) * 100;
+
 	stats.AddPlayer(player);
+	numberOfPlayers++;
 
 	std::vector<Node*>* nodes = this->currentGraph->GetNodes();
-	int nodeIndex = 0;
-	nodeIndex = ( rand() % (nodes->size() - 1) )  + 1;
+	size_t nodeIndex = 0;
+	nodeIndex = ( rand() % (nodes->size() - 1) ) + 1;
 
 	pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
 	(*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
@@ -90,13 +94,13 @@ void GameController::SubmitPlayer(Player* player)
 void GameController::StartTurn()
 {
 	PlayerInfo* currentPlayer;
-	for (unsigned char i = 0; i < numberOfPlayers; ++i)
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		currentPlayer = players[i];
 		if (currentPlayer->pawn->isAlive)
 		{
 			//RenewData();
-			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(this->graph,currentPlayer->pawn);
+			currentPlayer->currentDecision = currentPlayer->player->ProcessAI(this->graph, currentPlayer->pawn);
 			stats.AddSurvival(currentPlayer->player);
 		}
 	}
@@ -107,7 +111,7 @@ void GameController::Turn()
 	PlayerInfo* pPlayer;
 
 	//Suicides
-	for (int i = 0; i < numberOfPlayers; i++)
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		pPlayer = players[i];
 		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
@@ -118,7 +122,7 @@ void GameController::Turn()
 	}
 
 	//Moves
-	for (int i = 0; i < numberOfPlayers; i++)
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		pPlayer = players[i];
 		if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::MOVE)
@@ -135,7 +139,7 @@ void GameController::Turn()
 	}
 
 	//Shots
-	for (int i = 0; i < numberOfPlayers; i++)
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		pPlayer = players[i];
 
@@ -147,7 +151,7 @@ void GameController::Turn()
 			{
 				if (targetNode->GetPawn() != nullptr)
 				{
-					for (int j = 0; j < numberOfPlayers; j++)
+					for (size_t j = 0; j < numberOfPlayers; ++j)
 					{
 						if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
 						{
@@ -167,7 +171,7 @@ void GameController::EndTurn()
 	PlayerInfo* pPlayer;
 
 	//Finish shots
-	for (int i = 0; i < numberOfPlayers; i++)
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		pPlayer = players[i];
 		if (pPlayer->pawn->isAlive)
@@ -180,8 +184,8 @@ void GameController::EndTurn()
 		}
 	}
 
-	int countAlive = 0;
-	for (int i = 0; i < numberOfPlayers; i++)
+	size_t countAlive = 0;
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		if (players[i]->pawn->isAlive)
 			countAlive++;
@@ -206,7 +210,7 @@ void GameController::RenewData()
 	graph = new Graph(*currentGraph);
 }
 
-bool GameController::CanMoveTo(Node* node, PlayerInfo* player) const
+bool GameController::CanMoveTo(Node* const node, PlayerInfo* const player) const
 {
 	if (player->pawn->GetNode()->IsConnectedTo(node) == false) //if target is connected to current node
 	{
@@ -216,7 +220,7 @@ bool GameController::CanMoveTo(Node* node, PlayerInfo* player) const
 	{
 		if (node->GetPawn() == nullptr) //if no one is on the node
 		{
-			for (int j = 0; j < numberOfPlayers; j++) //two pawns try to go to the same node
+			for (size_t j = 0; j < numberOfPlayers; ++j) //two pawns try to go to the same node
 			{
 				if ((player != players[j]) && (players[j]->currentDecision.type == Decision::Type::MOVE))
 				{

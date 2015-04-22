@@ -3,7 +3,6 @@
 Pawn::Pawn()
 {
 	color = Colors::white;
-	radius = 10;
 }
 
 Pawn::~Pawn()
@@ -24,5 +23,8 @@ void Pawn::SetNode(Node* const node)
 void Pawn::Die()
 {
 	isAlive = false;
-	node->SetPawn(nullptr);
+	if (node != nullptr)
+	{
+		node->SetPawn(nullptr);
+	}
 }

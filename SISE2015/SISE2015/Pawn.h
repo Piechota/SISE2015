@@ -19,7 +19,6 @@ public:
 	void SetNode(Node* const node);
 
 	bool isAlive = true;
-	int radius;
 	Color color;
 };
 

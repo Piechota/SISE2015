@@ -1,9 +1,9 @@
-#include "Headers.h"
+#include "Globals.h"
 
 int screen_width;
 int screen_height;
 
 SDL_Window* window;
 SDL_Renderer* renderer;
-DanceMat danceMat;
+DanceMat* danceMat;
 Audio* audio;

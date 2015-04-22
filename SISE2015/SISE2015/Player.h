@@ -2,7 +2,6 @@
 #define _PLAYER_H_
 
 #include "Headers.h"
-//this is temporary, we'll need sth more complex, and not just 4 directions -> waiting for grapth
 
 struct Decision
 {
@@ -19,9 +18,7 @@ struct Decision
 	Node* target;
 };
 
-//TODO: swap int with some real type later on
 #define GraphInfo Graph
-//this depends on the structure of graph
 #define DecisionInfo Decision
 
 class Player
@@ -35,14 +32,14 @@ public:
 	static void ResetIdIndexing();
 
 	Player(std::string name);
-	Player(const Player &other);
+	Player(const Player& other);
 	~Player();
 
 	int GetId() const;
 	std::string GetName() const;
 
 	//method called to launch thought process of the pawn, returns decision
-	virtual DecisionInfo ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn) = 0;
+	virtual DecisionInfo ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn) = 0;
 };
 
 #endif //_PLAYER_H_

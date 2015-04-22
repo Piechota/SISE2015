@@ -1,8 +1,8 @@
 #include "Graph.h"
 
-int Graph::nodeIdCounter = 0;
+size_t Graph::nodeIdCounter = 0;
 
-Graph::Graph(int depth, int players, float distance)
+Graph::Graph(size_t depth, size_t players, float distance)
 {
 	this->depth = depth;
 	this->players = players;
@@ -59,13 +59,13 @@ void Graph::Generate()
 	float angle = 360.0f / players;
 	angle *= 0.01745f;
 
-	for (int i = 0; i < depth; ++i)
+	for (size_t i = 0; i < depth; ++i)
 	{
 		float nodeX = rootPosX + currDistance;
 		float nodeY = rootPosY;
 
 		// spawn nodes
-		for (int j = 0; j < players; ++j) 
+		for (size_t j = 0; j < players; ++j)
 		{
 			float newNodeX = (nodeX - rootPosX) * cos(angle) - (nodeY - rootPosY) * sin(angle) + rootPosX;
 			float newNodeY = (nodeX - rootPosX) * sin(angle) + (nodeY - rootPosY) * cos(angle) + rootPosY;
@@ -80,9 +80,9 @@ void Graph::Generate()
 		}
 
 		// create connections
-		for (int j = 1; j <= players; ++j) 
+		for (size_t j = 1; j <= players; ++j)
 		{
-			int index = nodes.size() - j;
+			size_t index = nodes.size() - j;
 			Node* n = nodes[index];
 
 			// connect to higher indexed node OR bridge the gap between first and last node
@@ -92,14 +92,16 @@ void Graph::Generate()
 			n->AddConnection(j != players ? nodes[index - 1] : nodes[index + players - 1]);
 
 			// connect to a lower ring node OR to the central node (in the case of the first ring)
-			index -= players;
-			n->AddConnection(index > 0 ? nodes[index] : nodes[0]);
+			//index -= players;
+			//n->AddConnection(index > 0 ? nodes[index] : nodes[0]);
+			n->AddConnection(index > players ? nodes[index - players] : nodes[0]);
 		}
 
 		currDistance += distance;
 	}
 
-	for (int i = 1; i <= players; ++i)
+	// connect central node to first ring
+	for (size_t i = 1; i <= players; ++i)
 	{
 		nodes[0]->AddConnection(nodes[i]);
 	}

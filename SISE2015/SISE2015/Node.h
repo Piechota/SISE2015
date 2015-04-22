@@ -9,11 +9,11 @@ class Pawn;
 class Node
 {	
 public:
-	Node(int id, float x, float y);
+	Node(size_t id, float x, float y);
 	Node(Node& other);
 	~Node();
 
-	int GetId() const;
+	size_t GetId() const;
 	std::vector<Node*>* GetConnections();
 	void AddConnection(Node* const node);
 	bool IsConnectedTo(Node* const node) const;
@@ -23,14 +23,14 @@ public:
 	Pawn* GetPawn() const;
 
 private:
-	int id;
+	size_t id;
 	std::vector<Node*> neighbors;
 	float positionX;
 	float positionY;
 	Pawn* pawn;
 };
 
-FORCEINLINE int Node::GetId() const
+FORCEINLINE size_t Node::GetId() const
 {
 	return id;
 }

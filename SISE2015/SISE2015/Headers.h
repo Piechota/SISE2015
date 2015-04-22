@@ -12,12 +12,12 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include "Audio.h"
 
-#include "DanceMat.h"
 #include "DataStructures.h"
 #include "Globals.h"
 #include "Color.h"
+#include "DanceMat.h"
+#include "Audio.h"
 
 #include "Pawn.h"
 #include "Node.h"
@@ -31,8 +31,5 @@
 
 #include "Renderer.h"
 #include "GraphRenderer.h"
-
-#include "ExamplePlayer.h"
-#include "HumanPlayer.h"
 
 #endif

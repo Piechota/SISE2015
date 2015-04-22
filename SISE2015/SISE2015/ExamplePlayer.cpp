@@ -9,7 +9,7 @@ ExamplePlayer::ExamplePlayer(const ExamplePlayer& other) : Player(other)
 	
 }
 
-DecisionInfo ExamplePlayer::ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn)
+DecisionInfo ExamplePlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn)
 {
 	//throw 0;
 	Decision dec;

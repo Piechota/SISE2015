@@ -9,7 +9,7 @@ public:
 	ExamplePlayer(std::string name);
 	ExamplePlayer(const ExamplePlayer& other);
 
-	virtual DecisionInfo ProcessAI(GraphInfo* grapthInfo, Pawn* myPawn) override;
+	virtual DecisionInfo ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn) override;
 };
 
 #endif
