@@ -40,6 +40,7 @@ Node::Node(Node&& other)
 	pawn = other.GetPawn();
 
 	other.SetPawn(nullptr);
+	other.neighbors.clear();
 }
 
 Node& Node::operator=(Node&& other)
@@ -53,6 +54,7 @@ Node& Node::operator=(Node&& other)
 		pawn = other.GetPawn();
 
 		other.SetPawn(nullptr);
+		other.neighbors.clear();
 	}
 
 	return *this;

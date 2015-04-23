@@ -6,12 +6,13 @@
 class HumanPlayer : public Player
 {
 public:
-    HumanPlayer(std::string name);
+    HumanPlayer(const std::string name, const Color color);
     ~HumanPlayer();
 
 	virtual DecisionInfo ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn) override;
+
 private:
-    void clear();
+    void clear() const;
 };
 
 #endif

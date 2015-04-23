@@ -57,8 +57,8 @@ int main(int argc, char* args[])
 
     GameController* game = new GameController();
     game->Init();
-    game->SubmitPlayer(new HumanPlayer("gracz #1"));
-    game->SubmitPlayer(new HumanPlayer("gracz #2"));
+    game->SubmitPlayer(new HumanPlayer("gracz #1", Colors::blue));
+	game->SubmitPlayer(new HumanPlayer("gracz #2", Colors::red));
 
     audio->Play();
 

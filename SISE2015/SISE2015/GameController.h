@@ -23,9 +23,9 @@ private:
 
 	struct PlayerInfo
 	{
+		DecisionInfo currentDecision;
 		Player* player;
 		Pawn* pawn;
-		DecisionInfo currentDecision;
 		bool die = false;		
 	};
 
@@ -41,7 +41,7 @@ private:
 	void EndTurn();
 	void GameOver();
 	void RenewData();
-	bool CanMoveTo(Node* const node, PlayerInfo* const player) const;
+	bool CanMoveTo(const Node* const node, const PlayerInfo* const player) const;
 };
 
 #endif

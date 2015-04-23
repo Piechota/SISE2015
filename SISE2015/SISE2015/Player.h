@@ -26,12 +26,13 @@ class Player
 public:
 	static void ResetIdIndexing();
 
-	Player(std::string name);
+	Player(const std::string name, const Color color);
 	Player(const Player& other);
 	~Player();
 
 	uint32_t GetId() const;
-	std::string GetName() const;
+	const std::string& GetName() const;
+	const Color& GetColor() const;
 
 	//method called to launch thought process of the pawn, returns decision
 	virtual DecisionInfo ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn) = 0;
@@ -40,8 +41,9 @@ protected:
     std::string name;
 
 private:
-	static uint32_t idCounter;
+	Color color;
     uint32_t id;
+	static uint32_t idCounter;
 };
 
 #endif //_PLAYER_H_

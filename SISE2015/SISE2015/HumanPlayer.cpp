@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-HumanPlayer::HumanPlayer(std::string name) : Player(name)
+HumanPlayer::HumanPlayer(const std::string name, const Color color) : Player(name, color)
 {
 }
 
@@ -109,7 +109,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
     return d;
 }
 
-void HumanPlayer::clear()
+void HumanPlayer::clear() const
 {
 #ifdef _WIN32
     system("cls");

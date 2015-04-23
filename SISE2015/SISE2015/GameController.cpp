@@ -79,9 +79,7 @@ void GameController::SubmitPlayer(Player* const player)
 
     pPlayer->player = player;
     pPlayer->pawn = new Pawn();
-    pPlayer->pawn->color.r = numberOfPlayers * 100;
-    pPlayer->pawn->color.g = 0;
-    pPlayer->pawn->color.b = (numberOfPlayers + 1) * 100;
+	pPlayer->pawn->color = player->GetColor();
 
     stats.AddPlayer(player);
     numberOfPlayers++;
@@ -103,7 +101,7 @@ void GameController::StartTurn()
         if (currentPlayer->pawn->isAlive)
         {
             //RenewData();
-            currentPlayer->currentDecision = currentPlayer->player->ProcessAI(this->graph, currentPlayer->pawn);
+            currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
             stats.AddSurvival(currentPlayer->player);
         }
     }
@@ -195,7 +193,9 @@ void GameController::EndTurn()
             countAlive++;
         }
     }
+
     turns++;
+
     if (countAlive <= 1 || turns >= 100)
     {
         GameOver();
@@ -218,7 +218,7 @@ void GameController::RenewData()
     graph = new Graph(*currentGraph);
 }
 
-bool GameController::CanMoveTo(Node* const node, PlayerInfo* const player) const
+bool GameController::CanMoveTo(const Node* const node, const PlayerInfo* const player) const
 {
     if (player->pawn->GetNode()->IsConnectedTo(node) == false) //if target is connected to current node
     {
