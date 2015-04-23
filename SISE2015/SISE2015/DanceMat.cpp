@@ -8,6 +8,11 @@ DanceMat::DanceMat()
 	}
 }
 
+DanceMat::~DanceMat()
+{
+	CloseDanceMat();
+}
+
 void DanceMat::CloseDanceMat()
 {
 	if (dance_mat != nullptr)
@@ -19,23 +24,23 @@ bool DanceMat::IsDanceMat() const
 	return dance_mat != nullptr;
 }
 
-bool DanceMat::IsKeyDown(const int& key) const
+bool DanceMat::IsKeyDown(const uint8_t& key) const
 {
 	return SDL_JoystickGetButton(dance_mat, key) == (Uint8)1;
 }
 
 namespace DanceMatButtons
 {
-	const int UP = 2;
-	const int RIGHT = 3;
-	const int DOWN = 1;
-	const int LEFT = 0;
+	const uint8_t UP = 2;
+	const uint8_t RIGHT = 3;
+	const uint8_t DOWN = 1;
+	const uint8_t LEFT = 0;
 
-	const int UP_RIGHT = 7;
-	const int RIGHT_DOWN = 5;
-	const int DOWN_LEFT = 4;
-	const int LEFT_UP = 6;
+	const uint8_t UP_RIGHT = 7;
+	const uint8_t RIGHT_DOWN = 5;
+	const uint8_t DOWN_LEFT = 4;
+	const uint8_t LEFT_UP = 6;
 
-	const int SELECT = 8;
-	const int START = 9;
+	const uint8_t SELECT = 8;
+	const uint8_t START = 9;
 }

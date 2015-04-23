@@ -9,28 +9,32 @@ class Pawn;
 class Node
 {	
 public:
-	Node(size_t id, float x, float y);
-	Node(Node& other);
+	Node(const uint32_t id, const int32_t x, const int32_t y);
+	Node(const Node& other);
+	Node& operator=(const Node& other);
+	Node(Node&& other);
+	Node& operator=(Node&& other);
 	~Node();
 
-	size_t GetId() const;
+	uint32_t GetId() const;
 	std::vector<Node*>* GetConnections();
+	const std::vector<Node*>* GetConstConnections() const;
 	void AddConnection(Node* const node);
-	bool IsConnectedTo(Node* const node) const;
-	float GetPositionX() const;
-	float GetPositionY() const;
+	bool IsConnectedTo(const Node* const node) const;
+	int32_t GetPositionX() const;
+	int32_t GetPositionY() const;
 	void SetPawn(Pawn* const pawn);
 	Pawn* GetPawn() const;
 
 private:
-	size_t id;
 	std::vector<Node*> neighbors;
-	float positionX;
-	float positionY;
 	Pawn* pawn;
+	uint32_t id;
+	int32_t positionX;
+	int32_t positionY;
 };
 
-FORCEINLINE size_t Node::GetId() const
+FORCEINLINE uint32_t Node::GetId() const
 {
 	return id;
 }
@@ -40,16 +44,21 @@ FORCEINLINE std::vector<Node*>* Node::GetConnections()
 	return &neighbors;
 }
 
+FORCEINLINE const std::vector<Node*>* Node::GetConstConnections() const
+{
+	return &neighbors;
+}
+
 FORCEINLINE void Node::AddConnection(Node* const node)
 {
 	if (node != nullptr) neighbors.push_back(node);
 }
 
-FORCEINLINE bool Node::IsConnectedTo(Node* const node) const
+FORCEINLINE bool Node::IsConnectedTo(const Node* const node) const
 {
 	if (node == nullptr) return false;
 
-	for (Node* const n : neighbors)
+	for (const Node* const n : neighbors)
 	{
 		if (n == node) return true;
 	}
@@ -57,12 +66,12 @@ FORCEINLINE bool Node::IsConnectedTo(Node* const node) const
 	return false;
 }
 
-FORCEINLINE float Node::GetPositionX() const
+FORCEINLINE int32_t Node::GetPositionX() const
 {
 	return positionX;
 }
 
-FORCEINLINE float Node::GetPositionY() const
+FORCEINLINE int32_t Node::GetPositionY() const
 {
 	return positionY;
 }

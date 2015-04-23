@@ -14,24 +14,24 @@ GraphRenderer::~GraphRenderer()
 {
 }
 
-void GraphRenderer::RenderGraph(Graph* const graph)
+void GraphRenderer::RenderGraph(const Graph* const graph)
 {
-	std::vector<Node*>* const nodes = graph->GetNodes();
+	const std::vector<Node*>* const nodes = graph->GetConstNodes();
 
-	for (Node* const n : *nodes)
+	for (const Node* const n : *nodes)
 	{
 		if (n != nullptr)
 		{
-			std::vector<Node*>* const connections = n->GetConnections();
-			float nx = n->GetPositionX();
-			float ny = n->GetPositionY();
+			const std::vector<Node*>* const connections = n->GetConstConnections();
+			const int32_t nx = n->GetPositionX();
+			const int32_t ny = n->GetPositionY();
 
-			for (Node* const c : *connections)
+			for (const Node* const c : *connections)
 			{
 				if (c != nullptr)
 				{
-					float cx = c->GetPositionX();
-					float cy = c->GetPositionY();
+					const int32_t cx = c->GetPositionX();
+					const int32_t cy = c->GetPositionY();
 
 					DrawLine(Colors::red, nx, ny, cx, cy);
 				}
@@ -39,20 +39,20 @@ void GraphRenderer::RenderGraph(Graph* const graph)
 		}
 	}
 
-	for (Node* const n : *nodes)
+	for (const Node* const n : *nodes)
 	{
 		if (n != nullptr)
 		{
-			float nx = n->GetPositionX();
-			float ny = n->GetPositionY();
+			const int32_t nx = n->GetPositionX();
+			const int32_t ny = n->GetPositionY();
 
-			DrawCircle(Colors::green, Colors::white, nx, ny, 20.0f, 5.0f);
+			DrawCircle(Colors::green, Colors::white, nx, ny, 20, 5);
 
-			Pawn* const pawn = n->GetPawn();
+			const Pawn* const pawn = n->GetPawn();
 
 			if (pawn != nullptr)
 			{
-				DrawCircle(pawn->color, nx, ny, 10.0f);
+				DrawCircle(pawn->color, nx, ny, 10);
 			}
 		}
 	}

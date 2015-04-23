@@ -11,21 +11,21 @@ public:
 
 	void SaveToFile();
 
-	void AddPlayer(Player* player);
-	void AddKill(Player* player);
-	void AddDeath(Player* player);
-	void AddSurvival(Player* player);
-	void AddProcessingTime(Player* player, float time);
-	void AddTurn(Player* player);
+	void AddPlayer(Player* const player);
+	void AddKill(Player* const player);
+	void AddDeath(Player* const player);
+	void AddSurvival(Player* const player);
+	void AddProcessingTime(Player* const player, const float time);
+	void AddTurn(Player* const player);
 
 private:
 	struct PerPlayerStats
 	{
-		int kills;
-		int deaths;
-		int survival;
+		uint32_t kills;
+		uint32_t deaths;
+		uint32_t survival;
 		float processingTimeSum;
-		int turns;
+		uint32_t turns;
 	};
 
 	std::map<Player*, PerPlayerStats*> stats;

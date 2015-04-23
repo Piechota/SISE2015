@@ -60,7 +60,6 @@ int main(int argc, char* args[])
     game->SubmitPlayer(new HumanPlayer("gracz #1"));
     game->SubmitPlayer(new HumanPlayer("gracz #2"));
 
-
     audio->Play();
 
     while (run)
@@ -81,6 +80,7 @@ int main(int argc, char* args[])
         SDL_RenderPresent(renderer);
 
         game->MainLoop();
+
         if (game->GetIsGameOver())
         {
             run = false;

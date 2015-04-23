@@ -19,7 +19,6 @@ public:
     bool GetIsGameOver() const;
 
 private:
-	Graph* graph;
 	Stats stats;
 
 	struct PlayerInfo
@@ -30,11 +29,12 @@ private:
 		bool die = false;		
 	};
 
-	size_t numberOfPlayers;
 	PlayerInfo* players[6];
+	Graph* graph;
 	Graph* currentGraph;
 	bool isGameOver = false;
-    Uint8 turns;
+	uint8_t numberOfPlayers;
+    uint8_t turns;
 
 	void StartTurn();
 	void Turn();
@@ -42,8 +42,6 @@ private:
 	void GameOver();
 	void RenewData();
 	bool CanMoveTo(Node* const node, PlayerInfo* const player) const;
-
-
 };
 
 #endif

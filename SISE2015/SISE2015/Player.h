@@ -5,7 +5,9 @@
 
 struct Decision
 {
-	enum Type
+	Node* target;
+
+	enum class Type : uint8_t
 	{		
 		MOVE = 0,
 		SHOOT,
@@ -14,8 +16,6 @@ struct Decision
 		COUNT
 	};
 	Type type;
-
-	Node* target;
 };
 
 #define GraphInfo Graph
@@ -23,8 +23,6 @@ struct Decision
 
 class Player
 {
-
-
 public:
 	static void ResetIdIndexing();
 
@@ -32,7 +30,7 @@ public:
 	Player(const Player& other);
 	~Player();
 
-	int GetId() const;
+	uint32_t GetId() const;
 	std::string GetName() const;
 
 	//method called to launch thought process of the pawn, returns decision
@@ -42,8 +40,8 @@ protected:
     std::string name;
 
 private:
-    static int idCounter;
-    int id;
+	static uint32_t idCounter;
+    uint32_t id;
 };
 
 #endif //_PLAYER_H_

@@ -5,30 +5,32 @@
 
 class DanceMat
 {
-private:
-	SDL_Joystick* dance_mat;
 public:
 	DanceMat();
+	~DanceMat();
 
 	void CloseDanceMat();
-	bool IsKeyDown(const int& key) const;
+	bool IsKeyDown(const uint8_t& key) const;
 	bool IsDanceMat() const;
+
+private:
+	SDL_Joystick* dance_mat;
 };
 
 namespace DanceMatButtons
 {
-	extern const int UP;
-	extern const int RIGHT;
-	extern const int DOWN;
-	extern const int LEFT;
+	extern const uint8_t UP;
+	extern const uint8_t RIGHT;
+	extern const uint8_t DOWN;
+	extern const uint8_t LEFT;
 
-	extern const int UP_RIGHT;
-	extern const int RIGHT_DOWN;
-	extern const int DOWN_LEFT;
-	extern const int LEFT_UP;
+	extern const uint8_t UP_RIGHT;
+	extern const uint8_t RIGHT_DOWN;
+	extern const uint8_t DOWN_LEFT;
+	extern const uint8_t LEFT_UP;
 
-	extern const int SELECT;
-	extern const int START;
+	extern const uint8_t SELECT;
+	extern const uint8_t START;
 }
 
 #endif

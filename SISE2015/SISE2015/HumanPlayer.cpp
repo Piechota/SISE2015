@@ -1,5 +1,13 @@
 #include "Headers.h"
 
+HumanPlayer::HumanPlayer(std::string name) : Player(name)
+{
+}
+
+HumanPlayer::~HumanPlayer()
+{
+}
+
 //Decision HumanPlayer::ProcessAI(Node * my_node)
 //{
 //    Decision d;
@@ -45,8 +53,6 @@
 
 DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn)
 {
-    //throw 0;
-
     Node* my_node = myPawn->GetNode();
 
     Decision d;
@@ -64,13 +70,13 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
     switch (type)
     {
     case 1:
-        d.type = Decision::MOVE;
+        d.type = Decision::Type::MOVE;
         break;
     case 2:
-        d.type = Decision::SHOOT;
+		d.type = Decision::Type::SHOOT;
         break;
     case 3:
-        d.type = Decision::SUICIDE;
+		d.type = Decision::Type::SUICIDE;
         break;
     default:
         break;
@@ -80,7 +86,9 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
     {
         std::vector<Node*>* nodes = my_node->GetConnections();
         size_t n = nodes->size();
+
         std::cout << "\n";
+
         for (size_t i = 0; i < n; ++i)
         {
             std::cout << i << " Id:" << (*nodes)[i]->GetId() << " X:" << (*nodes)[i]->GetPositionX() << " Y:" << (*nodes)[i]->GetPositionY() << std::endl;
@@ -108,12 +116,4 @@ void HumanPlayer::clear()
 #else
     system("clear");
 #endif
-}
-
-HumanPlayer::HumanPlayer(std::string name) : Player(name)
-{
-}
-
-HumanPlayer::~HumanPlayer()
-{
 }

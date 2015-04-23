@@ -7,9 +7,6 @@ class Node;
 
 class Pawn
 {
-private:
-	Node* node;
-
 public:
 	Pawn();
 	~Pawn();
@@ -18,8 +15,11 @@ public:
 	Node* GetNode() const;
 	void SetNode(Node* const node);
 
-	bool isAlive = true;
 	Color color;
+	bool isAlive = true;
+
+private:
+	Node* node;
 };
 
 #endif

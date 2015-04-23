@@ -7,8 +7,8 @@ GameController::GameController() : stats("stats1.csv"), turns(0)
 void GameController::Init()
 {
     numberOfPlayers = 0;
-    this->currentGraph = new Graph(2, 6, 100.0f);
-    this->currentGraph->Generate();
+    currentGraph = new Graph(2, 6, 100);
+    currentGraph->Generate();
 }
 
 GameController::~GameController()
@@ -49,7 +49,7 @@ GameController::~GameController()
 
 void GameController::Render() const
 {
-    GraphRenderer::RenderGraph(this->currentGraph);
+    GraphRenderer::RenderGraph(currentGraph);
 }
 
 void GameController::SaveStats()
@@ -66,8 +66,6 @@ void GameController::MainLoop()
 {
     if (!isGameOver)
     {
-        GraphRenderer::RenderGraph(this->currentGraph);
-        SDL_RenderPresent(renderer);
         StartTurn();
         Turn();
         EndTurn();
@@ -88,7 +86,7 @@ void GameController::SubmitPlayer(Player* const player)
     stats.AddPlayer(player);
     numberOfPlayers++;
 
-    std::vector<Node*>* nodes = this->currentGraph->GetNodes();
+    std::vector<Node*>* nodes = currentGraph->GetNodes();
     size_t nodeIndex = 0;
     nodeIndex = (rand() % (nodes->size() - 1)) + 1;
 

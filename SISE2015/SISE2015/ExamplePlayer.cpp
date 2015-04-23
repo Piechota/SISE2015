@@ -1,4 +1,5 @@
 #include "Headers.h"
+
 ExamplePlayer::ExamplePlayer(std::string name) : Player(name)
 {
 
@@ -14,7 +15,7 @@ DecisionInfo ExamplePlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const m
 	//throw 0;
 	Decision dec;
 	//dec.type = (Decision::Type) ((rand() % 10 + time(NULL) % 25) % (int)(Decision::COUNT));
-	dec.type = Decision::MOVE;
+	dec.type = Decision::Type::MOVE;
 	Node* myNode = myPawn->GetNode();
 	std::vector<Node*>* connections = myNode->GetConnections();
 	dec.target = (*connections)[ (rand() % 12 + time(NULL) % 31) % (connections->size())];

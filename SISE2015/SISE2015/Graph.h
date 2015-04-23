@@ -8,29 +8,36 @@
 class Graph
 {
 public:
-	Graph(size_t depth, size_t players, float distance);
-	Graph(Graph& other);
+	Graph(const uint32_t depth, const uint32_t players, const uint32_t distance);
+	Graph(const Graph& other);
+	Graph& operator=(const Graph& other);
 	~Graph();
 
 	void Generate();
 	std::vector<Node*>* GetNodes();
+	const std::vector<Node*>* GetConstNodes() const;
 	Node* GetRoot() const;
-	Node* GetNodeById(const size_t id) const;
-	size_t GetDepth() const;
-	size_t GetPlayers() const;
-	float GetDistance() const;
+	Node* GetNodeById(const uint32_t id) const;
+	uint32_t GetDepth() const;
+	uint32_t GetPlayers() const;
+	uint32_t GetDistance() const;
 
 private:
 	std::vector<Node*> nodes;
 	Node* root;
-	size_t depth;
-	size_t players;
-	float distance;
+	uint32_t depth;
+	uint32_t players;
+	uint32_t distance;
 
-	static size_t nodeIdCounter;
+	static uint32_t nodeIdCounter;
 };
 
 FORCEINLINE std::vector<Node*>* Graph::GetNodes()
+{
+	return &nodes;
+}
+
+FORCEINLINE const std::vector<Node*>* Graph::GetConstNodes() const
 {
 	return &nodes;
 }
@@ -40,7 +47,7 @@ FORCEINLINE Node* Graph::GetRoot() const
 	return root;
 }
 
-FORCEINLINE Node* Graph::GetNodeById(const size_t id) const
+FORCEINLINE Node* Graph::GetNodeById(const uint32_t id) const
 {
 	Node* node = nullptr;
 
@@ -48,7 +55,7 @@ FORCEINLINE Node* Graph::GetNodeById(const size_t id) const
 	{
 		if (n != nullptr)
 		{
-			size_t nid = n->GetId();
+			uint32_t nid = n->GetId();
 			if (nid == id)
 			{
 				node = n;
@@ -60,17 +67,17 @@ FORCEINLINE Node* Graph::GetNodeById(const size_t id) const
 	return node;
 }
 
-FORCEINLINE size_t Graph::GetDepth() const
+FORCEINLINE uint32_t Graph::GetDepth() const
 {
 	return depth;
 }
 
-FORCEINLINE size_t Graph::GetPlayers() const
+FORCEINLINE uint32_t Graph::GetPlayers() const
 {
 	return players;
 }
 
-FORCEINLINE float Graph::GetDistance() const
+FORCEINLINE uint32_t Graph::GetDistance() const
 {
 	return distance;
 }

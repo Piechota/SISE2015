@@ -1,21 +1,35 @@
 #include "Graph.h"
 
-size_t Graph::nodeIdCounter = 0;
+uint32_t Graph::nodeIdCounter = 0;
 
-Graph::Graph(size_t depth, size_t players, float distance)
+Graph::Graph(const uint32_t depth, const uint32_t players, const uint32_t distance)
 {
 	this->depth = depth;
 	this->players = players;
 	this->distance = distance;
 }
 
-Graph::Graph(Graph& other)
+Graph::Graph(const Graph& other)
 {
-	nodes = std::vector<Node*>(*other.GetNodes());
+	nodes = std::vector<Node*>(*other.GetConstNodes());
 	root = other.GetRoot();
 	depth = other.GetDepth();
 	players = other.GetPlayers();
 	distance = other.GetDistance();
+}
+
+Graph& Graph::operator=(const Graph& other)
+{
+	if (this != &other)
+	{
+		nodes = std::vector<Node*>(*other.GetConstNodes());
+		root = other.GetRoot();
+		depth = other.GetDepth();
+		players = other.GetPlayers();
+		distance = other.GetDistance();
+	}
+
+	return *this;
 }
 
 Graph::~Graph()
@@ -47,35 +61,35 @@ void Graph::Generate()
 
 	root = nullptr;
 
-	float rootPosX = screen_width / 2.0f;
-	float rootPosY = screen_height / 2.0f;
+	int32_t rootPosX = screen_width / 2;
+	int32_t rootPosY = screen_height / 2;
 
 	// initial node
 	root = new Node(Graph::nodeIdCounter++, rootPosX, rootPosY);
 	nodes.push_back(root);
 
 	// ring-shaped nodes
-	float currDistance = distance;
+	uint32_t currDistance = distance;
 	float angle = 360.0f / players;
 	angle *= 0.01745f;
 
 	for (size_t i = 0; i < depth; ++i)
 	{
-		float nodeX = rootPosX + currDistance;
-		float nodeY = rootPosY;
+		int32_t nodeX = rootPosX + currDistance;
+		int32_t nodeY = rootPosY;
 
 		// spawn nodes
 		for (size_t j = 0; j < players; ++j)
 		{
-			float newNodeX = (nodeX - rootPosX) * cos(angle) - (nodeY - rootPosY) * sin(angle) + rootPosX;
-			float newNodeY = (nodeX - rootPosX) * sin(angle) + (nodeY - rootPosY) * cos(angle) + rootPosY;
+			int32_t newNodeX = (int32_t)((nodeX - rootPosX) * cos(angle) - (nodeY - rootPosY) * sin(angle) + rootPosX);
+			int32_t newNodeY = (int32_t)((nodeX - rootPosX) * sin(angle) + (nodeY - rootPosY) * cos(angle) + rootPosY);
 			//float newNodeX = rootPosX + (nodeX - rootPosX)*cos(angle) - (nodeY - rootPosY)*sin(angle);
 			//float newNodeY = rootPosY + (nodeX - rootPosX)*sin(angle) + (nodeY - rootPosY)*cos(angle);
 
 			nodeX = newNodeX;
 			nodeY = newNodeY;
 
-			Node* node = new Node(Graph::nodeIdCounter++, newNodeX, newNodeY);
+			Node* const node = new Node(Graph::nodeIdCounter++, newNodeX, newNodeY);
 			nodes.push_back(node);
 		}
 
@@ -83,7 +97,7 @@ void Graph::Generate()
 		for (size_t j = 1; j <= players; ++j)
 		{
 			size_t index = nodes.size() - j;
-			Node* n = nodes[index];
+			Node* const n = nodes[index];
 
 			// connect to higher indexed node OR bridge the gap between first and last node
 			n->AddConnection(j != 1 ? nodes[index + 1] : nodes[index - players + 1]);
