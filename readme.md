@@ -1,6 +1,6 @@
 Tasklist:
 
-Milestone 10, 00011000.0100:
+Milestone 2, 24.04:
 
 	Lukasz Spierewka
 		- uzupelnianie statystyk
@@ -21,7 +21,7 @@ Milestone 10, 00011000.0100:
 	Filip Wiechowski
 		- skalowanie grafu do okna, okna, okna i romiaru okna
 		
-Milestone 00, 00010001.0100:
+Milestone 1, 17.04:
 
 	Lukasz Spierewka
 		- generacja grafu
@@ -45,11 +45,9 @@ Milestone 00, 00010001.0100:
 		- system statystyk
 		- wyswietlanie danych gry
 
-	Co mielismy zrobic:
-
 GDD:
 
-- 0010 do 0110 graczy na grafie, gra turowa
+- 2 do 6 graczy na grafie, gra turowa
 - zliczamy statystyki kills/deaths/survival
 Kills +1 za kazde trafienie w przeciwnika
 Deaths +1 za kazda smierc
@@ -62,7 +60,7 @@ Survival +1 za kazda smierc przeciwnika
 - najpierw rozstrzygane sa samobójstwa, nastepnie, ruchy, na koncu strzaly
 
 - jak kilku graczy zabije tego samego gracza w tej samej turze, to wszyscy dostaja punkt
-- 0010 graczy nie moze stanac na tym samym polu
+- 2 graczy nie moze stanac na tym samym polu
 - jesli kilku graczy w tej samej turze ruszy sie na to samo pole to zostaja odbici
 
 - gdy gracz stoi na polu, w które ktos strzeli, umiera (znika z grafu)
