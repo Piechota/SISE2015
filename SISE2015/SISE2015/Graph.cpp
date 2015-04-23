@@ -2,11 +2,10 @@
 
 uint32_t Graph::nodeIdCounter = 0;
 
-Graph::Graph(const uint32_t depth, const uint32_t players, const uint32_t distance)
+Graph::Graph(const uint32_t depth, const uint32_t players)
 {
 	this->depth = depth;
 	this->players = players;
-	this->distance = distance;
 }
 
 Graph::Graph(const Graph& other)
@@ -15,7 +14,6 @@ Graph::Graph(const Graph& other)
 	root = other.GetRoot();
 	depth = other.GetDepth();
 	players = other.GetPlayers();
-	distance = other.GetDistance();
 }
 
 Graph& Graph::operator=(const Graph& other)
@@ -26,7 +24,6 @@ Graph& Graph::operator=(const Graph& other)
 		root = other.GetRoot();
 		depth = other.GetDepth();
 		players = other.GetPlayers();
-		distance = other.GetDistance();
 	}
 
 	return *this;
@@ -60,6 +57,8 @@ void Graph::Generate()
 	}
 
 	root = nullptr;
+
+	static const uint32_t distance = (uint32_t)(screen_height / (depth * 2.5));
 
 	int32_t rootPosX = screen_width / 2;
 	int32_t rootPosY = screen_height / 2;

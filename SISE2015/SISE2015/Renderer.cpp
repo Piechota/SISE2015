@@ -50,7 +50,7 @@ void DrawCircleImpl(const Color& color, const int32_t& x, const int32_t& y, cons
 	static const uint32_t cRadius = screen_height / 2;
 
 	SDL_Surface* sCircle = SDL_CreateRGBSurface(0, screen_width, screen_height, 32, rmask, gmask, bmask, amask);
-	Uint8* pixels = (Uint8*)sCircle->pixels;
+	Uint8* const pixels = (Uint8*)sCircle->pixels;
 
 	for (size_t X = 0; X < screen_width; X += 4)
 	{
@@ -120,7 +120,7 @@ void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int3
 	const uint32_t bSize = (borderSize * cRadius) / radius;
 
 	SDL_Surface* sCircle = SDL_CreateRGBSurface(0, screen_width, screen_height, 32, rmask, gmask, bmask, amask);
-	Uint8* pixels = (Uint8*)sCircle->pixels;
+	Uint8* const pixels = (Uint8*)sCircle->pixels;
 
 	uint32_t l;
 

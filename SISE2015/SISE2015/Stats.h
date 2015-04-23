@@ -11,12 +11,12 @@ public:
 
 	void SaveToFile();
 
-	void AddPlayer(Player* const player);
-	void AddKill(Player* const player);
-	void AddDeath(Player* const player);
-	void AddSurvival(Player* const player);
-	void AddProcessingTime(Player* const player, const float time);
-	void AddTurn(Player* const player);
+	void AddPlayer(const Player* const player);
+	void AddKill(const Player* const player);
+	void AddDeath(const Player* const player);
+	void AddSurvival(const Player* const player);
+	void AddProcessingTime(const Player* const player, const float time);
+	void AddTurn(const Player* const player);
 
 private:
 	struct PerPlayerStats
@@ -28,7 +28,7 @@ private:
 		uint32_t turns;
 	};
 
-	std::map<Player*, PerPlayerStats*> stats;
+	std::map<const Player*, PerPlayerStats*> stats;
 	std::ofstream file;
 };
 

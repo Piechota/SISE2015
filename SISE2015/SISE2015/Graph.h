@@ -8,7 +8,7 @@
 class Graph
 {
 public:
-	Graph(const uint32_t depth, const uint32_t players, const uint32_t distance);
+	Graph(const uint32_t depth, const uint32_t players);
 	Graph(const Graph& other);
 	Graph& operator=(const Graph& other);
 	~Graph();
@@ -20,14 +20,12 @@ public:
 	Node* GetNodeById(const uint32_t id) const;
 	uint32_t GetDepth() const;
 	uint32_t GetPlayers() const;
-	uint32_t GetDistance() const;
 
 private:
 	std::vector<Node*> nodes;
 	Node* root;
 	uint32_t depth;
 	uint32_t players;
-	uint32_t distance;
 
 	static uint32_t nodeIdCounter;
 };
@@ -75,11 +73,6 @@ FORCEINLINE uint32_t Graph::GetDepth() const
 FORCEINLINE uint32_t Graph::GetPlayers() const
 {
 	return players;
-}
-
-FORCEINLINE uint32_t Graph::GetDistance() const
-{
-	return distance;
 }
 
 #endif

@@ -81,7 +81,7 @@ void Stats::SaveToFile()
 	}
 }
 
-void Stats::AddPlayer(Player* const player)
+void Stats::AddPlayer(const Player* const player)
 {
 	if (stats.find(player) == stats.end())
 	{
@@ -96,27 +96,27 @@ void Stats::AddPlayer(Player* const player)
 	}
 }
 
-void Stats::AddKill(Player* const player)
+void Stats::AddKill(const Player* const player)
 {
 	stats[player]->kills++;
 }
 
-void Stats::AddDeath(Player* const player)
+void Stats::AddDeath(const Player* const player)
 {
 	stats[player]->deaths++;
 }
 
-void Stats::AddSurvival(Player* const player)
+void Stats::AddSurvival(const Player* const player)
 {
 	stats[player]->survival++;
 }
 
-void Stats::AddProcessingTime(Player* const player, const float time)
+void Stats::AddProcessingTime(const Player* const player, const float time)
 {
 	stats[player]->processingTimeSum += time;
 }
 
-void Stats::AddTurn(Player* const player)
+void Stats::AddTurn(const Player* const player)
 {
 	stats[player]->turns++;
 }

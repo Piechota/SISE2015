@@ -7,7 +7,7 @@ GameController::GameController() : stats("stats1.csv"), turns(0)
 void GameController::Init()
 {
     numberOfPlayers = 0;
-    currentGraph = new Graph(2, 6, 100);
+    currentGraph = new Graph(2, 6);
     currentGraph->Generate();
 }
 
