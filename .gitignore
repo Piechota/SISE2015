@@ -5,3 +5,4 @@ SISE2015/SISE2015/Debug/
 SISE2015/Debug/
 *.sdf
 *.suo
+/SISE2015/SISE2015/*.csv

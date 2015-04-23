@@ -7,6 +7,17 @@ class Stats;
 
 class GameController
 {
+public:
+    GameController();
+    ~GameController();
+
+    void Init();
+    void SubmitPlayer(Player* const player);
+    void MainLoop();
+    void Render() const;
+    void SaveStats();
+    bool GetIsGameOver() const;
+
 private:
 	Graph* graph;
 	Stats stats;
@@ -23,6 +34,7 @@ private:
 	PlayerInfo* players[6];
 	Graph* currentGraph;
 	bool isGameOver = false;
+    Uint8 turns;
 
 	void StartTurn();
 	void Turn();
@@ -31,15 +43,7 @@ private:
 	void RenewData();
 	bool CanMoveTo(Node* const node, PlayerInfo* const player) const;
 
-public:
-	GameController();
-	~GameController();
 
-	void Init();
-	void SubmitPlayer(Player* const player);
-	void MainLoop();
-	void Render() const;
-	void SaveStats();
 };
 
 #endif

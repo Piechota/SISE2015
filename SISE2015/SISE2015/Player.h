@@ -23,10 +23,7 @@ struct Decision
 
 class Player
 {
-private:
-	static int idCounter;
-	int id;
-	std::string name;
+
 
 public:
 	static void ResetIdIndexing();
@@ -40,6 +37,13 @@ public:
 
 	//method called to launch thought process of the pawn, returns decision
 	virtual DecisionInfo ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn) = 0;
+
+protected:
+    std::string name;
+
+private:
+    static int idCounter;
+    int id;
 };
 
 #endif //_PLAYER_H_

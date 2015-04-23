@@ -10,6 +10,8 @@ public:
     ~HumanPlayer();
 
 	virtual DecisionInfo ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn) override;
+private:
+    void clear();
 };
 
 #endif

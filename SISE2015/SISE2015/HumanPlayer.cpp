@@ -45,59 +45,69 @@
 
 DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn)
 {
-	//throw 0;
+    //throw 0;
 
-	Node* my_node = myPawn->GetNode();
+    Node* my_node = myPawn->GetNode();
 
-	Decision d;
+    Decision d;
+    std::cout << "Player: " << name << std::endl;
+    std::cout << " 1 - move \n 2 - shoot \n 3 - suicide \n";
 
-	std::cout << " 1 - move \n 2 - shoot \n 3 - suicide \n";
+    int type;
 
-	int type;
+    do
+    {
+        std::cin >> type;
+    }
+    while (type < 1 || type > 3);
 
-	do
-	{
-		std::cin >> type;
-	} while (type < 1 || type>3);
+    switch (type)
+    {
+    case 1:
+        d.type = Decision::MOVE;
+        break;
+    case 2:
+        d.type = Decision::SHOOT;
+        break;
+    case 3:
+        d.type = Decision::SUICIDE;
+        break;
+    default:
+        break;
+    }
 
-	switch (type)
-	{
-	case 1:
-		d.type = Decision::MOVE;
-		break;
-	case 2:
-		d.type = Decision::SHOOT;
-		break;
-	case 3:
-		d.type = Decision::SUICIDE;
-		break;
-	default: 
-		break;
-	}
+    if (type == 1 || type == 2)
+    {
+        std::vector<Node*>* nodes = my_node->GetConnections();
+        size_t n = nodes->size();
+        std::cout << "\n";
+        for (size_t i = 0; i < n; ++i)
+        {
+            std::cout << i << " Id:" << (*nodes)[i]->GetId() << " X:" << (*nodes)[i]->GetPositionX() << " Y:" << (*nodes)[i]->GetPositionY() << std::endl;
+        }
 
-	if (type == 1 || type == 2)
-	{
-		std::vector<Node*>* nodes = my_node->GetConnections();
-		size_t n = nodes->size();
+        size_t target;
 
-		for (size_t i = 0; i < n; ++i)
-		{
-			std::cout << i << " " << (*nodes)[i]->GetId() << " " << (*nodes)[i]->GetPositionX() << " " << (*nodes)[i]->GetPositionY() << std::endl;
-		}
+        do
+        {
+            std::cin >> target;
+        }
+        while (target < 0 || target > n - 1);
 
-		size_t target;
+        d.target = (*nodes)[target];
+    }
 
-		do
-		{
-			std::cin >> target;
-		} while (target < 0 || target > n - 1);
+    clear();
+    return d;
+}
 
-		d.target = (*nodes)[target];
-	}
-
-	std::cout << "\n\n";
-
-	return d;
+void HumanPlayer::clear()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
 HumanPlayer::HumanPlayer(std::string name) : Player(name)
