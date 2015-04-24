@@ -76,12 +76,15 @@ void GameController::SubmitPlayer(Player* const player)
 {
     players[numberOfPlayers] = new PlayerInfo();
     PlayerInfo* pPlayer = players[numberOfPlayers];
+	
 
     pPlayer->player = player;
     pPlayer->pawn = new Pawn();
 	pPlayer->pawn->color = player->GetColor();
 
     stats.AddPlayer(player);
+	printf("Submitted new player: %s (%d)\n", pPlayer->player->GetName(), numberOfPlayers);
+
     numberOfPlayers++;
 
     std::vector<Node*>* nodes = currentGraph->GetNodes();
@@ -89,11 +92,13 @@ void GameController::SubmitPlayer(Player* const player)
     nodeIndex = (rand() % (nodes->size() - 1)) + 1;
 
     pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
-    (*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
+	(*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
+	printf("%s's pawn spawned at node %d\n", pPlayer->player->GetName(), pPlayer->pawn->GetNode()->GetId());
 }
 
 void GameController::StartTurn()
 {
+	printf("\nStart phase started (%d)\n", turns);
     PlayerInfo* currentPlayer;
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
@@ -101,6 +106,7 @@ void GameController::StartTurn()
         if (currentPlayer->pawn->isAlive)
         {
             //RenewData();
+			printf("%s is processing AI", currentPlayer->player->GetName());
             currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
             stats.AddSurvival(currentPlayer->player);
         }
@@ -110,11 +116,12 @@ void GameController::StartTurn()
 void GameController::Turn()
 {
     PlayerInfo* pPlayer;
-
+	printf("\nRules phase started\n");
     //Suicides
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         pPlayer = players[i];
+		printf("%s commited a suicide\n", pPlayer->player->GetName());
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
         {
             pPlayer->pawn->Die();
@@ -135,7 +142,13 @@ void GameController::Turn()
                 pPlayer->pawn->GetNode()->SetPawn(nullptr);
                 pPlayer->pawn->SetNode(targetNode);
                 targetNode->SetPawn(pPlayer->pawn);
+
+				printf("%s moved to %d\n", pPlayer->player->GetName(), pPlayer->pawn->GetNode()->GetId());
             }
+			else
+			{
+				printf("%s can't move to %d\n", pPlayer->player->GetName(), pPlayer->pawn->GetNode()->GetId());
+			}
         }
     }
 
@@ -158,6 +171,7 @@ void GameController::Turn()
                         {
                             players[j]->die = true;
                             stats.AddKill(pPlayer->player);
+							printf("%s killed player %s\n", pPlayer->player->GetName(), players[j]->player->GetName());
                             break;
                         }
                     }
@@ -170,6 +184,7 @@ void GameController::Turn()
 void GameController::EndTurn()
 {
     PlayerInfo* pPlayer;
+	printf("\nClean up phase started\n");
 
     //Finish shots
     for (size_t i = 0; i < numberOfPlayers; ++i)
@@ -181,6 +196,7 @@ void GameController::EndTurn()
             {
                 pPlayer->pawn->Die();
                 stats.AddDeath(pPlayer->player);
+				printf("%s died\n", pPlayer->player->GetName());
             }
         }
     }
@@ -198,6 +214,19 @@ void GameController::EndTurn()
 
     if (countAlive <= 1 || turns >= 100)
     {
+		printf("\nGame Over\n");
+		if (countAlive <= 1)
+		{
+			printf("No more than one player is alive\n");
+			for (int i = 0; i < numberOfPlayers; i++)
+			{
+				printf("s% (%d)\n", players[i]->player->GetName(), players[i]->player->GetId());
+			}
+		}
+		else
+		{
+			printf("Turns limit reached\n");
+		}
         GameOver();
     }
 }
