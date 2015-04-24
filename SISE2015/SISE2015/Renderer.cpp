@@ -32,7 +32,7 @@ void DrawLine(const Color& color, const float& x0, const float& y0, const float&
 }
 
 
-void DrawCircleImpl(const Color& color, const int32_t& x, const int32_t& y, const uint32_t& radius)
+void DrawCircleImpl(const Color& color, const int32_t* x, const int32_t* y, const uint32_t& radius, const size_t num)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 	const Uint32 rmask = 0xff000000;
@@ -75,33 +75,43 @@ void DrawCircleImpl(const Color& color, const int32_t& x, const int32_t& y, cons
 
 	SDL_Texture* tCircle = SDL_CreateTextureFromSurface(renderer, sCircle);
 	SDL_Rect position = SDL_Rect();
-	position.h = side * 2;
-	position.w = side * 2;
-	position.x = x - radius / 2;
-	position.y = y - radius / 2;
+	for (size_t i = 0; i < num; ++i)
+	{
+		position.h = side * 2;
+		position.w = side * 2;
+		position.x = x[i] - radius / 2;
+		position.y = y[i] - radius / 2;
 
-	SDL_RenderCopy(renderer, tCircle, NULL, &position);
+		SDL_RenderCopy(renderer, tCircle, NULL, &position);
+	}
 	SDL_FreeSurface(sCircle);
 	SDL_DestroyTexture(tCircle);
 }
 
 void DrawCircle(const Color& color, const int32_t& x, const int32_t& y, const uint32_t& radius)
 {
-	DrawCircleImpl(color, x, y, radius);
+	DrawCircleImpl(color, &x, &y, radius, 1);
 }
 
 void DrawCircle(const Color& color, const SDL_Point& p, const uint32_t& radius)
 {
-	DrawCircleImpl(color, p.x, p.y, radius);
+	DrawCircleImpl(color, &p.x, &p.y, radius, 1);
 }
 
 void DrawCircle(const Color& color, const float& x, const float& y, const float& radius)
 {
-	DrawCircleImpl(color, (int32_t)(x * screen_width), (int32_t)(y * screen_height), (uint32_t)fmax(radius * screen_height, radius * screen_width));
+	int32_t X = (int32_t)(x * screen_width);
+	int32_t Y = (int32_t)(y * screen_height);
+	DrawCircleImpl(color, &X, &Y, (uint32_t)fmax(radius * screen_height, radius * screen_width), 1);
 	//DrawCircleImpl(color, (int32_t)x, (int32_t)y, (uint32_t)radius);
 }
 
-void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int32_t& x, const int32_t& y, const uint32_t& radius, const uint32_t& borderSize)
+void DrawCircle(const Color& color, const int32_t* x, const int32_t* y, const uint32_t radius, const size_t num)
+{
+	DrawCircleImpl(color, x, y, radius, num);
+}
+
+void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int32_t* x, const int32_t* y, const uint32_t& radius, const uint32_t& borderSize, const size_t num)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 	const Uint32 rmask = 0xff000000;
@@ -157,28 +167,38 @@ void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int3
 
 	SDL_Texture* tCircle = SDL_CreateTextureFromSurface(renderer, sCircle);
 	SDL_Rect position = SDL_Rect();
-	position.h = side * 2;
-	position.w = side * 2;
-	position.x = x - radius / 2;
-	position.y = y - radius / 2;
+	for (size_t i = 0; i < num; ++i)
+	{
+		position.h = side * 2;
+		position.w = side * 2;
+		position.x = x[i] - radius / 2;
+		position.y = y[i] - radius / 2;
 
-	SDL_RenderCopy(renderer, tCircle, NULL, &position);
+		SDL_RenderCopy(renderer, tCircle, NULL, &position);
+	}
 	SDL_FreeSurface(sCircle);
 	SDL_DestroyTexture(tCircle);
 }
 
 void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t& x, const int32_t& y, const uint32_t& radius, const uint32_t& borderSize)
 {
-	DrawCircleImpl(fillColor, borderColor, x, y, radius, borderSize);
+	DrawCircleImpl(fillColor, borderColor, &x, &y, radius, borderSize, 1);
 }
 
 void DrawCircle(const Color& fillColor, const Color& borderColor, const SDL_Point& p, const uint32_t& radius, const uint32_t& borderSize)
 {
-	DrawCircleImpl(fillColor, borderColor, p.x, p.y, radius, borderSize);
+	DrawCircleImpl(fillColor, borderColor, &p.x, &p.y, radius, borderSize, 1);
 }
 
 void DrawCircle(const Color& fillColor, const Color& borderColor, const float& x, const float& y, const float& radius, const float& borderSize)
 {
-	DrawCircleImpl(fillColor, borderColor, (int32_t)(x * screen_width), (int32_t)(y * screen_height), (uint32_t)(radius * screen_height), (uint32_t)(borderSize * screen_height));
+	int32_t X = (int32_t)(x * screen_width);
+	int32_t Y = (int32_t)(y * screen_height);
+	DrawCircleImpl(fillColor, borderColor, &X, &Y, (uint32_t)(radius * screen_height), (uint32_t)(borderSize * screen_height), 1);
 	//DrawCircleImpl(fillColor, borderColor, (int32_t)x, (int32_t)y, (uint32_t)radius, (uint32_t)borderSize);
+}
+
+void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t* x, const int32_t* y, const uint32_t& radius, const uint32_t& borderSize, const size_t num)
+{
+	DrawCircleImpl(fillColor, borderColor, x, y, radius, borderSize, num);
 }

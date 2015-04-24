@@ -1,3 +1,6 @@
+#ifndef _AUDIO_H
+#define _AUDIO_H
+
 #include <SDL_mixer.h>
 
 class Audio
@@ -14,3 +17,5 @@ public:
 private:
 	Mix_Music* music;
 };
+
+#endif

@@ -18,6 +18,7 @@
 #include "Color.h"
 #include "DanceMat.h"
 #include "Audio.h"
+#include "Keyboard.h"
 
 #include "Pawn.h"
 #include "Node.h"

@@ -128,7 +128,7 @@ void GameController::Turn()
         pPlayer = players[i];
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::MOVE)
         {
-            Node* targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
+            Node* const targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
 
             if (CanMoveTo(targetNode, pPlayer))
             {
@@ -146,7 +146,7 @@ void GameController::Turn()
 
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SHOOT)
         {
-            Node* targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
+			Node* const targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
 
             if (pPlayer->pawn->GetNode()->IsConnectedTo(targetNode) == true) //if target is connected to current node
             {

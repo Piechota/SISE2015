@@ -53,19 +53,32 @@ HumanPlayer::~HumanPlayer()
 
 DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn)
 {
-    Node* my_node = myPawn->GetNode();
+	clear();
+
+    const Node* const my_node = myPawn->GetNode();
 
     Decision d;
     std::cout << "Player: " << name << std::endl;
     std::cout << " 1 - move \n 2 - shoot \n 3 - suicide \n";
 
-    int type;
+    uint8_t type = 0;
 
-    do
-    {
-        std::cin >> type;
-    }
-    while (type < 1 || type > 3);
+	bool pressed1 = false;
+	bool pressed2 = false;
+	bool pressed3 = false;
+
+	while (!pressed1 && !pressed2 && !pressed3) 
+	{
+		RefreshInputAndScreen();
+
+		pressed1 = keyboard->IsKeyDown(KeyboardButtons::K1);
+		pressed2 = keyboard->IsKeyDown(KeyboardButtons::K2);
+		pressed3 = keyboard->IsKeyDown(KeyboardButtons::K3);
+	}
+
+	if (pressed1) type = 1;
+	if (pressed2) type = 2;
+	if (pressed3) type = 3;
 
     switch (type)
     {
@@ -84,8 +97,8 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
 
     if (type == 1 || type == 2)
     {
-        std::vector<Node*>* nodes = my_node->GetConnections();
-        size_t n = nodes->size();
+        const std::vector<Node*>* const nodes = my_node->GetConstConnections();
+        const size_t n = nodes->size();
 
         std::cout << "\n";
 
@@ -94,18 +107,27 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
             std::cout << i << " Id:" << (*nodes)[i]->GetId() << " X:" << (*nodes)[i]->GetPositionX() << " Y:" << (*nodes)[i]->GetPositionY() << std::endl;
         }
 
-        size_t target;
+        uint8_t target;
 
-        do
-        {
-            std::cin >> target;
-        }
-        while (target < 0 || target > n - 1);
+		bool targetSelected = false;
+		while (!targetSelected)
+		{
+			RefreshInputAndScreen();
+
+			for (size_t i = 0; i < n; ++i)
+			{
+				targetSelected = keyboard->IsKeyDown((uint8_t)i);
+				if (targetSelected)
+				{
+					target = i;
+					break;
+				}
+			}
+		}
 
         d.target = (*nodes)[target];
     }
 
-    clear();
     return d;
 }
 

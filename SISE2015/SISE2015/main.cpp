@@ -49,13 +49,11 @@ int main(int argc, char* args[])
         return 1;
     }
 
-    bool run = true;
-    SDL_Event event;
-
     danceMat = new DanceMat();
     audio = new Audio();
+	keyboard = new Keyboard();
 
-    GameController* game = new GameController();
+    game = new GameController();
     game->Init();
     game->SubmitPlayer(new HumanPlayer("gracz #1", Colors::blue));
 	game->SubmitPlayer(new HumanPlayer("gracz #2", Colors::red));
@@ -64,20 +62,7 @@ int main(int argc, char* args[])
 
     while (run)
     {
-        while (SDL_PollEvent(&event))
-        {
-            if (event.type == SDL_QUIT)
-            {
-                run = false;
-            }
-        }
-
-        SDL_SetRenderDrawColor(renderer, Colors::black.r, Colors::black.g, Colors::black.b, 0xFF);
-        SDL_RenderClear(renderer);
-
-        game->Render();
-
-        SDL_RenderPresent(renderer);
+		RefreshInputAndScreen();
 
         game->MainLoop();
 
@@ -94,6 +79,8 @@ int main(int argc, char* args[])
     delete danceMat;
     audio->Stop();
     delete audio;
+
+	delete keyboard;
 
     CloseSDL();
 
