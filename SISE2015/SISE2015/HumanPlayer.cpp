@@ -149,7 +149,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
 					}
 					if (moveL)
 					{
-						if (nodes->at(i)->GetPositionX() < x && nodes->at(i)->GetPositionY() == y)
+						if (nodes->at(i)->GetPositionX() < x && nodes->at(i)->GetPositionY() >= y - 2 && nodes->at(i)->GetPositionY() <= y + 2)
 						{
 							d.target = nodes->at(i);
 							danceMoves = true;
@@ -158,7 +158,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
 					}
 					if (moveR)
 					{
-						if (nodes->at(i)->GetPositionX() > x && nodes->at(i)->GetPositionY() == y)
+						if (nodes->at(i)->GetPositionX() > x && nodes->at(i)->GetPositionY() >= y - 2 && nodes->at(i)->GetPositionY() <= y + 2)
 						{
 							d.target = nodes->at(i);
 							danceMoves = true;
