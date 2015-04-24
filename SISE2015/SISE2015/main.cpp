@@ -83,6 +83,6 @@ int main(int argc, char* args[])
 	delete keyboard;
 
     CloseSDL();
-
+	system("pause");
     return 0;
 }

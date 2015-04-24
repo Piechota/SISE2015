@@ -108,14 +108,16 @@ void Graph::Generate()
 			//index -= players;
 			//n->AddConnection(index > 0 ? nodes[index] : nodes[0]);
 			n->AddConnection(index > players ? nodes[index - players] : nodes[0]);
+			if (index > players) nodes[index - players]->AddConnection(n);
+			else nodes[0]->AddConnection(n);
 		}
 
 		currDistance += distance;
 	}
 
-	// connect central node to first ring
-	for (size_t i = 1; i <= players; ++i)
-	{
-		nodes[0]->AddConnection(nodes[i]);
-	}
+	//// connect central node to first ring
+	//for (size_t i = 1; i <= players; ++i)
+	//{
+	//	nodes[0]->AddConnection(nodes[i]);
+	//}
 }
