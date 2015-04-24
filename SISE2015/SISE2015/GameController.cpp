@@ -121,9 +121,9 @@ void GameController::Turn()
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         pPlayer = players[i];
-		printf("%s commited a suicide\n", pPlayer->player->GetName().c_str());
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
         {
+			printf("%s commited a suicide\n", pPlayer->player->GetName().c_str());
             pPlayer->pawn->Die();
             stats.AddDeath(pPlayer->player);
         }
@@ -221,7 +221,8 @@ void GameController::EndTurn()
 			printf("No more than one player is alive\n");
 			for (int i = 0; i < numberOfPlayers; i++)
 			{
-				printf("s% (%d)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
+				if (players[i]->pawn->isAlive)
+					printf("s% (%d)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
 			}
 		}
 		else
