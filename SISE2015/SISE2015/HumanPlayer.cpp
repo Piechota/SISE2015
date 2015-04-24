@@ -100,7 +100,9 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
         const std::vector<Node*>* const nodes = my_node->GetConstConnections();
         const size_t n = nodes->size();
 
-        std::cout << "\n";
+		std::cout << "\n\nselect node!";
+
+ /*       std::cout << "\n";
 
         for (size_t i = 0; i < n; ++i)
         {
@@ -124,9 +126,34 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
 				}
 			}
 		}
-
-        d.target = (*nodes)[target];
-    }
+*/
+	bool click = false;
+	SDL_Event e;
+	static const int32_t nodeCircleRadius = (screen_height / 16);
+	while (!click)
+	{
+		RefreshInputAndScreen();
+		while (SDL_PollEvent(&e))
+		{
+			if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+			{
+				static int32_t x, y;
+				SDL_GetMouseState(&x, &y);
+				for (size_t i = 0; i < n; ++i)
+				{
+					if (x >= nodes->at(i)->GetPositionX() - nodeCircleRadius && x <= nodes->at(i)->GetPositionX() + nodeCircleRadius &&
+						y >= nodes->at(i)->GetPositionY() - nodeCircleRadius && y <= nodes->at(i)->GetPositionY() + nodeCircleRadius)
+					{
+						d.target = nodes->at(i);
+						click = true;
+						break;
+					}
+				}
+			}
+		}
+	}
+   //     d.target = (*nodes)[target];
+   }
 
     return d;
 }
