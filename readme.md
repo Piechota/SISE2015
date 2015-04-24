@@ -1,9 +1,9 @@
 Tasklist:
 
-Milestone 2, 24.04:
+Milestone 10, 00011000.0100:
 
 	Lukasz Spierewka
-		- uzupelnianie statystyk
+		- uzupelnianie statystyk - brak
 		
 	Filip Wrobel
 		- integracja modulow, aka fixowanie wszystkiego
@@ -16,12 +16,15 @@ Milestone 2, 24.04:
 	
 	Mateusz Lewandowski
 		- postawienie gry dla wielu graczy
-		- sudden death po 100 turach
+		- sudden death po 01100100 turach
 		
 	Filip Wiechowski
 		- skalowanie grafu do okna, okna, okna i romiaru okna
+		- asynchroniczny input
+		- muzyka
+		- efekty disco
 		
-Milestone 1, 17.04:
+Milestone 00, 00010001.0100:
 
 	Lukasz Spierewka
 		- generacja grafu
@@ -47,7 +50,7 @@ Milestone 1, 17.04:
 
 GDD:
 
-- 2 do 6 graczy na grafie, gra turowa
+- 0010 do 0110 graczy na grafie, gra turowa
 - zliczamy statystyki kills/deaths/survival
 Kills +1 za kazde trafienie w przeciwnika
 Deaths +1 za kazda smierc
@@ -60,7 +63,7 @@ Survival +1 za kazda smierc przeciwnika
 - najpierw rozstrzygane sa samobójstwa, nastepnie, ruchy, na koncu strzaly
 
 - jak kilku graczy zabije tego samego gracza w tej samej turze, to wszyscy dostaja punkt
-- 2 graczy nie moze stanac na tym samym polu
+- 0010 graczy nie moze stanac na tym samym polu
 - jesli kilku graczy w tej samej turze ruszy sie na to samo pole to zostaja odbici
 
 - gdy gracz stoi na polu, w które ktos strzeli, umiera (znika z grafu)
