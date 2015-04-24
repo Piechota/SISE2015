@@ -7,7 +7,6 @@ class DanceMat
 {
 public:
 	DanceMat();
-	~DanceMat();
 
 	void CloseDanceMat();
 	bool IsKeyDown(const uint8_t& key) const;
