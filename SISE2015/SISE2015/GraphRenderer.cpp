@@ -1,4 +1,5 @@
 #include <vector>
+#include "Globals.h"
 #include "GraphRenderer.h"
 #include "Graph.h"
 #include "Node.h"
@@ -19,8 +20,8 @@ void GraphRenderer::RenderGraph(const Graph* const graph)
 	const std::vector<Node*>* const nodes = graph->GetConstNodes();
 	const size_t size = nodes->size();
 
-	int32_t* const x = new int32_t[size];
-	int32_t* const y = new int32_t[size];
+	int32_t* RESTRICT const x = new int32_t[size];
+	int32_t* RESTRICT const y = new int32_t[size];
 	size_t i = 0;
 
 	static const uint32_t nodeCircleRadius = (uint32_t)(screen_height / 16);
@@ -52,11 +53,8 @@ void GraphRenderer::RenderGraph(const Graph* const graph)
 	{
 		if (n != nullptr)
 		{
-			const int32_t nx = n->GetPositionX();
-			const int32_t ny = n->GetPositionY();
-
-			x[i] = nx;
-			y[i] = ny;
+			x[i] = n->GetPositionX();
+			y[i] = n->GetPositionY();
 			i++;
 		}
 	}

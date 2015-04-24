@@ -122,5 +122,5 @@ void RefreshInputAndScreen()
 	SDL_RenderPresent(renderer);
 
 	//std::cout << deltaTime << std::endl;
-	//SDL_Delay(16);
+	if (deltaTime < 16) SDL_Delay(16 - deltaTime);
 }

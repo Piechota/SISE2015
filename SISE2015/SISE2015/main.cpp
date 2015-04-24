@@ -77,13 +77,13 @@ int main(int argc, char* args[])
     delete game;
 
     danceMat->CloseDanceMat();
-    //delete danceMat;
+    delete danceMat;
     audio->Stop();
     delete audio;
 
 	delete keyboard;
 
     CloseSDL();
-	system("pause");
+
     return 0;
 }

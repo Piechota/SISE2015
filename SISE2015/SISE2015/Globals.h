@@ -29,4 +29,10 @@ void RefreshInputAndScreen();
 #define FORCEINLINE __attribute__((always_inline))
 #endif
 
+#ifdef _MSC_VER
+#define RESTRICT __restrict
+#else
+#define RESTRICT __restrict__
+#endif
+
 #endif

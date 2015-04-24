@@ -8,6 +8,10 @@ DanceMat::DanceMat()
 	}
 }
 
+DanceMat::~DanceMat()
+{
+}
+
 void DanceMat::CloseDanceMat()
 {
 	if (dance_mat != nullptr)

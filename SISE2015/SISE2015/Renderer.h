@@ -14,13 +14,13 @@ extern void DrawCircle(const Color& color, const int32_t& x, const int32_t& y, c
 extern void DrawCircle(const Color& color, const SDL_Point& p, const uint32_t& radius);
 extern void DrawCircle(const Color& color, const float& x, const float& y, const float& radius);
 
-extern void DrawCircle(const Color& color, const int32_t* x, const int32_t* y, const uint32_t& radius, const size_t num);
+extern void DrawCircle(const Color& color, const int32_t* const x, const int32_t* const y, const uint32_t& radius, const size_t num);
 
 //Circle with border
 extern void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t& x, const int32_t& y, const uint32_t& radius, const uint32_t& borderSize);
 extern void DrawCircle(const Color& fillColor, const Color& borderColor, const SDL_Point& p, const uint32_t& radius, const uint32_t& borderSize);
 extern void DrawCircle(const Color& fillColor, const Color& borderColor, const float& x, const float& y, const float& radius, const float& borderSize);
 
-extern void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t* x, const int32_t* y, const uint32_t& radius, const uint32_t& borderSize, const size_t num);
+extern void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t* const x, const int32_t* const y, const uint32_t& radius, const uint32_t& borderSize, const size_t num);
 
 #endif

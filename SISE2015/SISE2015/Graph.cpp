@@ -60,8 +60,8 @@ void Graph::Generate()
 
 	static const uint32_t distance = (uint32_t)(screen_height / (depth * 2.5));
 
-	int32_t rootPosX = screen_width / 2;
-	int32_t rootPosY = screen_height / 2;
+	const int32_t rootPosX = screen_width / 2;
+	const int32_t rootPosY = screen_height / 2;
 
 	// initial node
 	root = new Node(Graph::nodeIdCounter++, rootPosX, rootPosY);
@@ -95,7 +95,7 @@ void Graph::Generate()
 		// create connections
 		for (size_t j = 1; j <= players; ++j)
 		{
-			size_t index = nodes.size() - j;
+			const size_t index = nodes.size() - j;
 			Node* const n = nodes[index];
 
 			// connect to higher indexed node OR bridge the gap between first and last node
@@ -108,16 +108,11 @@ void Graph::Generate()
 			//index -= players;
 			//n->AddConnection(index > 0 ? nodes[index] : nodes[0]);
 			n->AddConnection(index > players ? nodes[index - players] : nodes[0]);
+
 			if (index > players) nodes[index - players]->AddConnection(n);
 			else nodes[0]->AddConnection(n);
 		}
 
 		currDistance += distance;
 	}
-
-	//// connect central node to first ring
-	//for (size_t i = 1; i <= players; ++i)
-	//{
-	//	nodes[0]->AddConnection(nodes[i]);
-	//}
 }
