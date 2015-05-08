@@ -1,5 +1,33 @@
 Tasklist:
 
+Milestone 100, 00001111.0101:
+
+	Lukasz Spierewka
+		- pêtla testowa (wiele testów), ew. poprawki
+	Filip Wrobel
+		- makefile project for linux
+	Lukasz Nizik
+		- research bibliotek logiki rozmytej (musi dzia³aæ na linuxie)
+	Konrad Piechota
+		- integracja biblioteki logiki rozmytej
+	Mateusz Lewandowski
+		- integracja bibliotek do ligiki pierwszego rzêdu
+	Filip Wiechowski
+		- research bibliotek logiki pierwszego rzêdu (musi dzia³aæ na linuxie)
+Milestone 11, 00001000.0101:
+
+	Lukasz Spierewka
+		
+	Filip Wrobel
+		
+	Lukasz Nizik
+		
+	Konrad Piechota
+	
+	Mateusz Lewandowski
+		
+	Filip Wiechowski
+
 Milestone 10, 00011000.0100:
 
 	Lukasz Spierewka
