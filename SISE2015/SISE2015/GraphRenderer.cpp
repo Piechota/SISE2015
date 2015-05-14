@@ -44,6 +44,10 @@ void GraphRenderer::RenderGraph(const Graph* const graph)
 			const int32_t nx = n->GetPositionX();
 			const int32_t ny = n->GetPositionY();
 
+			x[i] = nx;
+			y[i] = ny;
+			i++;
+
 			for (const Node* const c : *connections)
 			{
 				if (c != nullptr)
@@ -58,16 +62,6 @@ void GraphRenderer::RenderGraph(const Graph* const graph)
 	}
 
 	// draw graph nodes
-	for (const Node* const n : *nodes)
-	{
-		if (n != nullptr)
-		{
-			x[i] = n->GetPositionX();
-			y[i] = n->GetPositionY();
-			i++;
-		}
-	}
-
 	DrawCircle(Colours::nodeInner, Colours::nodeOuter, x, y, nodeCircleRadius, nodeBorderSize, size);
 
 	const Pawn* const currentPawn = game->GetCurrentPawn();

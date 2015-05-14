@@ -6,7 +6,7 @@
 class Stats
 {
 public:
-	Stats(std::string filename);
+	Stats(const std::string& filename);
 	~Stats();
 
 	void SaveToFile();

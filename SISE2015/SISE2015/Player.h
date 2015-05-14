@@ -26,7 +26,7 @@ class Player
 public:
 	static void ResetIdIndexing();
 
-	Player(const std::string name, const Colour color);
+	Player(const std::string& name, const Colour& color);
 	Player(const Player& other);
 	~Player();
 

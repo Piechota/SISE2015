@@ -21,7 +21,6 @@ public:
     ~GameController();
 
     void Init();
-    void NextRound();
     void SubmitPlayer(Player* const player);
     void MainLoop();
     void Render() const;
@@ -33,12 +32,11 @@ public:
     Pawn* GetCurrentPawn() const;
 
 private:
-    Stats stats;
-
     PlayerInfo* players[6];
     Pawn* currentPawn;
     Graph* graph;
     Graph* currentGraph;
+	Stats* stats;
     bool isGameOver = false;
     bool isQuitting = false;
     uint8_t numberOfPlayers;
@@ -46,6 +44,7 @@ private:
     uint8_t rounds;
     uint8_t currentRound;
 
+	void NextRound();
     void StartTurn();
     void Turn();
     void EndTurn();

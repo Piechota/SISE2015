@@ -13,7 +13,6 @@
 #include <SDL.h>
 #include <SDL_mixer.h>
 
-#include "DataStructures.h"
 #include "Globals.h"
 #include "Colour.h"
 #include "DanceMat.h"
