@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -22,9 +21,14 @@
     <ClCompile Include="Player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="DanceMat.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="Colour.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Color.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="GameController.h">
@@ -45,6 +49,13 @@
     <ClInclude Include="Pawn.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Audio.h" />
+    <ClInclude Include="DanceMat.h" />
+    <ClInclude Include="Headers.h" />
+    <ClInclude Include="HumanPlayer.h" />
+    <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Stats.h" />
+    <ClInclude Include="Colour.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-HumanPlayer::HumanPlayer(const std::string name, const Color color) : Player(name, color)
+HumanPlayer::HumanPlayer(const std::string name, const Colour color) : Player(name, color)
 {
 }
 

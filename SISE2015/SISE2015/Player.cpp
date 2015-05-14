@@ -2,7 +2,7 @@
 
 uint32_t Player::idCounter = 0;
 
-Player::Player(const std::string name, const Color color)
+Player::Player(const std::string name, const Colour color)
 {
 	id = Player::idCounter++;
 	this->name = name;
@@ -36,7 +36,7 @@ const std::string& Player::GetName() const
 	return name;
 }
 
-const Color& Player::GetColor() const
+const Colour& Player::GetColor() const
 {
 	return color;
 }

@@ -1,6 +1,6 @@
 #include "Globals.h"
 #include "Keyboard.h"
-#include "Color.h"
+#include "Colour.h"
 #include "GameController.h"
 #include <SDL.h>
 
@@ -113,6 +113,8 @@ void RefreshInputAndScreen()
 			}
 		}
 	}
+
+	Colours::background = Colour(255, (Uint8)(255 * sin(currentTime / 300.0f)), 150);
 	game->Render();
 
 	//std::cout << deltaTime << std::endl;

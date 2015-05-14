@@ -12,12 +12,14 @@ void GameController::Init()
     currentGraph->Generate();
 }
 
-void GameController::NextRound() {
+void GameController::NextRound() 
+{
     numberOfPlayers = 0;
 	currentRound++;
-    SubmitPlayer(new HumanPlayer("gracz #1", Colors::blue));
-    SubmitPlayer(new HumanPlayer("gracz #2", Colors::red));
-    SubmitPlayer(new HumanPlayer("gracz #3", Colors::white));
+
+    SubmitPlayer(new HumanPlayer("gracz #1", Colours::blue));
+    SubmitPlayer(new HumanPlayer("gracz #2", Colours::red));
+    SubmitPlayer(new HumanPlayer("gracz #3", Colours::white));
 }
 
 GameController::~GameController()
@@ -109,11 +111,13 @@ void GameController::SubmitPlayer(Player* const player)
     printf("%s's pawn spawned at node %d\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
 }
 
-Pawn* GameController::GetCurrentPawn() {
+Pawn* GameController::GetCurrentPawn() const 
+{
 	return currentPawn;
 }
 
-uint8_t GameController::GetCurrentRoundID() const {
+uint8_t GameController::GetCurrentRoundID() const 
+{
 	return currentRound;
 }
 
@@ -258,11 +262,14 @@ void GameController::EndTurn()
     }
 }
 
-void GameController::FinishRound() {
-	if (currentRound < rounds) {
+void GameController::FinishRound() 
+{
+	if (currentRound < rounds) 
+	{
 		NextRound();
 	}
-	else {
+	else 
+	{
 		GameOver();
 		// TODO: sum up results
 	}
@@ -274,7 +281,8 @@ void GameController::GameOver()
     std::cout << "\n\nGAME OVER\n\n";
 }
 
-void GameController::ForceQuit() {
+void GameController::ForceQuit() 
+{
     isQuitting = true;
 	currentRound = rounds;
 }

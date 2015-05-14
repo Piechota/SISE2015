@@ -15,7 +15,7 @@ public:
 	Node* GetNode() const;
 	void SetNode(Node* const node);
 
-	Color color;
+	Colour color;
 	bool isAlive = true;
 
 private:

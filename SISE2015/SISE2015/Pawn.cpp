@@ -2,7 +2,7 @@
 
 Pawn::Pawn()
 {
-	color = Colors::white;
+	color = Colours::white;
 }
 
 Pawn::~Pawn()

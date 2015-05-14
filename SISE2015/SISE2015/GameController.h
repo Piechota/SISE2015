@@ -30,7 +30,7 @@ public:
     void ForceQuit();
 	bool GetIsQuitting() const;
 	uint8_t GetCurrentRoundID() const;
-    Pawn* GetCurrentPawn();
+    Pawn* GetCurrentPawn() const;
 
 private:
     Stats stats;

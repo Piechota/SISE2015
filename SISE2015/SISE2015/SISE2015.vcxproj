@@ -78,7 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Colour.cpp" />
     <ClCompile Include="DanceMat.cpp" />
     <ClCompile Include="ExamplePlayer.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="Color.h" />
+    <ClInclude Include="Colour.h" />
     <ClInclude Include="DanceMat.h" />
     <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ExamplePlayer.h" />

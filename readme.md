@@ -14,6 +14,7 @@ Milestone 100, 00001111.0101:
 		- integracja bibliotek do ligiki pierwszego rzêdu
 	Filip Wiechowski
 		- research bibliotek logiki pierwszego rzêdu (musi dzia³aæ na linuxie)
+
 Milestone 11, 00001000.0101:
 
 	Lukasz Spierewka
@@ -27,6 +28,7 @@ Milestone 11, 00001000.0101:
 	Mateusz Lewandowski
 		
 	Filip Wiechowski
+		- optymalizacja wyœwietlania
 
 Milestone 10, 00011000.0100:
 

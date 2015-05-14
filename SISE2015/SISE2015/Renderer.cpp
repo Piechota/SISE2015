@@ -4,10 +4,10 @@
 #include <SDL.h>
 #include "Globals.h"
 #include "Renderer.h"
-#include "Color.h"
+#include "Colour.h"
 
-std::unordered_map<const Color*, SDL_Texture*> circleTextures;
-std::map<std::pair<const Color*, const Color*>, SDL_Texture*> circleTexturesBorder;
+std::unordered_map<const Colour*, SDL_Texture*> circleTextures;
+std::map<std::pair<const Colour*, const Colour*>, SDL_Texture*> circleTexturesBorder;
 
 FORCEINLINE uint32_t length(const int32_t& x0, const int32_t& y0, const int32_t& x1, const int32_t& y1)
 {
@@ -17,26 +17,26 @@ FORCEINLINE uint32_t length(const int32_t& x0, const int32_t& y0, const int32_t&
 	return (uint32_t)sqrt(w2 + h2);
 }
 
-FORCEINLINE void DrawLine(const Color& color, const SDL_Point& p0, const SDL_Point& p1)
+FORCEINLINE void DrawLine(const Colour& color, const SDL_Point& p0, const SDL_Point& p1)
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0xFF);
 	SDL_RenderDrawLine(renderer, p0.x, p0.y, p1.x, p1.y);
 }
 
-FORCEINLINE void DrawLine(const Color& color, const int32_t& x0, const int32_t& y0, const int32_t& x1, const int32_t& y1)
+FORCEINLINE void DrawLine(const Colour& color, const int32_t& x0, const int32_t& y0, const int32_t& x1, const int32_t& y1)
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0xFF);
 	SDL_RenderDrawLine(renderer, x0, y0, x1, y1);
 }
 
-FORCEINLINE void DrawLine(const Color& color, const float& x0, const float& y0, const float& x1, const float& y1)
+FORCEINLINE void DrawLine(const Colour& color, const float& x0, const float& y0, const float& x1, const float& y1)
 {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0xFF);
 	SDL_RenderDrawLine(renderer, (int32_t)(x0 * screen_width), (int32_t)(y0 * screen_height), (int32_t)(x1 * screen_width), (int32_t)(y1 * screen_height));
 	//SDL_RenderDrawLine(renderer, (int32_t)x0, (int32_t)y0, (int32_t)x1, (int32_t)y1);
 }
 
-FORCEINLINE void DrawCircleImpl(const Color& color, const int32_t* RESTRICT const x, const int32_t* RESTRICT const y, const uint32_t& radius, const size_t num)
+FORCEINLINE void DrawCircleImpl(const Colour& color, const int32_t* RESTRICT const x, const int32_t* RESTRICT const y, const uint32_t& radius, const size_t num)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 	const Uint32 rmask = 0xff000000;
@@ -102,17 +102,17 @@ FORCEINLINE void DrawCircleImpl(const Color& color, const int32_t* RESTRICT cons
 	}
 }
 
-void DrawCircle(const Color& color, const int32_t& x, const int32_t& y, const uint32_t& radius)
+void DrawCircle(const Colour& color, const int32_t& x, const int32_t& y, const uint32_t& radius)
 {
 	DrawCircleImpl(color, &x, &y, radius, 1);
 }
 
-void DrawCircle(const Color& color, const SDL_Point& p, const uint32_t& radius)
+void DrawCircle(const Colour& color, const SDL_Point& p, const uint32_t& radius)
 {
 	DrawCircleImpl(color, &p.x, &p.y, radius, 1);
 }
 
-void DrawCircle(const Color& color, const float& x, const float& y, const float& radius)
+void DrawCircle(const Colour& color, const float& x, const float& y, const float& radius)
 {
 	const int32_t X = (int32_t)(x * screen_width);
 	const int32_t Y = (int32_t)(y * screen_height);
@@ -120,12 +120,12 @@ void DrawCircle(const Color& color, const float& x, const float& y, const float&
 	//DrawCircleImpl(color, (int32_t)x, (int32_t)y, (uint32_t)radius);
 }
 
-void DrawCircle(const Color& color, const int32_t* const x, const int32_t* const y, const uint32_t& radius, const size_t num)
+void DrawCircle(const Colour& color, const int32_t* const x, const int32_t* const y, const uint32_t& radius, const size_t num)
 {
 	DrawCircleImpl(color, x, y, radius, num);
 }
 
-FORCEINLINE void DrawCircleImpl(const Color& fillColor, const Color& borderColor, const int32_t* RESTRICT const x, const int32_t* RESTRICT const y, const uint32_t& radius, const uint32_t& borderSize, const size_t num)
+FORCEINLINE void DrawCircleImpl(const Colour& fillColor, const Colour& borderColor, const int32_t* RESTRICT const x, const int32_t* RESTRICT const y, const uint32_t& radius, const uint32_t& borderSize, const size_t num)
 {
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 	const Uint32 rmask = 0xff000000;
@@ -143,7 +143,7 @@ FORCEINLINE void DrawCircleImpl(const Color& fillColor, const Color& borderColor
 	static const uint32_t cRadius = screen_height / 2;
 	const uint32_t bSize = (borderSize * cRadius) / radius;
 
-	std::pair<const Color*, const Color*> key = std::make_pair(&fillColor, &borderColor);
+	std::pair<const Colour*, const Colour*> key = std::make_pair(&fillColor, &borderColor);
 
 	if (circleTexturesBorder.find(key) == circleTexturesBorder.end())
 	{
@@ -206,17 +206,17 @@ FORCEINLINE void DrawCircleImpl(const Color& fillColor, const Color& borderColor
 	}
 }
 
-void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t& x, const int32_t& y, const uint32_t& radius, const uint32_t& borderSize)
+void DrawCircle(const Colour& fillColor, const Colour& borderColor, const int32_t& x, const int32_t& y, const uint32_t& radius, const uint32_t& borderSize)
 {
 	DrawCircleImpl(fillColor, borderColor, &x, &y, radius, borderSize, 1);
 }
 
-void DrawCircle(const Color& fillColor, const Color& borderColor, const SDL_Point& p, const uint32_t& radius, const uint32_t& borderSize)
+void DrawCircle(const Colour& fillColor, const Colour& borderColor, const SDL_Point& p, const uint32_t& radius, const uint32_t& borderSize)
 {
 	DrawCircleImpl(fillColor, borderColor, &p.x, &p.y, radius, borderSize, 1);
 }
 
-void DrawCircle(const Color& fillColor, const Color& borderColor, const float& x, const float& y, const float& radius, const float& borderSize)
+void DrawCircle(const Colour& fillColor, const Colour& borderColor, const float& x, const float& y, const float& radius, const float& borderSize)
 {
 	const int32_t X = (int32_t)(x * screen_width);
 	const int32_t Y = (int32_t)(y * screen_height);
@@ -224,7 +224,7 @@ void DrawCircle(const Color& fillColor, const Color& borderColor, const float& x
 	//DrawCircleImpl(fillColor, borderColor, (int32_t)x, (int32_t)y, (uint32_t)radius, (uint32_t)borderSize);
 }
 
-void DrawCircle(const Color& fillColor, const Color& borderColor, const int32_t* const x, const int32_t* const y, const uint32_t& radius, const uint32_t& borderSize, const size_t num)
+void DrawCircle(const Colour& fillColor, const Colour& borderColor, const int32_t* const x, const int32_t* const y, const uint32_t& radius, const uint32_t& borderSize, const size_t num)
 {
 	DrawCircleImpl(fillColor, borderColor, x, y, radius, borderSize, num);
 }

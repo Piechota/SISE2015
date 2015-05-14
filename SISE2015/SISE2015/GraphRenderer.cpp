@@ -4,7 +4,7 @@
 #include "Graph.h"
 #include "Node.h"
 #include "Renderer.h"
-#include "Color.h"
+#include "Colour.h"
 #include "Pawn.h"
 
 GraphRenderer::GraphRenderer()
@@ -15,11 +15,13 @@ GraphRenderer::~GraphRenderer()
 {
 }
 
-void GraphRenderer::RenderBackground() {
-	SDL_SetRenderDrawColor(renderer, Colors::background.r, Colors::background.g, Colors::background.b, SDL_ALPHA_OPAQUE);
+void GraphRenderer::RenderBackground() 
+{
+	SDL_SetRenderDrawColor(renderer, Colours::background.r, Colours::background.g, Colours::background.b, SDL_ALPHA_OPAQUE);
 }
 
-void GraphRenderer::RenderGraph(const Graph* const graph) {
+void GraphRenderer::RenderGraph(const Graph* const graph) 
+{
 	SDL_RenderClear(renderer);
 
 	const std::vector<Node*>* const nodes = graph->GetConstNodes();
@@ -49,7 +51,7 @@ void GraphRenderer::RenderGraph(const Graph* const graph) {
 					const int32_t cx = c->GetPositionX();
 					const int32_t cy = c->GetPositionY();
 
-					DrawLine(Colors::black, nx, ny, cx, cy);
+					DrawLine(Colours::black, nx, ny, cx, cy);
 				}
 			}
 		}
@@ -66,7 +68,9 @@ void GraphRenderer::RenderGraph(const Graph* const graph) {
 		}
 	}
 
-	DrawCircle(Colors::nodeInner, Colors::nodeOuter, x, y, nodeCircleRadius, nodeBorderSize, size);
+	DrawCircle(Colours::nodeInner, Colours::nodeOuter, x, y, nodeCircleRadius, nodeBorderSize, size);
+
+	const Pawn* const currentPawn = game->GetCurrentPawn();
 
 	// draw pawns
 	for (const Node* const n : *nodes)
@@ -80,12 +84,12 @@ void GraphRenderer::RenderGraph(const Graph* const graph) {
 				const int32_t nx = n->GetPositionX();
 				const int32_t ny = n->GetPositionY();
 
-				if (game->GetCurrentPawn() == pawn) {
+				if (currentPawn == pawn) {
 					// pawn->color
-					DrawCircle(Colors::pawnActive, nx, ny, pawnCircleRadius);
+					DrawCircle(Colours::pawnActive, nx, ny, pawnCircleRadius);
 				}
 				else {
-					DrawCircle(Colors::pawn, nx, ny, pawnCircleRadius);
+					DrawCircle(Colours::pawn, nx, ny, pawnCircleRadius);
 				}
 			}
 		}

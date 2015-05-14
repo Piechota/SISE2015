@@ -15,7 +15,7 @@
 
 #include "DataStructures.h"
 #include "Globals.h"
-#include "Color.h"
+#include "Colour.h"
 #include "DanceMat.h"
 #include "Audio.h"
 #include "Keyboard.h"
