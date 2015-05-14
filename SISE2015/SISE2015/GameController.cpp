@@ -7,7 +7,7 @@ GameController::GameController() : stats("stats1.csv"), turns(0)
 void GameController::Init()
 {
     numberOfPlayers = 0;
-    currentGraph = new Graph(2, 6);
+    currentGraph = new Graph(2, 8);
     currentGraph->Generate();
 }
 
@@ -62,10 +62,14 @@ bool GameController::GetIsGameOver() const
     return isGameOver;
 }
 
+bool GameController::GetIsQuitting() const
+{
+	return isQuitting;
+}
+
 void GameController::MainLoop()
 {
-    if (!isGameOver)
-    {
+    if (!isGameOver && !isQuitting) {
         StartTurn();
         Turn();
         EndTurn();
@@ -102,14 +106,19 @@ void GameController::StartTurn()
     PlayerInfo* currentPlayer;
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
-        currentPlayer = players[i];
-        if (currentPlayer->pawn->isAlive)
-        {
-            //RenewData();
-			printf("%s is processing AI", currentPlayer->player->GetName().c_str());
-            currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
-            stats.AddSurvival(currentPlayer->player);
-        }
+		currentPlayer = players[i];
+		if (!isQuitting) {
+			if (currentPlayer->pawn->isAlive)
+			{
+				//RenewData();
+				printf("%s is processing AI", currentPlayer->player->GetName().c_str());
+				currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
+				stats.AddSurvival(currentPlayer->player);
+			}
+		}
+		else {
+			currentPlayer->pawn->Die();
+		}
     }
 }
 
@@ -237,6 +246,10 @@ void GameController::GameOver()
 {
     isGameOver = true;
     std::cout << "\n\nGAME OVER\n\n";
+}
+
+void GameController::ForceQuit() {
+	isQuitting = true;
 }
 
 void GameController::RenewData()

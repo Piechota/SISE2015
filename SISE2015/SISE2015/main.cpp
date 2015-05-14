@@ -5,7 +5,7 @@ bool InitSDL(const int& w, const int& h)
     screen_width = w;
     screen_height = h;
 
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0)
     {
         printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         return false;
@@ -44,31 +44,30 @@ void CloseSDL()
 
 int main(int argc, char* args[])
 {
-    if (!InitSDL(960, 960))
+    if (!InitSDL(480, 480))
     {
         return 1;
     }
 
     danceMat = new DanceMat();
     audio = new Audio();
-	keyboard = new Keyboard();
+    keyboard = new Keyboard();
 
     game = new GameController();
     game->Init();
     game->SubmitPlayer(new HumanPlayer("gracz #1", Colors::blue));
-	game->SubmitPlayer(new HumanPlayer("gracz #2", Colors::red));
-	game->SubmitPlayer(new HumanPlayer("gracz #3", Colors::white));
+    game->SubmitPlayer(new HumanPlayer("gracz #2", Colors::red));
+    game->SubmitPlayer(new HumanPlayer("gracz #3", Colors::white));
 
     audio->Play();
 
     while (run)
     {
-		RefreshInputAndScreen();
+        RefreshInputAndScreen();
 
         game->MainLoop();
 
-        if (game->GetIsGameOver())
-        {
+        if (game->GetIsGameOver()) {
             run = false;
         }
     }
@@ -81,7 +80,7 @@ int main(int argc, char* args[])
     audio->Stop();
     delete audio;
 
-	delete keyboard;
+    delete keyboard;
 
     CloseSDL();
 
