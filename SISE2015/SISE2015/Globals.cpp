@@ -113,13 +113,7 @@ void RefreshInputAndScreen()
 			}
 		}
 	}
-
-	SDL_SetRenderDrawColor(renderer, 255, (Uint8)(255 * sin(currentTime / 300.0f)), 150, 0xFF);
-	SDL_RenderClear(renderer);
-
 	game->Render();
-
-	SDL_RenderPresent(renderer);
 
 	//std::cout << deltaTime << std::endl;
 	if (deltaTime < 16) SDL_Delay(16 - deltaTime);

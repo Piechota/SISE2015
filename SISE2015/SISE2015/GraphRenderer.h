@@ -9,6 +9,7 @@ public:
 	GraphRenderer();
 	~GraphRenderer();
 
+	static void RenderBackground();
 	static void RenderGraph(const Graph* const graph);
 };
 

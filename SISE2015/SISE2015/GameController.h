@@ -7,6 +7,15 @@ class Stats;
 
 class GameController
 {
+private:
+    struct PlayerInfo
+    {
+        DecisionInfo currentDecision;
+        Player* player;
+        Pawn* pawn;
+        bool die = false;
+    };
+
 public:
     GameController();
     ~GameController();
@@ -19,19 +28,13 @@ public:
     bool GetIsGameOver() const;
     void ForceQuit();
     bool GetIsQuitting() const;
+    Pawn* GetCurrentPawn();
 
 private:
     Stats stats;
 
-    struct PlayerInfo
-    {
-        DecisionInfo currentDecision;
-        Player* player;
-        Pawn* pawn;
-        bool die = false;		
-    };
-
     PlayerInfo* players[6];
+    Pawn* currentPawn;
     Graph* graph;
     Graph* currentGraph;
     bool isGameOver = false;

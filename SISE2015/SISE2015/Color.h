@@ -20,6 +20,12 @@ namespace Colors
 	extern const Color red;
 	extern const Color green;
 	extern const Color blue;
+
+	extern const Color background;
+	extern const Color nodeOuter;
+	extern const Color nodeInner;
+	extern const Color pawn;
+	extern const Color pawnActive;
 }
 
 #endif
