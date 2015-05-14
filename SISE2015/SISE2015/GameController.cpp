@@ -186,11 +186,13 @@ void GameController::StartTurn()
 
         if (!isQuitting) 
 		{
-            if (currentPlayer->pawn->isAlive) 
+			currentPawn = currentPlayer->pawn;
+
+			if (currentPawn->isAlive)
 			{
                 //RenewData();
 				printf("%s is processing AI", currentPlayer->player->GetName().c_str());
-                currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
+				currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPawn);
 				stats->AddSurvival(currentPlayer->player);
             }
         }
