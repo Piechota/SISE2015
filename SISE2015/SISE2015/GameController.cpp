@@ -6,9 +6,18 @@ GameController::GameController() : stats("stats1.csv"), turns(0)
 
 void GameController::Init()
 {
-    numberOfPlayers = 0;
+    rounds = 4;
+	currentRound = 0;
     currentGraph = new Graph(2, 8);
     currentGraph->Generate();
+}
+
+void GameController::NextRound() {
+    numberOfPlayers = 0;
+	currentRound++;
+    SubmitPlayer(new HumanPlayer("gracz #1", Colors::blue));
+    SubmitPlayer(new HumanPlayer("gracz #2", Colors::red));
+    SubmitPlayer(new HumanPlayer("gracz #3", Colors::white));
 }
 
 GameController::~GameController()
@@ -81,7 +90,6 @@ void GameController::SubmitPlayer(Player* const player)
 {
     players[numberOfPlayers] = new PlayerInfo();
     PlayerInfo* pPlayer = players[numberOfPlayers];
-    
 
     pPlayer->player = player;
     pPlayer->pawn = new Pawn();
@@ -101,6 +109,14 @@ void GameController::SubmitPlayer(Player* const player)
     printf("%s's pawn spawned at node %d\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
 }
 
+Pawn* GameController::GetCurrentPawn() {
+	return currentPawn;
+}
+
+uint8_t GameController::GetCurrentRoundID() const {
+	return currentRound;
+}
+
 void GameController::StartTurn()
 {
     printf("\nStart phase started (%d)\n", turns);
@@ -111,7 +127,7 @@ void GameController::StartTurn()
             currentPawn = currentPlayer->pawn;
             if (currentPlayer->pawn->isAlive) {
                 //RenewData();
-                printf("%s is processing AI", currentPlayer->player->GetName().c_str());
+				printf("%s is processing AI", currentPlayer->player->GetName().c_str());
                 currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
                 stats.AddSurvival(currentPlayer->player);
             }
@@ -120,10 +136,6 @@ void GameController::StartTurn()
             currentPlayer->pawn->Die();
         }
     }
-}
-
-Pawn* GameController::GetCurrentPawn() {
-    return currentPawn;
 }
 
 void GameController::Turn()
@@ -242,8 +254,18 @@ void GameController::EndTurn()
         {
             printf("Turns limit reached\n");
         }
-        GameOver();
+        FinishRound();
     }
+}
+
+void GameController::FinishRound() {
+	if (currentRound < rounds) {
+		NextRound();
+	}
+	else {
+		GameOver();
+		// TODO: sum up results
+	}
 }
 
 void GameController::GameOver()
@@ -254,6 +276,7 @@ void GameController::GameOver()
 
 void GameController::ForceQuit() {
     isQuitting = true;
+	currentRound = rounds;
 }
 
 void GameController::RenewData()

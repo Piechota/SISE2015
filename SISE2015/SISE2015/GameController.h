@@ -21,13 +21,15 @@ public:
     ~GameController();
 
     void Init();
+    void NextRound();
     void SubmitPlayer(Player* const player);
     void MainLoop();
     void Render() const;
     void SaveStats();
     bool GetIsGameOver() const;
     void ForceQuit();
-    bool GetIsQuitting() const;
+	bool GetIsQuitting() const;
+	uint8_t GetCurrentRoundID() const;
     Pawn* GetCurrentPawn();
 
 private:
@@ -41,12 +43,15 @@ private:
     bool isQuitting = false;
     uint8_t numberOfPlayers;
     uint8_t turns;
+    uint8_t rounds;
+    uint8_t currentRound;
 
     void StartTurn();
     void Turn();
     void EndTurn();
     void RenewData();
     bool CanMoveTo(const Node* const node, const PlayerInfo* const player) const;
+    void FinishRound();
     void GameOver();
 };
 

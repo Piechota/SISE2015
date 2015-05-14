@@ -53,8 +53,7 @@ HumanPlayer::~HumanPlayer()
 
 DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn)
 {
-    clear();
-
+	clear();
     const Node* const my_node = myPawn->GetNode();
 
     if (danceMat->IsDanceMat()) {
@@ -233,6 +232,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
     }
 
     Decision d;
+    std::cout << "Round: #" << (int)game->GetCurrentRoundID() << std::endl;
     std::cout << "Player: " << name << std::endl;
     std::cout << " 1 - move \n 2 - shoot \n 3 - suicide \n";
 
