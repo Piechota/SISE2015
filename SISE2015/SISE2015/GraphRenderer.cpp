@@ -1,4 +1,5 @@
 #include <vector>
+#include <stdio.h>
 #include "Globals.h"
 #include "GraphRenderer.h"
 #include "Graph.h"

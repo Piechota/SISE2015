@@ -1,4 +1,6 @@
 #include "Graph.h"
+#include <stdio.h>
+#include <math.h>
 
 uint32_t Graph::nodeIdCounter = 0;
 
