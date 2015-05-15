@@ -1,21 +1,68 @@
 #include "Headers.h"
 
-GameController::GameController() : stats("stats1.csv"), turns(0)
+#define MAX_ROUNDS 3
+#define MAX_TURNS_PER_ROUND 100
+#define GRAPH_DEPTH 2
+#define GRAPH_PLAYERS 8
+
+GameController::GameController()
 {
 }
 
 void GameController::Init()
 {
-    rounds = 4;
+	rounds = MAX_ROUNDS;
 	currentRound = 0;
-    currentGraph = new Graph(2, 8);
-    currentGraph->Generate();
+	NextRound();
 }
 
 void GameController::NextRound() 
 {
-    numberOfPlayers = 0;
 	currentRound++;
+    numberOfPlayers = 0;
+	turns = 0;
+
+	for (PlayerInfo* p : players)
+	{
+		if (p != nullptr)
+		{
+			if (p->player != nullptr)
+			{
+				delete p->player;
+				p->player = nullptr;
+			}
+
+			if (p->pawn != nullptr)
+			{
+				delete p->pawn;
+				p->pawn = nullptr;
+			}
+
+			delete p;
+			p = nullptr;
+		}
+	}
+
+	if (stats != nullptr)
+	{
+		delete stats;
+	}
+	stats = new Stats("stats.csv");
+
+	if (graph != nullptr)
+	{
+		delete graph;
+		graph = nullptr;
+	}
+
+	if (currentGraph != nullptr)
+	{
+		delete currentGraph;
+		currentGraph = nullptr;
+	}
+
+	currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
+	currentGraph->Generate();
 
     SubmitPlayer(new HumanPlayer("gracz #1", Colours::blue));
     SubmitPlayer(new HumanPlayer("gracz #2", Colours::red));
@@ -56,6 +103,12 @@ GameController::~GameController()
             p = nullptr;
         }
     }
+
+	if (stats != nullptr)
+	{
+		delete stats;
+		stats = nullptr;
+	}
 }
 
 void GameController::Render() const
@@ -66,7 +119,7 @@ void GameController::Render() const
 
 void GameController::SaveStats()
 {
-    stats.SaveToFile();
+    stats->SaveToFile();
 }
 
 bool GameController::GetIsGameOver() const
@@ -81,7 +134,8 @@ bool GameController::GetIsQuitting() const
 
 void GameController::MainLoop()
 {
-    if (!isGameOver && !isQuitting) {
+    if (!isGameOver && !isQuitting) 
+	{
         StartTurn();
         Turn();
         EndTurn();
@@ -97,17 +151,18 @@ void GameController::SubmitPlayer(Player* const player)
     pPlayer->pawn = new Pawn();
     pPlayer->pawn->color = player->GetColor();
 
-    stats.AddPlayer(player);
+	stats->AddPlayer(player);
     printf("Submitted new player: %s (%d)\n", pPlayer->player->GetName().c_str(), numberOfPlayers);
 
     numberOfPlayers++;
 
-    std::vector<Node*>* nodes = currentGraph->GetNodes();
+    std::vector<Node*>* const nodes = currentGraph->GetNodes();
     size_t nodeIndex = 0;
     nodeIndex = (rand() % (nodes->size() - 1)) + 1;
 
     pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
     (*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
+
     printf("%s's pawn spawned at node %d\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
 }
 
@@ -124,19 +179,25 @@ uint8_t GameController::GetCurrentRoundID() const
 void GameController::StartTurn()
 {
     printf("\nStart phase started (%d)\n", turns);
+
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
-        PlayerInfo* currentPlayer = players[i];
-        if (!isQuitting) {
-            currentPawn = currentPlayer->pawn;
-            if (currentPlayer->pawn->isAlive) {
+        PlayerInfo* const currentPlayer = players[i];
+
+        if (!isQuitting) 
+		{
+			currentPawn = currentPlayer->pawn;
+
+			if (currentPawn->isAlive)
+			{
                 //RenewData();
 				printf("%s is processing AI", currentPlayer->player->GetName().c_str());
-                currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPlayer->pawn);
-                stats.AddSurvival(currentPlayer->player);
+				currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPawn);
+				stats->AddSurvival(currentPlayer->player);
             }
         }
-        else {
+        else 
+		{
             currentPlayer->pawn->Die();
         }
     }
@@ -146,15 +207,17 @@ void GameController::Turn()
 {
     PlayerInfo* pPlayer;
     printf("\nRules phase started\n");
+
     //Suicides
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         pPlayer = players[i];
+
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SUICIDE)
         {
             printf("%s commited a suicide\n", pPlayer->player->GetName().c_str());
             pPlayer->pawn->Die();
-            stats.AddDeath(pPlayer->player);
+			stats->AddDeath(pPlayer->player);
         }
     }
 
@@ -162,6 +225,7 @@ void GameController::Turn()
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         pPlayer = players[i];
+
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::MOVE)
         {
             Node* const targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
@@ -188,19 +252,18 @@ void GameController::Turn()
 
         if (pPlayer->pawn->isAlive && pPlayer->currentDecision.type == Decision::Type::SHOOT)
         {
-            Node* const targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
+            const Node* const targetNode = currentGraph->GetNodeById(pPlayer->currentDecision.target->GetId());
 
             if (pPlayer->pawn->GetNode()->IsConnectedTo(targetNode) == true) //if target is connected to current node
             {
                 if (targetNode->GetPawn() != nullptr)
                 {
-                    
                     for (size_t j = 0; j < numberOfPlayers; ++j)
                     {
                         if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
                         {
                             players[j]->die = true;
-                            stats.AddKill(pPlayer->player);
+							stats->AddKill(pPlayer->player);
                             printf("%s killed player %s\n", pPlayer->player->GetName().c_str(), players[j]->player->GetName().c_str());
                             break;
                         }
@@ -220,18 +283,20 @@ void GameController::EndTurn()
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         pPlayer = players[i];
+
         if (pPlayer->pawn->isAlive)
         {
             if (pPlayer->die)
             {
                 pPlayer->pawn->Die();
-                stats.AddDeath(pPlayer->player);
+				stats->AddDeath(pPlayer->player);
                 printf("%s died\n", pPlayer->player->GetName().c_str());
             }
         }
     }
 
     size_t countAlive = 0;
+
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         if (players[i]->pawn->isAlive)
@@ -242,22 +307,27 @@ void GameController::EndTurn()
 
     turns++;
 
-    if (countAlive <= 1 || turns >= 100)
+	if (countAlive <= 1 || turns >= MAX_TURNS_PER_ROUND)
     {
         printf("\nGame Over\n");
+
         if (countAlive <= 1)
         {
             printf("No more than one player is alive\n");
-            for (int i = 0; i < numberOfPlayers; i++)
+
+			for (size_t i = 0; i < numberOfPlayers; ++i)
             {
-                if (players[i]->pawn->isAlive)
-                    printf("s% (%d)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
+				if (players[i]->pawn->isAlive)
+				{
+					printf("s% (%d)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
+				}
             }
         }
         else
         {
             printf("Turns limit reached\n");
         }
+
         FinishRound();
     }
 }
@@ -289,6 +359,7 @@ void GameController::ForceQuit()
 
 void GameController::RenewData()
 {
+	// Currently doesn't work properly, requires graph deep copy!
     if (graph != nullptr)
     {
         delete graph;
@@ -311,7 +382,8 @@ bool GameController::CanMoveTo(const Node* const node, const PlayerInfo* const p
             {
                 if ((player != players[j]) && (players[j]->currentDecision.type == Decision::Type::MOVE))
                 {
-                    Node* pNodeTrg = players[j]->currentDecision.target;
+                    const Node* const pNodeTrg = players[j]->currentDecision.target;
+
                     if (pNodeTrg->GetId() == player->currentDecision.target->GetId())
                     {
                         return false;

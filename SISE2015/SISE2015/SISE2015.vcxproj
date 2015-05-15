@@ -98,7 +98,6 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="DanceMat.h" />
-    <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ExamplePlayer.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Globals.h" />

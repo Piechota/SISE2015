@@ -51,7 +51,7 @@ HumanPlayer::~HumanPlayer()
 //
 //}
 
-DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myPawn)
+DecisionInfo HumanPlayer::ProcessAI(const GraphInfo* const grapthInfo, const Pawn* const myPawn)
 {
 	clear();
     const Node* const my_node = myPawn->GetNode();
@@ -107,6 +107,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
             while (!danceMoves)
             {
                 RefreshInputAndScreen();
+
                 if (!danceMat->IsKeyDown(DanceMatButtons::LEFT_UP) && !danceMat->IsKeyDown(DanceMatButtons::UP) && !danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT))
                     canMove = true;
 
@@ -123,8 +124,9 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
                 bool moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
                 bool moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
 
-                int32_t x = my_node->GetPositionX();
-                int32_t y = my_node->GetPositionY();
+                const int32_t x = my_node->GetPositionX();
+                const int32_t y = my_node->GetPositionY();
+
                 for (size_t i = 0; i < n; ++i)
                 {
                     if (moveU)
@@ -203,6 +205,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
                 }
             }
         }
+
         bool moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
         bool moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
         bool moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
@@ -217,6 +220,7 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
                 moveUR || moveDL || moveLU || moveRD)
         {
             RefreshInputAndScreen();
+
             moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
             moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
             moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
@@ -311,15 +315,18 @@ DecisionInfo HumanPlayer::ProcessAI(GraphInfo* const grapthInfo, Pawn* const myP
     bool click = false;
     SDL_Event e;
     static const int32_t nodeCircleRadius = (screen_height / 16);
+
     while (!click)
     {
         RefreshInputAndScreen();
+
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
-                static int32_t x, y;
+                int32_t x, y;
                 SDL_GetMouseState(&x, &y);
+
                 for (size_t i = 0; i < n; ++i)
                 {
                     if (x >= nodes->at(i)->GetPositionX() - nodeCircleRadius && x <= nodes->at(i)->GetPositionX() + nodeCircleRadius &&

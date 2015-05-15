@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-Stats::Stats(std::string filename)
+Stats::Stats(const std::string& filename)
 {
 	file.open(filename);
 }

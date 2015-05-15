@@ -55,7 +55,6 @@ int main(int argc, char* args[])
 
     game = new GameController();
     game->Init();
-    game->NextRound();
 
     audio->Play();
 

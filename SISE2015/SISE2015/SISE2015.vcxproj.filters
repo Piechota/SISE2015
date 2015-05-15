@@ -40,7 +40,6 @@
     <ClInclude Include="Node.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures.h" />
     <ClInclude Include="ExamplePlayer.h" />
     <ClInclude Include="GraphRenderer.h" />
     <ClInclude Include="Player.h">
