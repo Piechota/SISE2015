@@ -16,9 +16,9 @@ SRCS = $(addprefix $(SOURCE_FOLDER)/, $(SOURCES))
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
-INCLUDES = -I/$(SOURCE_FOLDER) -I../libs_linux/include
+INCLUDES = -I/$(SOURCE_FOLDER) -I../libs_linux/include -I../SDL2-2.0.3/include -I../SDL2_mixer-2.0.0
 
-LIB_FOLDERS = -L../libs_linux/lib
+LIB_FOLDERS = -L../libs_linux/lib -L../SDL2-2.0.3/build
 
 LIBRARIES = SDL2 SDL2main SDL2_mixer
 LIBRARIES_BASENAME = $(basename $(LIBRARIES))
@@ -61,3 +61,4 @@ else
 	
 endif
 	@echo Build cleanned...
+

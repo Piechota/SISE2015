@@ -1,5 +1,6 @@
 echo Start clean...
 rm -r libs_linux
 rm -r SDL2-2.0.3
+rm -r SDL2_mixer-2.0.0
 rm -r SISE2015/MakeFileBuild
 echo Clean finished...
