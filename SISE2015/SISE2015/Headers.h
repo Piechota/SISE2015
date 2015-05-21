@@ -32,4 +32,6 @@
 #include "Renderer.h"
 #include "GraphRenderer.h"
 
+#include <fl/Headers.h>
+
 #endif
