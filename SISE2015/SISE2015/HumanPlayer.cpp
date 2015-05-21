@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-HumanPlayer::HumanPlayer(const std::string name, const Colour color) : Player(name, color)
+HumanPlayer::HumanPlayer(const std::string& name, const Colour& color) : Player(name, color)
 {
 }
 
@@ -54,303 +54,311 @@ HumanPlayer::~HumanPlayer()
 DecisionInfo HumanPlayer::ProcessAI(const GraphInfo* const grapthInfo, const Pawn* const myPawn)
 {
 	clear();
-    const Node* const my_node = myPawn->GetNode();
+	const Node* const my_node = myPawn->GetNode();
 
-    if (danceMat->IsDanceMat()) {
-        Decision d;
-        std::cout << "Player: " << name << std::endl;
-        std::cout << " LEFT-UP - move \n UP - shoot \n UP-RIGHT - suicide \n";
+	if (danceMat->IsDanceMat())
+	{
+		Decision d;
+		std::cout << "Player: " << name << std::endl;
+		std::cout << " LEFT-UP - move \n UP - shoot \n UP-RIGHT - suicide \n";
 
-        uint8_t type = 0;
+		uint8_t type = 0;
 
-        bool pressedLU = false;
-        bool pressedU = false;
-        bool pressedUR = false;
+		bool pressedLU = false;
+		bool pressedU = false;
+		bool pressedUR = false;
 
-        while (!pressedLU && !pressedU && !pressedUR)
-        {
-            RefreshInputAndScreen();
-            pressedLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
-            pressedU = danceMat->IsKeyDown(DanceMatButtons::UP);
-            pressedUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
-        }
+		while (!pressedLU && !pressedU && !pressedUR)
+		{
+			RefreshInputAndScreen();
+			pressedLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
+			pressedU = danceMat->IsKeyDown(DanceMatButtons::UP);
+			pressedUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
+		}
 
-        if (pressedLU) type = 1;
-        if (pressedU) type = 2;
-        if (pressedUR) type = 3;
+		if (pressedLU) type = 1;
+		if (pressedU) type = 2;
+		if (pressedUR) type = 3;
 
-        switch (type)
-        {
-        case 1:
-            d.type = Decision::Type::MOVE;
-            break;
-        case 2:
-            d.type = Decision::Type::SHOOT;
-            break;
-        case 3:
-            d.type = Decision::Type::SUICIDE;
-            break;
-        default:
-            break;
-        }
+		switch (type)
+		{
+		case 1:
+			d.type = Decision::Type::MOVE;
+			break;
+		case 2:
+			d.type = Decision::Type::SHOOT;
+			break;
+		case 3:
+			d.type = Decision::Type::SUICIDE;
+			break;
+		default:
+			break;
+		}
 
-        if (type == 1 || type == 2)
-        {
-            const std::vector<Node*>* const nodes = my_node->GetConstConnections();
-            const size_t n = nodes->size();
+		if (type == 1 || type == 2)
+		{
+			const std::vector<Node*>* const nodes = my_node->GetConstConnections();
+			const size_t n = nodes->size();
 
-            std::cout << "\n\n DANCE!";
+			std::cout << "\n\n DANCE!";
 
-            bool danceMoves = false;
-            bool canMove = false;
+			bool danceMoves = false;
+			bool canMove = false;
 
-            while (!danceMoves)
-            {
-                RefreshInputAndScreen();
+			while (!danceMoves)
+			{
+				RefreshInputAndScreen();
 
-                if (!danceMat->IsKeyDown(DanceMatButtons::LEFT_UP) && !danceMat->IsKeyDown(DanceMatButtons::UP) && !danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT))
-                    canMove = true;
+				if (!danceMat->IsKeyDown(DanceMatButtons::LEFT_UP) && !danceMat->IsKeyDown(DanceMatButtons::UP) && !danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT))
+					canMove = true;
 
-                if (!canMove)
-                    continue;
+				if (!canMove)
+					continue;
 
-                bool moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
-                bool moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
-                bool moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
-                bool moveL = danceMat->IsKeyDown(DanceMatButtons::LEFT);
+				bool moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
+				bool moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
+				bool moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
+				bool moveL = danceMat->IsKeyDown(DanceMatButtons::LEFT);
 
-                bool moveUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
-                bool moveRD = danceMat->IsKeyDown(DanceMatButtons::RIGHT_DOWN);
-                bool moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
-                bool moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
+				bool moveUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
+				bool moveRD = danceMat->IsKeyDown(DanceMatButtons::RIGHT_DOWN);
+				bool moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
+				bool moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
 
-                const int32_t x = my_node->GetPositionX();
-                const int32_t y = my_node->GetPositionY();
+				const int32_t x = my_node->GetPositionX();
+				const int32_t y = my_node->GetPositionY();
 
-                for (size_t i = 0; i < n; ++i)
-                {
-                    if (moveU)
-                    {
-                        if (nodes->at(i)->GetPositionX() == x && nodes->at(i)->GetPositionY() < y)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                    if (moveD)
-                    {
-                        if (nodes->at(i)->GetPositionX() == x && nodes->at(i)->GetPositionY() > y)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                    if (moveL)
-                    {
-                        if (nodes->at(i)->GetPositionX() < x && nodes->at(i)->GetPositionY() >= y - 2 && nodes->at(i)->GetPositionY() <= y + 2)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                    if (moveR)
-                    {
-                        if (nodes->at(i)->GetPositionX() > x && nodes->at(i)->GetPositionY() >= y - 2 && nodes->at(i)->GetPositionY() <= y + 2)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
+				for (size_t i = 0; i < n; ++i)
+				{
+					Node* const node = (*nodes)[i];
 
-                    if (moveUR)
-                    {
-                        if (nodes->at(i)->GetPositionX() > x && nodes->at(i)->GetPositionY() < y)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                    if (moveRD)
-                    {
-                        if (nodes->at(i)->GetPositionX() > x && nodes->at(i)->GetPositionY() > y)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                    if (moveDL)
-                    {
-                        if (nodes->at(i)->GetPositionX() < x && nodes->at(i)->GetPositionY() > y)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                    if (moveLU)
-                    {
-                        if (nodes->at(i)->GetPositionX() < x && nodes->at(i)->GetPositionY() < y)
-                        {
-                            d.target = nodes->at(i);
-                            danceMoves = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+					if (moveU)
+					{
+						if (node->GetPositionX() == x && node->GetPositionY() < y)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+					if (moveD)
+					{
+						if (node->GetPositionX() == x && node->GetPositionY() > y)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+					if (moveL)
+					{
+						if (node->GetPositionX() < x && node->GetPositionY() >= y - 2 && node->GetPositionY() <= y + 2)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+					if (moveR)
+					{
+						if (node->GetPositionX() > x && node->GetPositionY() >= y - 2 && node->GetPositionY() <= y + 2)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
 
-        bool moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
-        bool moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
-        bool moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
-        bool moveL = danceMat->IsKeyDown(DanceMatButtons::LEFT);
+					if (moveUR)
+					{
+						if (node->GetPositionX() > x && node->GetPositionY() < y)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+					if (moveRD)
+					{
+						if (node->GetPositionX() > x && node->GetPositionY() > y)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+					if (moveDL)
+					{
+						if (node->GetPositionX() < x && node->GetPositionY() > y)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+					if (moveLU)
+					{
+						if (node->GetPositionX() < x && node->GetPositionY() < y)
+						{
+							d.target = node;
+							danceMoves = true;
+							break;
+						}
+					}
+				}
+			}
+		}
 
-        bool moveUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
-        bool moveRD = danceMat->IsKeyDown(DanceMatButtons::RIGHT_DOWN);
-        bool moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
-        bool moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
+		bool moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
+		bool moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
+		bool moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
+		bool moveL = danceMat->IsKeyDown(DanceMatButtons::LEFT);
 
-        while (	moveU || moveD || moveL || moveR ||
-                moveUR || moveDL || moveLU || moveRD)
-        {
-            RefreshInputAndScreen();
+		bool moveUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
+		bool moveRD = danceMat->IsKeyDown(DanceMatButtons::RIGHT_DOWN);
+		bool moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
+		bool moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
 
-            moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
-            moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
-            moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
-            moveL = danceMat->IsKeyDown(DanceMatButtons::LEFT);
+		while (moveU || moveD || moveL || moveR ||
+			moveUR || moveDL || moveLU || moveRD)
+		{
+			RefreshInputAndScreen();
 
-            moveUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
-            moveRD = danceMat->IsKeyDown(DanceMatButtons::RIGHT_DOWN);
-            moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
-            moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
-        }
+			moveU = danceMat->IsKeyDown(DanceMatButtons::UP);
+			moveR = danceMat->IsKeyDown(DanceMatButtons::RIGHT);
+			moveD = danceMat->IsKeyDown(DanceMatButtons::DOWN);
+			moveL = danceMat->IsKeyDown(DanceMatButtons::LEFT);
 
-        return d;
-    }
+			moveUR = danceMat->IsKeyDown(DanceMatButtons::UP_RIGHT);
+			moveRD = danceMat->IsKeyDown(DanceMatButtons::RIGHT_DOWN);
+			moveDL = danceMat->IsKeyDown(DanceMatButtons::DOWN_LEFT);
+			moveLU = danceMat->IsKeyDown(DanceMatButtons::LEFT_UP);
+		}
 
-    Decision d;
-    std::cout << "Round: #" << (int)game->GetCurrentRoundID() << std::endl;
-    std::cout << "Player: " << name << std::endl;
-    std::cout << " 1 - move \n 2 - shoot \n 3 - suicide \n";
+		return d;
+	}
 
-    uint8_t type = 0;
+	Decision d;
+	std::cout << "Round: #" << (int)game->GetCurrentRoundID() << std::endl;
+	std::cout << "Player: " << name << std::endl;
+	std::cout << " 1 - move \n 2 - shoot \n 3 - suicide \n";
 
-    bool pressed1 = false;
-    bool pressed2 = false;
-    bool pressed3 = false;
+	uint8_t type = 0;
 
-    while (!pressed1 && !pressed2 && !pressed3) 
-    {
-        RefreshInputAndScreen();
+	bool pressed1 = false;
+	bool pressed2 = false;
+	bool pressed3 = false;
 
-        pressed1 = keyboard->IsKeyDown(KeyboardButtons::K1);
-        pressed2 = keyboard->IsKeyDown(KeyboardButtons::K2);
-        pressed3 = keyboard->IsKeyDown(KeyboardButtons::K3);
+	while (!pressed1 && !pressed2 && !pressed3)
+	{
+		RefreshInputAndScreen();
 
-        if (keyboard->IsKeyDown(KeyboardButtons::ESCAPE)) {
-            game->ForceQuit();
-            d.type = Decision::Type::SUICIDE;
-            break;
-        }
-    }
+		pressed1 = keyboard->IsKeyDown(KeyboardButtons::K1);
+		pressed2 = keyboard->IsKeyDown(KeyboardButtons::K2);
+		pressed3 = keyboard->IsKeyDown(KeyboardButtons::K3);
 
-    if (pressed1) type = 1;
-    if (pressed2) type = 2;
-    if (pressed3) type = 3;
+		if (keyboard->IsKeyDown(KeyboardButtons::ESCAPE)) {
+			game->ForceQuit();
+			d.type = Decision::Type::SUICIDE; // TODO: don't suicide on exit?
+			break;
+		}
+	}
 
-    switch (type)
-    {
-    case 1:
-        d.type = Decision::Type::MOVE;
-        break;
-    case 2:
-        d.type = Decision::Type::SHOOT;
-        break;
-    case 3:
-        d.type = Decision::Type::SUICIDE;
-        break;
-    default:
-        break;
-    }
+	if (pressed1) type = 1;
+	if (pressed2) type = 2;
+	if (pressed3) type = 3;
 
-    if (type == 1 || type == 2)
-    {
-        const std::vector<Node*>* const nodes = my_node->GetConstConnections();
-        const size_t n = nodes->size();
+	switch (type)
+	{
+	case 1:
+		d.type = Decision::Type::MOVE;
+		break;
+	case 2:
+		d.type = Decision::Type::SHOOT;
+		break;
+	case 3:
+		d.type = Decision::Type::SUICIDE;
+		break;
+	default:
+		break;
+	}
 
-        std::cout << "\n\nselect node!";
+	if (type == 1 || type == 2)
+	{
+		const std::vector<Node*>* const nodes = my_node->GetConstConnections();
+		const size_t n = nodes->size();
 
- /*       std::cout << "\n";
+		std::cout << "\n\nselect node!";
 
-        for (size_t i = 0; i < n; ++i)
-        {
-            std::cout << i << " Id:" << (*nodes)[i]->GetId() << " X:" << (*nodes)[i]->GetPositionX() << " Y:" << (*nodes)[i]->GetPositionY() << std::endl;
-        }
+		/*std::cout << "\n";
 
-        uint8_t target;
+		for (size_t i = 0; i < n; ++i)
+		{
+			std::cout << i << " Id:" << (*nodes)[i]->GetId() << " X:" << (*nodes)[i]->GetPositionX() << " Y:" << (*nodes)[i]->GetPositionY() << std::endl;
+		}
 
-        bool targetSelected = false;
-        while (!targetSelected)
-        {
-            RefreshInputAndScreen();
+		uint8_t target;
 
-            for (size_t i = 0; i < n; ++i)
-            {
-                targetSelected = keyboard->IsKeyDown((uint8_t)i);
-                if (targetSelected)
-                {
-                    target = i;
-                    break;
-                }
-            }
-        }
-*/
-    bool click = false;
-    SDL_Event e;
-    static const int32_t nodeCircleRadius = (screen_height / 16);
+		bool targetSelected = false;
+		while (!targetSelected)
+		{
+			RefreshInputAndScreen();
 
-    while (!click)
-    {
-        RefreshInputAndScreen();
+			for (size_t i = 0; i < n; ++i)
+			{
+				targetSelected = keyboard->IsKeyDown((uint8_t)i);
+				if (targetSelected)
+				{
+					target = i;
+					break;
+				}
+			}
+		}*/
 
-        while (SDL_PollEvent(&e))
-        {
-            if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
-            {
-                int32_t x, y;
-                SDL_GetMouseState(&x, &y);
+		bool click = false;
+		SDL_Event e;
+		static const int32_t nodeCircleRadius = (screen_height / 16);
 
-                for (size_t i = 0; i < n; ++i)
-                {
-                    if (x >= nodes->at(i)->GetPositionX() - nodeCircleRadius && x <= nodes->at(i)->GetPositionX() + nodeCircleRadius &&
-                        y >= nodes->at(i)->GetPositionY() - nodeCircleRadius && y <= nodes->at(i)->GetPositionY() + nodeCircleRadius)
-                    {
-                        d.target = nodes->at(i);
-                        click = true;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-   //     d.target = (*nodes)[target];
-   }
+		while (!click)
+		{
+			RefreshInputAndScreen();
 
-    return d;
+			while (SDL_PollEvent(&e))
+			{
+				if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+				{
+					int32_t x, y;
+					SDL_GetMouseState(&x, &y);
+
+					for (size_t i = 0; i < n; ++i)
+					{
+						Node* const node = (*nodes)[i];
+						const int32_t nodePositionX = node->GetPositionX();
+						const int32_t nodePositionY = node->GetPositionY();
+
+						if (x >= nodePositionX - nodeCircleRadius && x <= nodePositionX + nodeCircleRadius &&
+							y >= nodePositionY - nodeCircleRadius && y <= nodePositionY + nodeCircleRadius)
+						{
+							d.target = node;
+							click = true;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		//d.target = (*nodes)[target];
+	}
+
+	return d;
 }
 
 void HumanPlayer::clear() const
 {
 #ifdef _WIN32
-    system("cls");
+	system("cls");
 #else
-    system("clear");
+	system("clear");
 #endif
 }

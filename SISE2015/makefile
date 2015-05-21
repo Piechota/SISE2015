@@ -1,7 +1,7 @@
 # this is a simple makefile
 CXX = g++
 #CXXLAGS = -Wall -std=c++11
-CXXLAGS = -std=c++11
+CXXLAGS = -std=c++11 -O3
 
 # rules
 

@@ -163,7 +163,7 @@ void GameController::SubmitPlayer(Player* const player)
     pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
     (*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
 
-    printf("%s's pawn spawned at node %d\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
+    printf("%s's pawn spawned at node %u\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
 }
 
 Pawn* GameController::GetCurrentPawn() const 
@@ -236,11 +236,11 @@ void GameController::Turn()
                 pPlayer->pawn->SetNode(targetNode);
                 targetNode->SetPawn(pPlayer->pawn);
 
-                printf("%s moved to %d\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
+                printf("%s moved to %u\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
             }
             else
             {
-                printf("%s can't move to %d\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
+                printf("%s can't move to %u\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
             }
         }
     }
@@ -319,7 +319,7 @@ void GameController::EndTurn()
             {
 				if (players[i]->pawn->isAlive)
 				{
-					printf("s% (%d)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
+					printf("%s (%u)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
 				}
             }
         }

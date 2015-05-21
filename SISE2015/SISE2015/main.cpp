@@ -48,8 +48,7 @@ void CloseSDL()
 
 int main(int argc, char* args[])
 {
-
-    void *theEnv;
+    void* theEnv;
     theEnv = __CreateEnvironment();
      __EnvBuild(theEnv,"(defrule hello"
     "   =>"
@@ -57,10 +56,8 @@ int main(int argc, char* args[])
     "  (readline))"
     );
     __EnvReset(theEnv);
-
     __EnvRun(theEnv, -1);
     __DestroyEnvironment(theEnv);
-
 
     if (!InitSDL(480, 480))
     {
@@ -70,7 +67,7 @@ int main(int argc, char* args[])
     danceMat = new DanceMat();
     audio = new Audio();
     keyboard = new Keyboard();
-	fuzzyEngine = new fl::Engine("fuzzy-engine");
+	//fuzzyEngine = new fl::Engine("fuzzy-engine");
     game = new GameController();
     game->Init();
 

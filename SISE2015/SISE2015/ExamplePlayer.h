@@ -6,7 +6,7 @@
 class ExamplePlayer : public Player
 {
 public:
-	ExamplePlayer(const std::string name, const Colour color);
+	ExamplePlayer(const std::string& name, const Colour& color);
 	ExamplePlayer(const ExamplePlayer& other);
 
 	virtual DecisionInfo ProcessAI(const GraphInfo* const grapthInfo, const Pawn* const myPawn) override;

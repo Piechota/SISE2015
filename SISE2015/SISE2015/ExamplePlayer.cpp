@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-ExamplePlayer::ExamplePlayer(const std::string name, const Colour color) : Player(name, color)
+ExamplePlayer::ExamplePlayer(const std::string& name, const Colour& color) : Player(name, color)
 {
 
 }
