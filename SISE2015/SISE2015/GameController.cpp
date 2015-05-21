@@ -145,14 +145,14 @@ void GameController::MainLoop()
 void GameController::SubmitPlayer(Player* const player)
 {
     players[numberOfPlayers] = new PlayerInfo();
-    PlayerInfo* pPlayer = players[numberOfPlayers];
+    PlayerInfo* const pPlayer = players[numberOfPlayers];
 
     pPlayer->player = player;
     pPlayer->pawn = new Pawn();
     pPlayer->pawn->color = player->GetColor();
 
 	stats->AddPlayer(player);
-    printf("Submitted new player: %s (%d)\n", pPlayer->player->GetName().c_str(), numberOfPlayers);
+    printf("Submitted new player: %s (%u)\n", pPlayer->player->GetName().c_str(), numberOfPlayers);
 
     numberOfPlayers++;
 

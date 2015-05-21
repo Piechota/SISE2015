@@ -3,6 +3,8 @@
 
 #include "Headers.h"
 
+#define MAX_PLAYERS 6
+
 class Stats;
 
 class GameController
@@ -32,7 +34,7 @@ public:
     Pawn* GetCurrentPawn() const;
 
 private:
-    PlayerInfo* players[6];
+	PlayerInfo* players[MAX_PLAYERS];
     Pawn* currentPawn;
     Graph* graph;
     Graph* currentGraph;
