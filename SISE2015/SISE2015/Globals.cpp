@@ -3,6 +3,7 @@
 #include "Colour.h"
 #include "GameController.h"
 #include <SDL.h>
+#include <fl\Headers.h>
 
 uint16_t screen_width;
 uint16_t screen_height;
@@ -14,6 +15,8 @@ DanceMat* danceMat;
 Audio* audio;
 Keyboard* keyboard;
 GameController* game;
+
+fl::Engine* fuzzyEngine;
 
 uint32_t lastTime = 0;
 uint32_t currentTime = 0;

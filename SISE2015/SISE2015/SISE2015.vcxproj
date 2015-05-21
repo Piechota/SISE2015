@@ -50,7 +50,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\libs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;CLIPSDynamic32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>fuzzylited.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;CLIPSDynamic32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

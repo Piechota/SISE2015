@@ -21,6 +21,12 @@ extern Audio* audio;
 extern Keyboard* keyboard;
 extern GameController* game;
 
+namespace fl
+{
+	class Engine;
+}
+extern fl::Engine* fuzzyEngine;
+
 void RefreshInputAndScreen();
 
 #ifdef _MSC_VER
