@@ -25,6 +25,7 @@
 
 #include "Player.h"
 #include "ExamplePlayer.h"
+#include "CLIPSPlayer.h"
 #include "HumanPlayer.h"
 #include "Stats.h"
 #include "GameController.h"

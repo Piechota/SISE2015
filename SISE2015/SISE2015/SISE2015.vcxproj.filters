@@ -27,6 +27,8 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Colour.cpp" />
+    <ClCompile Include="CLIPSPlayer.cpp" />
+    <ClCompile Include="clipscpplib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -55,6 +57,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Colour.h" />
+    <ClInclude Include="CLIPSPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

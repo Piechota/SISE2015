@@ -46,11 +46,12 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\libs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\..\libs\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;CLIPSDynamic32.lib;fuzzylite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;CLIPSDynamic32.lib;fuzzylite.lib;CLIPSStatic32.lib;CLIPSWrapper32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -78,6 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="clipscpplib.cpp" />
+    <ClCompile Include="CLIPSPlayer.cpp" />
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="DanceMat.cpp" />
     <ClCompile Include="ExamplePlayer.cpp" />
@@ -96,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="CLIPSPlayer.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="DanceMat.h" />
     <ClInclude Include="ExamplePlayer.h" />

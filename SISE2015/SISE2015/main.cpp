@@ -1,8 +1,4 @@
 #include "Headers.h"
-extern "C"
-{
-#include "CLIPSDLL.h"
-}
 
 bool InitSDL(const int& w, const int& h)
 {
@@ -48,18 +44,7 @@ void CloseSDL()
 
 int main(int argc, char* args[])
 {
-    void* theEnv;
-    theEnv = __CreateEnvironment();
-     __EnvBuild(theEnv,"(defrule hello"
-    "   =>"
-    "  (printout t \"I guess CLIPS kinda works. But I have no idea how to actually use it.\" crlf)"
-    "  (readline))"
-    );
-    __EnvReset(theEnv);
-    __EnvRun(theEnv, -1);
-    __DestroyEnvironment(theEnv);
-
-    if (!InitSDL(480, 480))
+    if (!InitSDL(600, 600))
     {
         return 1;
     }

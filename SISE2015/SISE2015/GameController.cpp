@@ -66,7 +66,7 @@ void GameController::NextRound()
 
     SubmitPlayer(new HumanPlayer("gracz #1", Colours::blue));
     SubmitPlayer(new HumanPlayer("gracz #2", Colours::red));
-    SubmitPlayer(new HumanPlayer("gracz #3", Colours::white));
+    SubmitPlayer(new CLIPSPlayer("gracz #3", Colours::white));
 }
 
 GameController::~GameController()
