@@ -14,7 +14,7 @@ CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
 {
 	CLIPS::CLIPSCPPEnv theEnv;
-	theEnv.Load("Behaviour/students.clp");
+	theEnv.Load("../Behaviour/spierek.clp");
 	theEnv.Reset();
 	theEnv.Run(-1);
 
