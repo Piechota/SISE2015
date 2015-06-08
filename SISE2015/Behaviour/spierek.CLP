@@ -1,23 +1,26 @@
-(deffacts Student "Student Info"
-	(Student Adam 24 M)
-	(Student Rob 19 M)
-	(Student Mark 22 M)
-	(Student Anya 23 F)
-	(Student Martha 21 F)
+;name, surname, ID
+(deffacts Clients
+	(Client Jan Kowalski 1)
+	(Client Marcin Wawoz 2)
+	(Client Jan Kowalski 3)
+	(Client Adam Temp 5)
+	(Client Bartlomiej Test 6)
 )
 
-(printout t "Female students:" crlf)
-(defrule checkFemale "Print out all female students"
-	(Student ?SName ?SAge ?SGender)
-	(test (eq ?SGender F))
-	=>
-	(printout t ?SName " " ?SAge " " ?SGender crlf)
+;name, ID
+(deffacts Shipments
+	(Shipment Nails 1)
+	(Shipment Hammers 2)
+	(Shipment Screws 3)
+	(Shipment Paint 4)
+	(Shipment Wood 5)
 )
 
-(printout t "Students over age 21:" crlf)
-(defrule checkAge "Checks if the student's age is over 21"
-	(Student ?SName ?SAge ?SGender)
-	(test (> ?SAge 21))
+;test assertion
+(defrule assertOrders "Combine Clients and Shipments into Orders"
+	(Client ?cName ?cSurname ?cID)
+	(Shipment ?sName ?sID)
+	(test (eq ?cID ?sID))
 	=>
-	(printout t ?SName " " ?SAge crlf)
+	(assert (Order ?cName ?sName))
 )

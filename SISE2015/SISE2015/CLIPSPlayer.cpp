@@ -14,9 +14,17 @@ CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
 {
 	CLIPS::CLIPSCPPEnv theEnv;
+	CLIPS::DataObject dataObject;
+	char* text = "";
+
 	theEnv.Load("../Behaviour/spierek.clp");
 	theEnv.Reset();
 	theEnv.Run(-1);
+	dataObject = theEnv.Eval("(facts)");
+	dataObject.String(text);
+
+	printf(text);
+	//getchar();
 
 	//throw 0;
 	Decision dec;
