@@ -168,6 +168,22 @@ DataObject CLIPSCPPEnv::Eval(
      
    return ConvertDataObject(theEnv,&rv);
   }
+
+
+/*****************/
+/* Assert String */
+/*****************/
+void* CLIPSCPPEnv::AssertString(
+	char *assertString)
+{
+#ifndef CLIPS_DLL_WRAPPER
+	return EnvAssertString(theEnv, assertString);
+#else
+	return __EnvAssertString(theEnv, assertString);
+#endif
+}
+
+
   
 /*********************/
 /* ConvertDataObject */

@@ -20,11 +20,12 @@ DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn
 	theEnv.Load("../Behaviour/spierek.clp");
 	theEnv.Reset();
 	theEnv.Run(-1);
+	theEnv.AssertString("(Shipment Wood 6)");
 	dataObject = theEnv.Eval("(facts)");
 	dataObject.String(text);
 
 	printf(text);
-	//getchar();
+	getchar();
 
 	//throw 0;
 	Decision dec;
