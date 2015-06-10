@@ -39,6 +39,9 @@ class CLIPSCPPEnv
       DataObject Eval(char *);
       bool Build(char *);
       int AddRouter(char *,int,CLIPSCPPRouter *);
+
+	  void* AssertString(char *);
+
   };
 
 class CLIPSCPPRouter
