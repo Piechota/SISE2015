@@ -2,3 +2,13 @@ dane do logiki first-order:
 - każde pole ma informacje o tym jak daleko jest każdy gracz
 - gracz dostaje wszytkie pola grafu wraz z indexami sąsiadów
 - informacje o tym którym graczem jest aktulna logika
+- kolor tła
+
+taski:
+- Łukasz Nizik - fuzzy light
+- Łukasz Spierewka - Clips
+- Filip Wróbel - Dane wejściowe, 
+- Filip Wiechowski - unicorn/particle, SFX, FX
+- Michał Pryczek - unicorn dance
+- Mateusz Lewandowski -  dodanie sleep'a, wizualizacja gameplay'u, przykładowy skrypt clips'owy
+- Konrad Piechota - Naprawa fuzzy light
