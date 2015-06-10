@@ -1,9 +1,9 @@
 #include "Headers.h"
 #include "clipscpp.h"
 
-CLIPSPlayer::CLIPSPlayer(const std::string& name, const Colour& color) : Player(name, color)
+CLIPSPlayer::CLIPSPlayer(const std::string& name, const Colour& color, char* file) : Player(name, color)
 {
-
+	AIfile = file;
 }
 
 CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
@@ -17,7 +17,7 @@ DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn
 	CLIPS::DataObject dataObject;
 	char* text = "";
 
-	theEnv.Load("../Behaviour/spierek.clp");
+	theEnv.Load(AIfile);
 	theEnv.Reset();
 	theEnv.Run(-1);
 	theEnv.AssertString("(Shipment Wood 6)");
