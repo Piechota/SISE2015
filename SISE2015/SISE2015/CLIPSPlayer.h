@@ -2,6 +2,7 @@
 #define _CLIPSPLAYER_H_
 
 #include "Headers.h"
+#include "clipscpp.h"
 
 class CLIPSPlayer : public Player
 {
@@ -10,6 +11,8 @@ public:
 	CLIPSPlayer(const CLIPSPlayer& other);
 
 	char* AIfile;
+	CLIPS::CLIPSCPPEnv theEnv;
+	CLIPS::DataObject dataObject;
 
 	virtual DecisionInfo ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn) override;
 };

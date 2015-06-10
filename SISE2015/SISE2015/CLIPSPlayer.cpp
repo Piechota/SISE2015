@@ -1,5 +1,4 @@
-#include "Headers.h"
-#include "clipscpp.h"
+#include "CLIPSPlayer.h"
 
 CLIPSPlayer::CLIPSPlayer(const std::string& name, const Colour& color, char* file) : Player(name, color)
 {
@@ -13,20 +12,24 @@ CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 
 DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
 {
-	CLIPS::CLIPSCPPEnv theEnv;
-	CLIPS::DataObject dataObject;
-	char* text = "";
-
+	// load data (rules), reset and run
 	theEnv.Load(AIfile);
 	theEnv.Reset();
 	theEnv.Run(-1);
+	
+	// assert new facts
 	theEnv.AssertString("(Shipment Wood 6)");
-	dataObject = theEnv.Eval("(facts)");
-	dataObject.String(text);
 
+	// evaluate (run all rules)
+	dataObject = theEnv.Eval("(facts)");
+
+	// display info
+	char* text = "";
+	dataObject.String(text);
 	printf(text);
 	getchar();
 
+	// old decision making
 	//throw 0;
 	Decision dec;
 	//dec.type = (Decision::Type) ((rand() % 10 + time(NULL) % 25) % (int)(Decision::COUNT));

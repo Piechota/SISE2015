@@ -65,7 +65,8 @@ void GameController::NextRound()
 	currentGraph->Generate();
 
     SubmitPlayer(new HumanPlayer("gracz #1", Colours::blue));
-    SubmitPlayer(new CLIPSPlayer("gracz #2", Colours::white, "../Behaviour/spierek.clp"));
+	SubmitPlayer(new CLIPSPlayer("gracz #2", Colours::white, "../Behaviour/spierek.clp"));
+	SubmitPlayer(new CLIPSPlayer("gracz #3", Colours::green, "../Behaviour/spierek_test.clp"));
 }
 
 GameController::~GameController()
