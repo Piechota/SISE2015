@@ -52,7 +52,7 @@ int main(int argc, char* args[])
     danceMat = new DanceMat();
     audio = new Audio();
     keyboard = new Keyboard();
-	//fuzzyEngine = new fl::Engine("fuzzy-engine");
+	fuzzyEngine = new fl::Engine("fuzzy-engine");
     game = new GameController();
     game->Init();
 
