@@ -84,6 +84,7 @@
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="DanceMat.cpp" />
     <ClCompile Include="ExamplePlayer.cpp" />
+    <ClCompile Include="FuzzyPlayer.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Graph.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="Colour.h" />
     <ClInclude Include="DanceMat.h" />
     <ClInclude Include="ExamplePlayer.h" />
+    <ClInclude Include="FuzzyPlayer.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graph.h" />
