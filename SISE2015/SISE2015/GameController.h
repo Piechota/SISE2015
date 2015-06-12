@@ -9,7 +9,7 @@ class Stats;
 
 class GameController
 {
-private:
+public:
     struct PlayerInfo
     {
         DecisionInfo currentDecision;

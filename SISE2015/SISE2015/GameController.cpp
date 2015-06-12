@@ -180,6 +180,14 @@ void GameController::StartTurn()
 {
     printf("\nStart phase started (%d)\n", turns);
 
+	uint32_t* playerNodeIds = new uint32_t[this->numberOfPlayers];
+	for (uint32_t i = 0; i < numberOfPlayers; ++i)
+	{
+		playerNodeIds[i] = this->players[i]->pawn->GetNode()->GetId();
+	}
+
+	std::vector<NodeInfo> turnGrapthInfo = this->currentGraph->GenerateNodesForLogic(playerNodeIds, this->numberOfPlayers);
+
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         PlayerInfo* const currentPlayer = players[i];

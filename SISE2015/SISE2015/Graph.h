@@ -2,8 +2,21 @@
 #define _GRAPH_H_
 
 #include <vector>
+#include <queue>
 #include "Globals.h"
 #include "Node.h"
+
+struct NodeInfo
+{
+public:
+	NodeInfo(uint32_t myId)
+	{
+		this->myId = myId;
+	}
+	uint32_t myId;
+	std::vector<uint32_t> distanceToPlayers;
+	std::vector<uint32_t> neighborIds;
+};
 
 class Graph
 {
@@ -20,6 +33,8 @@ public:
 	Node* GetNodeById(const uint32_t id) const;
 	uint32_t GetDepth() const;
 	uint32_t GetPlayers() const;
+	uint32_t GetNodeCount() const;
+	std::vector<NodeInfo> GenerateNodesForLogic(uint32_t* playerNodeIds, uint32_t playerCount);
 
 private:
 	std::vector<Node*> nodes;
@@ -27,7 +42,7 @@ private:
 	uint32_t depth;
 	uint32_t players;
 
-	static uint32_t nodeIdCounter;
+	uint32_t nodeIdCounter;
 };
 
 FORCEINLINE std::vector<Node*>* Graph::GetNodes()
@@ -74,5 +89,7 @@ FORCEINLINE uint32_t Graph::GetPlayers() const
 {
 	return players;
 }
+
+
 
 #endif

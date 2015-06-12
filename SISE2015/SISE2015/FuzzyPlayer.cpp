@@ -41,8 +41,7 @@ FuzzyPlayer::~FuzzyPlayer()
 	delete engine;
 }
 
-DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
+DecisionInfo FuzzyPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
 {
-
-
+	return Decision();
 }

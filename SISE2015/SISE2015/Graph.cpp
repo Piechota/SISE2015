@@ -2,12 +2,11 @@
 #include <stdio.h>
 #include <math.h>
 
-uint32_t Graph::nodeIdCounter = 0;
-
 Graph::Graph(const uint32_t depth, const uint32_t players)
 {
 	this->depth = depth;
 	this->players = players;
+	this->nodeIdCounter = 0;
 }
 
 Graph::Graph(const Graph& other)
@@ -16,6 +15,7 @@ Graph::Graph(const Graph& other)
 	root = other.GetRoot();
 	depth = other.GetDepth();
 	players = other.GetPlayers();
+	this->nodeIdCounter = other.nodeIdCounter;
 }
 
 Graph& Graph::operator=(const Graph& other)
@@ -26,6 +26,7 @@ Graph& Graph::operator=(const Graph& other)
 		root = other.GetRoot();
 		depth = other.GetDepth();
 		players = other.GetPlayers();
+		this->nodeIdCounter = other.nodeIdCounter;
 	}
 
 	return *this;
@@ -43,6 +44,12 @@ Graph::~Graph()
 	}
 
 	root = nullptr;
+}
+
+
+uint32_t Graph::GetNodeCount() const
+{
+	return this->nodeIdCounter;
 }
 
 void Graph::Generate()
@@ -90,7 +97,7 @@ void Graph::Generate()
 			nodeX = newNodeX;
 			nodeY = newNodeY;
 
-			Node* const node = new Node(Graph::nodeIdCounter++, newNodeX, newNodeY);
+			Node* const node = new Node(this->nodeIdCounter++, newNodeX, newNodeY);
 			nodes.push_back(node);
 		}
 
@@ -117,4 +124,80 @@ void Graph::Generate()
 
 		currDistance += distance;
 	}
+}
+
+
+std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint32_t playerCount)
+{
+	uint32_t nodeCount = this->GetNodeCount();
+	std::vector<Node*>* tmpNodes;
+	std::vector<NodeInfo> resultInfos;
+	std::vector<Node*>* tmpNeighbors = nullptr;
+
+	tmpNodes = this->GetNodes();
+
+	for (uint32_t i = 0; i < nodeCount; ++i)
+	{
+		resultInfos.push_back(NodeInfo((*tmpNodes)[i]->GetId()));
+		tmpNeighbors = (*tmpNodes)[i]->GetConnections();
+		uint32_t neightborCount = tmpNeighbors->size();
+		for (uint32_t j = 0; j < neightborCount; ++j)
+		{
+			resultInfos[i].neighborIds.push_back((*tmpNeighbors)[j]->GetId());
+		}
+		for (uint32_t j = 0; j < playerCount; ++j)
+		{
+			resultInfos[i].distanceToPlayers.push_back(-1);
+		}
+	}
+
+	bool* visited = new bool[nodeCount];
+	std::queue<Node*> toVisit;
+
+	uint32_t tmpPlayerNodeId = -1;
+	for (uint32_t playerIndex = 0; playerIndex < playerCount; tmpPlayerNodeId = ++playerIndex)
+	{
+		for (uint32_t i = 0; i < nodeCount; ++i)
+		{
+			visited[i] = false;
+			resultInfos[i].distanceToPlayers[playerIndex] = -1;
+		}
+		uint32_t startingIndex = playerNodeIds[playerIndex];
+		
+		Node* currentNode;
+		
+		resultInfos[startingIndex].distanceToPlayers[playerIndex] = 0;
+		toVisit.push((*tmpNodes)[startingIndex]);
+		visited[startingIndex] = true;
+
+		while (!toVisit.empty())
+		{
+			currentNode = toVisit.front();
+			toVisit.pop();
+
+			uint32_t currentId = currentNode->GetId();
+			uint32_t currentDistance = resultInfos[currentId].distanceToPlayers[playerIndex];
+			tmpNeighbors = currentNode->GetConnections();
+			uint32_t neighborCount = tmpNeighbors->size();
+			for (uint32_t i = 0; i < neighborCount; ++i)
+			{
+				uint32_t tmpId = (*tmpNeighbors)[i]->GetId();
+				//resultInfos[currentId].neighborIds.push_back(tmpId);
+				if (!visited[tmpId] || resultInfos[tmpId].distanceToPlayers[playerIndex] > currentDistance + 1)
+				{
+					resultInfos[tmpId].distanceToPlayers[playerIndex] = currentDistance + 1;
+				}
+
+				if (!visited[tmpId])
+				{
+					visited[tmpId] = true;
+					toVisit.push((*tmpNeighbors)[i]);
+				}
+			}
+		}
+	}
+
+	delete[nodeCount] visited;
+
+	return resultInfos;
 }
