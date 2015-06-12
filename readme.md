@@ -1,5 +1,20 @@
 Tasklist:
 
+Milestone 101, 00001100.0110:
+
+	Lukasz Spierewka
+		- Clips - fixing
+	Filip Wrobel
+		- Dane wejœciowe(przetworzenie grafu)
+	Lukasz Nizik
+		- fuzzy light - fixing
+	Konrad Piechota
+		- Naprawa fuzzy light
+	Mateusz Lewandowski
+		- dodanie sleep'a, wizualizacja gameplay'u, przyk³adowy skrypt clips'owy
+	Filip Wiechowski
+		- unicorn/particle, SFX, FX
+
 Milestone 100, 00001111.0101:
 
 	Lukasz Spierewka
