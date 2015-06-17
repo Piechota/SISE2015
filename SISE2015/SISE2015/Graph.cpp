@@ -183,7 +183,7 @@ std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint
 			{
 				uint32_t tmpId = (*tmpNeighbors)[i]->GetId();
 				//resultInfos[currentId].neighborIds.push_back(tmpId);
-				if (!visited[tmpId] || resultInfos[tmpId].distanceToPlayers[playerIndex] > currentDistance + 1)
+				if (!visited[tmpId] || resultInfos[tmpId].distanceToPlayers[playerIndex] > currentDistance + 1 || resultInfos[tmpId].distanceToPlayers[playerIndex] == -1)
 				{
 					resultInfos[tmpId].distanceToPlayers[playerIndex] = currentDistance + 1;
 				}
