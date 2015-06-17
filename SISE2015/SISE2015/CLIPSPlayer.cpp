@@ -10,22 +10,30 @@ CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 
 }
 
-DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
-{
-	// load data (rules), reset and run
-	theEnv.Load(AIfile);
-	theEnv.Reset();
-	theEnv.Run(-1);
-	
-	// assert new facts
-	theEnv.AssertString("(Shipment Wood 6)");
+DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn) {
+	// load data (rules), reset
+	environment.Clear();
+	environment.Load(AIfile);
+	environment.Reset();
 
-	// evaluate (run all rules)
-	dataObject = theEnv.Eval("(facts)");
+	// assert new facts
+	environment.AssertString("(NodeA 1)");
+	environment.AssertString("(NodeA 2)");
+	environment.AssertString("(NodeA 3)");
+	environment.AssertString("(NodeB 1)");
+	environment.AssertString("(NodeB 3)");
+
+	// run & evaluate
+	//environment.Run(-1);
+	//dataObject = environment.Eval("(facts)");
+	dataObject = environment.FunctionCall("Add", "1 2");
+	//dataObject = environment.FunctionCall("Hypotenuse", "1 2");
+	//dataObject = environment.FunctionCall("ReturnSum", "");
 
 	// display info
 	char* text = "";
 	dataObject.String(text);
+	printf("\nDECISION: ");
 	printf(text);
 	getchar();
 

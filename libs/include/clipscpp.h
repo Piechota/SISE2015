@@ -41,7 +41,7 @@ class CLIPSCPPEnv
       int AddRouter(char *,int,CLIPSCPPRouter *);
 
 	  void* AssertString(char *);
-
+	  DataObject FunctionCall(char *, char *);
   };
 
 class CLIPSCPPRouter

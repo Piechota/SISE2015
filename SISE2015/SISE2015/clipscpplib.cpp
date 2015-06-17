@@ -183,6 +183,33 @@ void* CLIPSCPPEnv::AssertString(
 #endif
 }
 
+/*****************/
+/* Call Function */
+/*****************/
+DataObject CLIPSCPPEnv::FunctionCall(
+	char *functionName,
+	char *arguments)
+{
+	int rc;
+	DATA_OBJECT rv;
+
+#ifndef CLIPS_DLL_WRAPPER
+	rc = EnvFunctionCall(theEnv, functionName, arguments, &rv);
+#else
+	rc = __EnvFunctionCall(theEnv, functionName, arguments, &rv);
+#endif
+
+	if (rc == 0) {
+		std::string excStr = "Function Call: Invalid expression ";
+		excStr.append(functionName);
+		excStr.append(" ");
+		excStr.append(arguments);
+		throw std::logic_error(excStr);
+	}
+
+	return ConvertDataObject(theEnv, &rv);
+}
+
 
   
 /*********************/

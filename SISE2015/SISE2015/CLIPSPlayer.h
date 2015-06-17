@@ -11,7 +11,7 @@ public:
 	CLIPSPlayer(const CLIPSPlayer& other);
 
 	char* AIfile;
-	CLIPS::CLIPSCPPEnv theEnv;
+	CLIPS::CLIPSCPPEnv environment;
 	CLIPS::DataObject dataObject;
 
 	virtual DecisionInfo ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn) override;
