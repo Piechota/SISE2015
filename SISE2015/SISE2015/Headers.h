@@ -9,6 +9,7 @@
 #include <fstream>
 #include <map>
 #include <string>
+#include <fl/Headers.h>
 
 #include <SDL.h>
 #include <SDL_mixer.h>
@@ -27,12 +28,10 @@
 #include "ExamplePlayer.h"
 #include "CLIPSPlayer.h"
 #include "HumanPlayer.h"
+#include "FuzzyPlayer.h"
 #include "Stats.h"
 #include "GameController.h"
 
 #include "Renderer.h"
 #include "GraphRenderer.h"
-
-#include <fl/Headers.h>
-
 #endif

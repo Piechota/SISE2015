@@ -16,8 +16,6 @@ Audio* audio;
 Keyboard* keyboard;
 GameController* game;
 
-fl::Engine* fuzzyEngine;
-
 uint32_t lastTime = 0;
 uint32_t currentTime = 0;
 uint32_t deltaTime = 0;
