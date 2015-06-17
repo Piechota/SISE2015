@@ -174,7 +174,7 @@ DataObject CLIPSCPPEnv::Eval(
 /* Assert String */
 /*****************/
 void* CLIPSCPPEnv::AssertString(
-	char *assertString)
+	const char *assertString)
 {
 #ifndef CLIPS_DLL_WRAPPER
 	return EnvAssertString(theEnv, assertString);

@@ -40,7 +40,7 @@ class CLIPSCPPEnv
       bool Build(char *);
       int AddRouter(char *,int,CLIPSCPPRouter *);
 
-	  void* AssertString(char *);
+	  void* AssertString(const char *);
 	  DataObject FunctionCall(char *, char *);
   };
 

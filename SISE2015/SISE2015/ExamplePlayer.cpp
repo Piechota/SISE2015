@@ -10,7 +10,7 @@ ExamplePlayer::ExamplePlayer(const ExamplePlayer& other) : Player(other)
 	
 }
 
-DecisionInfo ExamplePlayer::ProcessAI(const GraphInfo* const grapthInfo, const Pawn* const myPawn)
+DecisionInfo ExamplePlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	//throw 0;
 	Decision dec;
@@ -20,5 +20,4 @@ DecisionInfo ExamplePlayer::ProcessAI(const GraphInfo* const grapthInfo, const P
 	std::vector<Node*>* connections = myNode->GetConnections();
 	dec.target = (*connections)[ (rand() % 12 + time(NULL) % 31) % (connections->size())];
 	return dec;
-	//return (Decision) ( (rand() % 10 + time(NULL) % 25 + grapthInfo ) % (int)(Decision::DECISION_COUNT) );
 }

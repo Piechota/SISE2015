@@ -10,18 +10,43 @@ CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 
 }
 
-DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn) {
+DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) {
 	// load data (rules), reset
 	environment.Clear();
 	environment.Load(AIfile);
 	environment.Reset();
 
-	// assert new facts
-	environment.AssertString("(NodeA 1)");
-	environment.AssertString("(NodeA 2)");
-	environment.AssertString("(NodeA 3)");
-	environment.AssertString("(NodeB 1)");
-	environment.AssertString("(NodeB 3)");
+	std::ostringstream oss;
+
+	// assert node info
+	for (uint32_t i = 0; i < graphInfo.size(); i++) {
+		// distance info
+		for (uint32_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a) {
+			oss.str("");
+			oss.clear();
+			oss << "(NodeDistance ";					// name
+			oss << i << " ";							// node ID
+			oss << a << " ";							// player ID
+			oss << graphInfo[i].distanceToPlayers[a];	// distance
+			oss << ")";
+
+			std::string& tmp = oss.str();
+			environment.AssertString(tmp.c_str());
+		}
+
+		// neighbor info
+		for (uint32_t a = 0; a < graphInfo[i].neighborIds.size(); ++a) {
+			oss.str("");
+			oss.clear();
+			oss << "(NodeNeighbor ";			// name
+			oss << i << " ";					// node ID
+			oss << graphInfo[i].neighborIds[a];	// neighbor ID
+			oss << ")";
+
+			std::string& tmp = oss.str();
+			environment.AssertString(tmp.c_str());
+		}
+	}
 
 	// run & evaluate
 	environment.Run(-1);

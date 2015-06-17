@@ -66,7 +66,7 @@ void GameController::NextRound()
 
     //SubmitPlayer(new HumanPlayer("gracz #1", Colours::blue));
 	SubmitPlayer(new CLIPSPlayer("gracz #2", Colours::white, "../Behaviour/spierek.clp"));
-	//SubmitPlayer(new CLIPSPlayer("gracz #3", Colours::green, "../Behaviour/spierek_test.clp"));
+	SubmitPlayer(new CLIPSPlayer("gracz #3", Colours::green, "../Behaviour/spierek_test.clp"));
 }
 
 GameController::~GameController()
@@ -186,7 +186,7 @@ void GameController::StartTurn()
 		playerNodeIds[i] = this->players[i]->pawn->GetNode()->GetId();
 	}
 
-	std::vector<NodeInfo> turnGrapthInfo = this->currentGraph->GenerateNodesForLogic(playerNodeIds, this->numberOfPlayers);
+	std::vector<NodeInfo> turnGraphInfo = this->currentGraph->GenerateNodesForLogic(playerNodeIds, this->numberOfPlayers);
 
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
@@ -200,7 +200,7 @@ void GameController::StartTurn()
 			{
                 //RenewData();
 				printf("%s is processing AI", currentPlayer->player->GetName().c_str());
-				currentPlayer->currentDecision = currentPlayer->player->ProcessAI(graph, currentPawn);
+				currentPlayer->currentDecision = currentPlayer->player->ProcessAI(turnGraphInfo, currentPawn);
 				stats->AddSurvival(currentPlayer->player);
             }
         }

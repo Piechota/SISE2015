@@ -35,7 +35,7 @@ public:
 	const Colour& GetColor() const;
 
 	//method called to launch thought process of the pawn, returns decision
-	virtual DecisionInfo ProcessAI(const GraphInfo* const grapthInfo, const Pawn* const myPawn) = 0;
+	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) = 0;
 
 protected:
     std::string name;

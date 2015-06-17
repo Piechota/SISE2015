@@ -14,7 +14,7 @@ public:
 	CLIPS::CLIPSCPPEnv environment;
 	CLIPS::DataObject dataObject;
 
-	virtual DecisionInfo ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn) override;
+	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
 };
 
 #endif

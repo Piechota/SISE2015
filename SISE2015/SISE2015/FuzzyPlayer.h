@@ -10,6 +10,6 @@ public:
 	FuzzyPlayer(const std::string& name, const Colour& color);
 	~FuzzyPlayer();
 
-	virtual DecisionInfo ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn) override;
+	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
 };
 

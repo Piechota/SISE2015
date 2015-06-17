@@ -41,7 +41,7 @@ FuzzyPlayer::~FuzzyPlayer()
 	delete engine;
 }
 
-DecisionInfo FuzzyPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn* const myPawn)
+DecisionInfo FuzzyPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	return Decision();
 }
