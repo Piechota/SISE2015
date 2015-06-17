@@ -24,11 +24,8 @@ DecisionInfo CLIPSPlayer::ProcessAI(const GraphInfo* const graphInfo, const Pawn
 	environment.AssertString("(NodeB 3)");
 
 	// run & evaluate
-	//environment.Run(-1);
-	//dataObject = environment.Eval("(facts)");
-	dataObject = environment.FunctionCall("Add", "1 2");
-	//dataObject = environment.FunctionCall("Hypotenuse", "1 2");
-	//dataObject = environment.FunctionCall("ReturnSum", "");
+	environment.Run(-1);
+	dataObject = environment.Eval("(facts)");
 
 	// display info
 	char* text = "";
