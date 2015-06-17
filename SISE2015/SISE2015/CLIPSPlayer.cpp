@@ -16,35 +16,21 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	environment.Load(AIfile);
 	environment.Reset();
 
-	std::ostringstream oss;
 
-	// assert node info
+	// assert player ID
+	AssertPlayerID(this->GetId());
+
+	// assert distance info
 	for (uint32_t i = 0; i < graphInfo.size(); i++) {
-		// distance info
 		for (uint32_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a) {
-			oss.str("");
-			oss.clear();
-			oss << "(NodeDistance ";					// name
-			oss << i << " ";							// node ID
-			oss << a << " ";							// player ID
-			oss << graphInfo[i].distanceToPlayers[a];	// distance
-			oss << ")";
-
-			std::string& tmp = oss.str();
-			environment.AssertString(tmp.c_str());
+			AssertNodeDistance(i, a, graphInfo[i].distanceToPlayers[a]);
 		}
+	}
 
-		// neighbor info
+	// assert neighbor info
+	for (uint32_t i = 0; i < graphInfo.size(); i++) {
 		for (uint32_t a = 0; a < graphInfo[i].neighborIds.size(); ++a) {
-			oss.str("");
-			oss.clear();
-			oss << "(NodeNeighbor ";			// name
-			oss << i << " ";					// node ID
-			oss << graphInfo[i].neighborIds[a];	// neighbor ID
-			oss << ")";
-
-			std::string& tmp = oss.str();
-			environment.AssertString(tmp.c_str());
+			AssertNodeNeighbor(i, graphInfo[i].neighborIds[a]);
 		}
 	}
 
@@ -69,4 +55,45 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	dec.target = (*connections)[(rand() % 12 + time(NULL) % 31) % (connections->size())];
 	return dec;
 	//return (Decision) ( (rand() % 10 + time(NULL) % 25 + graphInfo ) % (int)(Decision::DECISION_COUNT) );
+}
+
+void CLIPSPlayer::AssertPlayerID(uint32_t ID) {
+	std::ostringstream oss;
+
+	oss.str("");
+	oss.clear();
+	oss << "(CurrentPlayer ";
+	oss << ID << ")";
+
+	std::string& tmp = oss.str();
+	environment.AssertString(tmp.c_str());
+}
+
+void CLIPSPlayer::AssertNodeDistance(uint32_t nodeID, uint32_t playerID, uint32_t distance) {
+	std::ostringstream oss;
+
+	oss.str("");
+	oss.clear();
+	oss << "(NodeDistance ";
+	oss << nodeID << " ";
+	oss << playerID << " ";
+	oss << distance;
+	oss << ")";
+
+	std::string& tmp = oss.str();
+	environment.AssertString(tmp.c_str());
+}
+
+void CLIPSPlayer::AssertNodeNeighbor(uint32_t nodeID, uint32_t neighborID) {
+	std::ostringstream oss;
+	
+	oss.str("");
+	oss.clear();
+	oss << "(NodeNeighbor ";
+	oss << nodeID << " ";
+	oss << neighborID;
+	oss << ")";
+
+	std::string& tmp = oss.str();
+	environment.AssertString(tmp.c_str());
 }

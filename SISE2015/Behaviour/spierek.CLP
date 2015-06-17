@@ -1,20 +1,9 @@
 ;test assertion
-(defrule assertOrders "Combine Clients and Shipments into Orders"
-	(NodeA ?nAID)
-	(NodeB ?nBID)
-	(test (eq ?nAID ?nBID))
+(defrule FindCurrentNode "Combine Clients and Shipments into Orders"
+	(CurrentPlayer ?cPlayerID)
+	(NodeDistance ?nodeID ?nPlayerID ?distance)
+	(test (eq ?cPlayerID ?nPlayerID))
+	(test (eq ?distance 0))
 	=>
-	(assert (CombinedNode ?nAID ?nBID))
-)
-
-(deffunction Add (?a ?b)
-	(+ ?a ?b)
-)
-
-(deffunction Hypotenuse (?a ?b)
-	(sqrt(+ (* ?a ?a) (* ?b ?b)))	
-)
-
-(deffunction ReturnSum ()
-	(+ 5 10)	
+	(assert (CurrentNode ?nodeID))
 )

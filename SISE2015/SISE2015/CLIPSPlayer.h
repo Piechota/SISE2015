@@ -15,6 +15,9 @@ public:
 	CLIPS::DataObject dataObject;
 
 	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
+	void AssertPlayerID(uint32_t ID);
+	void AssertNodeDistance(uint32_t nodeID, uint32_t playerID, uint32_t distance);
+	void AssertNodeNeighbor(uint32_t nodeID, uint32_t neighborID);
 };
 
 #endif
