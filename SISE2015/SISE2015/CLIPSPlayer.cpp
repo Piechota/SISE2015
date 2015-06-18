@@ -70,10 +70,10 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	}
 
 	// debug fact info
-	dataObject = environment.Eval("(facts)");			// run this if you want to see all facts
-	char* text = "";
-	dataObject.String(text);
-	printf(text);
+	//dataObject = environment.Eval("(facts)");			// run this if you want to see all facts
+	//char* text = "";
+	//dataObject.String(text);
+	//printf(text);
 	std::cout << std::endl << "DECISION: " << decString << " -> " << decTarget << std::endl;
 	getchar();
 

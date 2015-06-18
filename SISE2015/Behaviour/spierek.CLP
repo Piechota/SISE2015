@@ -4,7 +4,7 @@
 	; test has several versions, with "eq", "<", ">", etc.
 
 ;GLOBAL VARIABLES
-(defglobal ?*Decision* = Move)
+(defglobal ?*Decision* = NONE)
 (defglobal ?*Target* = 0)
 
 ;RULES
@@ -20,18 +20,6 @@
 	(assert (CurrentNode ?nodeID))
 )
 
-(defrule FindNeighborNodes "Finds the IDs of nearby nodes, based on distance"
-	(declare (salience 90))
-
-	(CurrentPlayer ?cPlayerID)
-	(NodeDistance ?nodeID ?nPlayerID ?distance)
-
-	(test (eq ?cPlayerID ?nPlayerID))
-	(test (eq ?distance 1))
-	=>
-	(assert (NeighborNode ?nodeID))
-)
-
 (defrule InitNodeSearch
 	(declare (salience 80))
 
@@ -44,61 +32,66 @@
 (defrule FindClosestNode "Finds the ID of a node closest to any enemy player"
 	(declare (salience 70))
 
-	(NeighborNode ?neighborID)
-	(NodeDistance ?nodeID ?nPlayerID ?distance)
+	(CurrentPlayer ?cPlayerID)
+	(CurrentNode ?cNodeID)
+	(NodeNeighbor ?nNodeID ?neighborID)
+	(NodeDistance ?dNodeID ?dPlayerID ?distance)
 	?closest <- (ClosestNode ?closestID ?closestDistance)
 
-	(test (eq ?neighborID ?nodeID))
+	(test (eq ?cNodeID ?nNodeID))
+	(test (eq ?neighborID ?dNodeID))
+	(test (not (eq ?cPlayerID ?dPlayerID)))
 	(test (> ?closestDistance ?distance))
 	=>
 	(retract ?closest)
-	(assert (ClosestNode ?nodeID ?distance))
+	(assert (ClosestNode ?neighborID ?distance))
 )
 
 (defrule FindFurthestNode "Finds the ID of a node furthest from any enemy players"
 	(declare (salience 60))
-
-	(NeighborNode ?neighborID)
-	(NodeDistance ?nodeID ?nPlayerID ?distance)
+	
+	(CurrentPlayer ?cPlayerID)
+	(CurrentNode ?cNodeID)
+	(NodeNeighbor ?nNodeID ?neighborID)
+	(NodeDistance ?dNodeID ?dPlayerID ?distance)
 	?furthest <- (FurthestNode ?furthestID ?furthestDistance)
 
-	(test (eq ?neighborID ?nodeID))
+	(test (eq ?cNodeID ?nNodeID))
+	(test (eq ?neighborID ?dNodeID))
+	(test (not (eq ?cPlayerID ?dPlayerID)))
 	(test (< ?furthestDistance ?distance))
 	=>
 	(retract ?furthest)
-	(assert (FurthestNode ?nodeID ?distance))
+	(assert (FurthestNode ?neighborID ?distance))
 )
 
-(defrule DecideShoot "If the enemy is within range - shoot"
+(defrule DecideEscape "First, decide on running away"
 	(declare (salience 50))
 
-	(ClosestNode ?nodeID ?distance)
-	(not (Decision ?))
-
-	(test (< ?distance 3))
-	=>
-	(bind ?*Target* ?nodeID)
-	(bind ?*Decision* SHOOT)
-	(assert (SHOOTYSHOOTYBANGBANG ?distance))
-)
-
-(defrule DecideMoveTowards "If the enemy is further - move towards"
-	(declare (salience 40))
-
-	(ClosestNode ?nodeID ?distance)
-	(not (Decision ?))
-
-	(test (> ?distance 2))
+	(FurthestNode ?nodeID ?distance)
+	
 	=>
 	(bind ?*Target* ?nodeID)
 	(bind ?*Decision* MOVE)
 )
 
-(defrule DecideEscape "Otherwise - step back"
+(defrule DecideShoot "... but if the enemy is within range - shoot"
+	(declare (salience 40))
+
+	(ClosestNode ?nodeID ?distance)
+
+	(test (<= ?distance 1))
+	=>
+	(bind ?*Target* ?nodeID)
+	(bind ?*Decision* SHOOT)
+)
+
+(defrule DecideMoveTowards "If the enemy is further - move towards"
 	(declare (salience 30))
 
-	(FurthestNode ?nodeID ?distance)
-	(not (Decision ?))
+	(ClosestNode ?nodeID ?distance)
+
+	(test (>= ?distance 2))
 	=>
 	(bind ?*Target* ?nodeID)
 	(bind ?*Decision* MOVE)
