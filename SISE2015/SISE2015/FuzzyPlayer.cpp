@@ -40,7 +40,7 @@ FuzzyPlayer::~FuzzyPlayer()
 {
 }
 
-DecisionInfo FuzzyPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo FuzzyPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 	const std::string names[] = { "Player1", "Player2" };
@@ -81,7 +81,7 @@ DecisionInfo FuzzyPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	if (!engine->isReady(&status))
 		printf("Engine not ready. \nThe following errors were encountered:\n" + *status.c_str());
 
-	NodeInfo* ni;
+	const NodeInfo* ni;
 	uint32_t n = myPawn->GetNode()->GetConnections()->at(0)->GetId();
 	size_t nc = graphInfo.size();
 	for (size_t i = 0; i < nc; ++i)
@@ -109,7 +109,7 @@ DecisionInfo FuzzyPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	return dec;
 }
 
-size_t FuzzyPlayer::AddVariables(const std::string* playersNames, const NodeInfo* const checkNode, const size_t& playersCount)
+size_t FuzzyPlayer::AddVariables(const std::string* playersNames, const NodeInfo* const checkNode, const size_t playersCount)
 {
 	static size_t loop_stop = checkNode->distanceToPlayers.size() < playersCount ? checkNode->distanceToPlayers.size() : playersCount;
 

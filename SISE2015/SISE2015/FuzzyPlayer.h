@@ -8,12 +8,12 @@ class FuzzyPlayer : public Player
 {
 protected:
 	Engine* engine;
-	size_t AddVariables(const std::string* playersNames, const NodeInfo* const checkNode, const size_t& playersCount);
+	size_t AddVariables(const std::string* playersNames, const NodeInfo* const checkNode, const size_t playersCount);
 public:
 	FuzzyPlayer(const std::string& name, const Colour& color);
 	~FuzzyPlayer();
 
-	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
+	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
 };
 
 #endif

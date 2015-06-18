@@ -2,7 +2,7 @@
 
 PiechotaFuzzy::PiechotaFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
 PiechotaFuzzy::~PiechotaFuzzy(){}
-DecisionInfo PiechotaFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 
@@ -44,7 +44,7 @@ DecisionInfo PiechotaFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Paw
 
 	const size_t nodesCount = myPawn->GetNode()->GetConnections()->size();
 	const size_t nc = graphInfo.size();
-	NodeInfo* ni;
+	const NodeInfo* ni;
 	Node* n;
 
 	for (size_t i = 0; i < nodesCount; ++i)

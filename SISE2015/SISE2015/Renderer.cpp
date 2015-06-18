@@ -9,10 +9,10 @@
 std::unordered_map<const Colour*, SDL_Texture*> circleTextures;
 std::map<std::pair<const Colour*, const Colour*>, SDL_Texture*> circleTexturesBorder;
 
-FORCEINLINE uint32_t length(const int32_t& x0, const int32_t& y0, const int32_t& x1, const int32_t& y1)
+FORCEINLINE uint32_t length(const size_t& x0, const size_t& y0, const int32_t& x1, const int32_t& y1)
 {
-	const int32_t w2 = (x1 - x0) * (x1 - x0);
-	const int32_t h2 = (y1 - y0) * (y1 - y0);
+	const size_t w2 = (x1 - x0) * (x1 - x0);
+	const size_t h2 = (y1 - y0) * (y1 - y0);
 
 	return (uint32_t)sqrt(w2 + h2);
 }

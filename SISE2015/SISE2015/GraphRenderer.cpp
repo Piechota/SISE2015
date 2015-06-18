@@ -25,7 +25,7 @@ void GraphRenderer::RenderGraph(const Graph* const graph)
 {
 	SDL_RenderClear(renderer);
 
-	const std::vector<Node*>* const nodes = graph->GetConstNodes();
+	const std::vector<Node*>* const nodes = graph->GetNodes();
 	const size_t size = nodes->size();
 
 	int32_t* RESTRICT const x = new int32_t[size];
@@ -41,7 +41,7 @@ void GraphRenderer::RenderGraph(const Graph* const graph)
 	{
 		if (n != nullptr)
 		{
-			const std::vector<Node*>* const connections = n->GetConstConnections();
+			const std::vector<Node*>* const connections = n->GetConnections();
 			const int32_t nx = n->GetPositionX();
 			const int32_t ny = n->GetPositionY();
 

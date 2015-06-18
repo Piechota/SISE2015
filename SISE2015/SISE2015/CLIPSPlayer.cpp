@@ -7,10 +7,10 @@ CLIPSPlayer::CLIPSPlayer(const std::string& name, const Colour& color, char* fil
 
 CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 {
-
+	AIfile = other.AIfile;
 }
 
-DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) {
+DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) {
 	// load data (rules), reset
 	environment.Clear();
 	environment.Load(AIfile);
@@ -20,15 +20,19 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	AssertPlayerID(this->GetId());
 
 	// assert distance info
-	for (uint32_t i = 0; i < graphInfo.size(); i++) {
-		for (uint32_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a) {
+	for (uint32_t i = 0; i < graphInfo.size(); ++i) 
+	{
+		for (uint32_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a) 
+		{
 			AssertNodeDistance(i, a, graphInfo[i].distanceToPlayers[a].distance);
 		}
 	}
 
 	// assert neighbor info
-	for (uint32_t i = 0; i < graphInfo.size(); i++) {
-		for (uint32_t a = 0; a < graphInfo[i].neighborIds.size(); ++a) {
+	for (uint32_t i = 0; i < graphInfo.size(); ++i) 
+	{
+		for (uint32_t a = 0; a < graphInfo[i].neighborIds.size(); ++a) 
+		{
 			AssertNodeNeighbor(i, graphInfo[i].neighborIds[a]);
 		}
 	}
@@ -40,7 +44,7 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	Decision dec;
 	//dataObject = environment.Eval("(facts)");			// run this if you want to see all facts
 	dataObject = environment.Eval("?*Decision*");
-	CLIPS::SymbolValue* str = dynamic_cast<CLIPS::SymbolValue*>(dataObject.GetDOValue());
+	const CLIPS::SymbolValue* const str = dynamic_cast<CLIPS::SymbolValue*>(dataObject.GetDOValue());
 	std::string decString;
 
 	if (str->theString == "MOVE") {
@@ -58,13 +62,16 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	
 	// get target node
 	dataObject = environment.Eval("?*Target*");
-	CLIPS::IntegerValue* target = dynamic_cast<CLIPS::IntegerValue*>(dataObject.GetDOValue());
-	__int64 decTarget = target->theInteger;
+	const CLIPS::IntegerValue* const target = dynamic_cast<CLIPS::IntegerValue*>(dataObject.GetDOValue());
+	const __int64 decTarget = target->theInteger;
 
-	Node* myNode = myPawn->GetNode();
-	std::vector<Node*>* connections = myNode->GetConnections();
-	for (uint32_t i = 0; i < connections->size(); ++i) {
-		if ((*connections)[i]->GetId() == target->theInteger) {
+	const Node* const myNode = myPawn->GetNode();
+	const std::vector<Node*>* const connections = myNode->GetConnections();
+	const size_t connectionsSize = connections->size();
+	for (uint32_t i = 0; i < connectionsSize; ++i) 
+	{
+		if ((*connections)[i]->GetId() == target->theInteger) 
+		{
 			dec.target = (*connections)[i];
 		}
 	}
@@ -80,7 +87,7 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	return dec;
 }
 
-void CLIPSPlayer::AssertPlayerID(uint32_t ID) {
+void CLIPSPlayer::AssertPlayerID(const uint32_t ID) {
 	std::ostringstream oss;
 
 	oss.str("");
@@ -92,7 +99,7 @@ void CLIPSPlayer::AssertPlayerID(uint32_t ID) {
 	environment.AssertString(tmp.c_str());
 }
 
-void CLIPSPlayer::AssertNodeDistance(uint32_t nodeID, uint32_t playerID, uint32_t distance) {
+void CLIPSPlayer::AssertNodeDistance(const uint32_t nodeID, const uint32_t playerID, const uint32_t distance) {
 	std::ostringstream oss;
 
 	oss.str("");
@@ -107,7 +114,7 @@ void CLIPSPlayer::AssertNodeDistance(uint32_t nodeID, uint32_t playerID, uint32_
 	environment.AssertString(tmp.c_str());
 }
 
-void CLIPSPlayer::AssertNodeNeighbor(uint32_t nodeID, uint32_t neighborID) {
+void CLIPSPlayer::AssertNodeNeighbor(const uint32_t nodeID, const uint32_t neighborID) {
 	std::ostringstream oss;
 	
 	oss.str("");

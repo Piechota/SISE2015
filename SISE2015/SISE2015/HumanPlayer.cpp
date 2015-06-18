@@ -51,7 +51,7 @@ HumanPlayer::~HumanPlayer()
 //
 //}
 
-DecisionInfo HumanPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo HumanPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	clear();
 	const Node* const my_node = myPawn->GetNode();
@@ -97,7 +97,7 @@ DecisionInfo HumanPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 
 		if (type == 1 || type == 2)
 		{
-			const std::vector<Node*>* const nodes = my_node->GetConstConnections();
+			const std::vector<Node*>* const nodes = my_node->GetConnections();
 			const size_t n = nodes->size();
 
 			std::cout << "\n\n DANCE!";
@@ -285,7 +285,7 @@ DecisionInfo HumanPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 
 	if (type == 1 || type == 2)
 	{
-		const std::vector<Node*>* const nodes = my_node->GetConstConnections();
+		const std::vector<Node*>* const nodes = my_node->GetConnections();
 		const size_t n = nodes->size();
 
 		std::cout << "\n\nselect node!";
