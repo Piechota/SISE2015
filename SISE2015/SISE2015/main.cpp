@@ -44,7 +44,7 @@ void CloseSDL()
 
 int main(int argc, char* args[])
 {
-    if (!InitSDL(600, 600))
+    if (!InitSDL(300, 300))
     {
         return 1;
     }

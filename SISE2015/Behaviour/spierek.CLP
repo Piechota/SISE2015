@@ -14,7 +14,7 @@
 	(CurrentPlayer ?cPlayerID)
 	(NodeDistance ?nodeID ?nPlayerID ?distance)
 
-	(test (eq ?cPlayerID ?nPlayerID))
+	(test (eq (mod ?cPlayerID 2) ?nPlayerID))
 	(test (eq ?distance 0))
 	=>
 	(assert (CurrentNode ?nodeID))
@@ -40,7 +40,7 @@
 
 	(test (eq ?cNodeID ?nNodeID))
 	(test (eq ?neighborID ?dNodeID))
-	(test (not (eq ?cPlayerID ?dPlayerID)))
+	(test (not (eq (mod ?cPlayerID 2) ?dPlayerID)))
 	(test (> ?closestDistance ?distance))
 	=>
 	(retract ?closest)
@@ -58,7 +58,7 @@
 
 	(test (eq ?cNodeID ?nNodeID))
 	(test (eq ?neighborID ?dNodeID))
-	(test (not (eq ?cPlayerID ?dPlayerID)))
+	(test (not (eq (mod ?cPlayerID 2) ?dPlayerID)))
 	(test (< ?furthestDistance ?distance))
 	=>
 	(retract ?furthest)
