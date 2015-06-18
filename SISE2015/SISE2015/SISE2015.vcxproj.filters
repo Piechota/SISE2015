@@ -30,8 +30,15 @@
     <ClCompile Include="CLIPSPlayer.cpp" />
     <ClCompile Include="clipscpplib.cpp" />
     <ClCompile Include="FuzzyPlayer.cpp" />
-    <ClCompile Include="PiechotaFuzzy.cpp" />
-    <ClCompile Include="SpierekFuzzy.cpp" />
+    <ClCompile Include="PiechotaFuzzy.cpp">
+      <Filter>Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="SpierekFuzzy.cpp">
+      <Filter>Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="NizikFuzzy.cpp">
+      <Filter>Bots</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -62,12 +69,22 @@
     <ClInclude Include="Colour.h" />
     <ClInclude Include="CLIPSPlayer.h" />
     <ClInclude Include="FuzzyPlayer.h" />
-    <ClInclude Include="PiechotaFuzzy.h" />
-    <ClInclude Include="SpierekFuzzy.h" />
+    <ClInclude Include="PiechotaFuzzy.h">
+      <Filter>Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="SpierekFuzzy.h">
+      <Filter>Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="NizikFuzzy.h">
+      <Filter>Bots</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
       <UniqueIdentifier>{76c7a92a-a25c-4a7f-b1e6-4e3ab53c946d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bots">
+      <UniqueIdentifier>{c05b6e0f-708e-4644-b0a9-782b708af5bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -157,6 +157,7 @@
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NizikFuzzy.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PiechotaFuzzy.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Headers.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="NizikFuzzy.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="PiechotaFuzzy.h" />

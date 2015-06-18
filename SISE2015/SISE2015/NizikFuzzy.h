@@ -5,9 +5,9 @@
 class NizikFuzzy : public FuzzyPlayer
 {
 public:
-	PiechotaFuzzy(const std::string& name, const Colour& color);
-	~PiechotaFuzzy();
-	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
+	NizikFuzzy(const std::string& name, const Colour& color);
+	~NizikFuzzy();
+	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
 };
 
 #endif

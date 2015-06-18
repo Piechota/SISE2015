@@ -4,7 +4,7 @@ NizikFuzzy::NizikFuzzy(const std::string& name, const Colour& color) : FuzzyPlay
 
 NizikFuzzy::~NizikFuzzy(){}
 
-DecisionInfo NizikFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo NizikFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 
@@ -46,7 +46,7 @@ DecisionInfo NizikFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* 
 
 	const size_t nodesCount = myPawn->GetNode()->GetConnections()->size();
 	const size_t nc = graphInfo.size();
-	NodeInfo* ni;
+	const NodeInfo* ni;
 	Node* n;
 
 	for (size_t i = 0; i < nodesCount; ++i)
