@@ -29,6 +29,7 @@
 #include "CLIPSPlayer.h"
 #include "HumanPlayer.h"
 #include "FuzzyPlayer.h"
+#include "PiechotaFuzzy.h"
 #include "Stats.h"
 #include "GameController.h"
 

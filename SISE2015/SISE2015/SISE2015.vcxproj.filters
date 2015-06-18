@@ -30,6 +30,7 @@
     <ClCompile Include="CLIPSPlayer.cpp" />
     <ClCompile Include="clipscpplib.cpp" />
     <ClCompile Include="FuzzyPlayer.cpp" />
+    <ClCompile Include="PiechotaFuzzy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Colour.h" />
     <ClInclude Include="CLIPSPlayer.h" />
     <ClInclude Include="FuzzyPlayer.h" />
+    <ClInclude Include="PiechotaFuzzy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

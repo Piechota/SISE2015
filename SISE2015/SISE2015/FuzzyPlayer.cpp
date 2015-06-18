@@ -1,4 +1,4 @@
-#include "FuzzyPlayer.h"
+#include "Headers.h"
 
 FuzzyPlayer::FuzzyPlayer(const std::string& name, const Colour& color) : Player(name, color)
 {

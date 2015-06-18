@@ -94,6 +94,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="PiechotaFuzzy.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Stats.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="PiechotaFuzzy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Stats.h" />
