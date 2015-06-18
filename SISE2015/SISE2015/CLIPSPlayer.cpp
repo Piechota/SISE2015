@@ -22,7 +22,7 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	// assert distance info
 	for (uint32_t i = 0; i < graphInfo.size(); i++) {
 		for (uint32_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a) {
-			AssertNodeDistance(i, a, graphInfo[i].distanceToPlayers[a]);
+			AssertNodeDistance(i, a, graphInfo[i].distanceToPlayers[a].distance);
 		}
 	}
 
