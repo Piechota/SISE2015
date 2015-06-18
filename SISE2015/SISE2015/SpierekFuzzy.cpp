@@ -3,7 +3,7 @@
 SpierekFuzzy::SpierekFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
 SpierekFuzzy::~SpierekFuzzy(){}
 
-DecisionInfo SpierekFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo SpierekFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 
@@ -43,7 +43,7 @@ DecisionInfo SpierekFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn
 	float targetValue = 0;
 
 	Node* neighbor;
-	NodeInfo* neighborInfo;
+	const NodeInfo* neighborInfo;
 
 	for (size_t i = 0; i < myPawn->GetNode()->GetConnections()->size(); ++i) {
 		// choose a neighbor and get info

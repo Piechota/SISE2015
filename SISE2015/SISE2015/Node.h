@@ -18,7 +18,7 @@ public:
 
 	uint32_t GetId() const;
 	std::vector<Node*>* GetConnections();
-	const std::vector<Node*>* GetConstConnections() const;
+	const std::vector<Node*>* GetConnections() const;
 	void AddConnection(Node* const node);
 	bool IsConnectedTo(const Node* const node) const;
 	int32_t GetPositionX() const;
@@ -44,7 +44,7 @@ FORCEINLINE std::vector<Node*>* Node::GetConnections()
 	return &neighbors;
 }
 
-FORCEINLINE const std::vector<Node*>* Node::GetConstConnections() const
+FORCEINLINE const std::vector<Node*>* Node::GetConnections() const
 {
 	return &neighbors;
 }
