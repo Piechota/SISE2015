@@ -3,8 +3,11 @@
 	; ?variable <- fact syntax = assigning a fact to a variable for retracting / modifying
 	; test has several versions, with "eq", "<", ">", etc.
 
+;GLOBAL VARIABLES
+(defglobal ?*Decision* = Move)
+(defglobal ?*Target* = 0)
 
-;NOW FOR SOME CODE
+;RULES
 (defrule FindCurrentNode "Finds the ID of the current player's node, based on distance"
 	(declare (salience 100))
 
@@ -66,28 +69,29 @@
 	(assert (FurthestNode ?nodeID ?distance))
 )
 
-(defrule DecideAttack "If the enemy is within range - attack"
+(defrule DecideShoot "If the enemy is within range - shoot"
 	(declare (salience 50))
 
 	(ClosestNode ?nodeID ?distance)
 	(not (Decision ?))
 
-	(test (eq ?distance 1))
+	(test (< ?distance 3))
 	=>
-	(assert (Target ?nodeID))
-	(assert (Decision Attack))
+	(bind ?*Target* ?nodeID)
+	(bind ?*Decision* SHOOT)
+	(assert (SHOOTYSHOOTYBANGBANG ?distance))
 )
 
-(defrule DecideEngage "If the enemy is further - move towards"
+(defrule DecideMoveTowards "If the enemy is further - move towards"
 	(declare (salience 40))
 
 	(ClosestNode ?nodeID ?distance)
 	(not (Decision ?))
 
-	(test (> ?distance 1))
+	(test (> ?distance 2))
 	=>
-	(assert (Target ?nodeID))
-	(assert (Decision Move))
+	(bind ?*Target* ?nodeID)
+	(bind ?*Decision* MOVE)
 )
 
 (defrule DecideEscape "Otherwise - step back"
@@ -95,8 +99,7 @@
 
 	(FurthestNode ?nodeID ?distance)
 	(not (Decision ?))
-
 	=>
-	(assert (Target ?nodeID))
-	(assert (Decision Move))
+	(bind ?*Target* ?nodeID)
+	(bind ?*Decision* MOVE)
 )

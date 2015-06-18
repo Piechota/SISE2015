@@ -109,7 +109,7 @@ class SymbolValue : public Value
      virtual std::ostream& print(std::ostream& o) const;
      virtual SymbolValue *clone() const; 
   
-   private:
+   public:
      std::string theString;
   };
 
@@ -139,7 +139,7 @@ class IntegerValue : public Value
      virtual std::ostream& print(std::ostream& o) const;
      virtual IntegerValue *clone() const; 
   
-   private:
+   public:
      long long theInteger;
   };
 
@@ -218,6 +218,7 @@ class DataObject
      friend std::ostream& operator<< (std::ostream& o, const DataObject& s);
      friend std::ostream& operator<< (std::ostream& o, const DataObject* s);
      virtual std::ostream& print(std::ostream& o) const;
+	 virtual Value* GetDOValue();
      virtual DataObject GetFactSlot(char *) const;
      static DataObject Void();
      static DataObject String();

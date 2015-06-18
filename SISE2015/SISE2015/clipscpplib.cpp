@@ -449,6 +449,13 @@ std::ostream& CLIPS::operator<< (std::ostream& o, const DataObject* s)
 std::ostream& DataObject::print (std::ostream& o) const
   { return std::cout << theValue; }
 
+/*********/
+/* Get Value */
+/*********/
+Value* DataObject::GetDOValue() {
+	return theValue;
+}
+
 /***************/
 /* GetFactSlot */
 /***************/

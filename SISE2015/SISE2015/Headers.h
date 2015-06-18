@@ -10,6 +10,7 @@
 #include <map>
 #include <string>
 #include <fl/Headers.h>
+#include <clips.h>
 
 #include <SDL.h>
 #include <SDL_mixer.h>

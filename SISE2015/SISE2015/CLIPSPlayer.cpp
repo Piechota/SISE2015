@@ -16,7 +16,6 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 	environment.Load(AIfile);
 	environment.Reset();
 
-
 	// assert player ID
 	AssertPlayerID(this->GetId());
 
@@ -34,27 +33,51 @@ DecisionInfo CLIPSPlayer::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 		}
 	}
 
-	// run & evaluate
+	// run
 	environment.Run(-1);
-	dataObject = environment.Eval("(facts)");
 
-	// display info
-	char* text = "";
-	dataObject.String(text);
-	printf("\nDECISION: ");
-	printf(text);
-	getchar();
-
-	// old decision making
-	//throw 0;
+	// get decision type
 	Decision dec;
-	//dec.type = (Decision::Type) ((rand() % 10 + time(NULL) % 25) % (int)(Decision::COUNT));
-	dec.type = Decision::Type::MOVE;
+	//dataObject = environment.Eval("(facts)");			// run this if you want to see all facts
+	dataObject = environment.Eval("?*Decision*");
+	CLIPS::SymbolValue* str = dynamic_cast<CLIPS::SymbolValue*>(dataObject.GetDOValue());
+	std::string decString;
+
+	if (str->theString == "MOVE") {
+		dec.type = Decision::Type::MOVE;
+		decString = "MOVE";
+	}
+	else if (str->theString == "SHOOT") {
+		dec.type = Decision::Type::SHOOT;
+		decString = "SHOOT";
+	}
+	else {
+		dec.type = Decision::Type::SUICIDE;
+		decString = "SUICIDE";
+	}
+	
+	// get target node
+	dataObject = environment.Eval("?*Target*");
+	CLIPS::IntegerValue* target = dynamic_cast<CLIPS::IntegerValue*>(dataObject.GetDOValue());
+	__int64 decTarget = target->theInteger;
+
 	Node* myNode = myPawn->GetNode();
 	std::vector<Node*>* connections = myNode->GetConnections();
-	dec.target = (*connections)[(rand() % 12 + time(NULL) % 31) % (connections->size())];
+	for (uint32_t i = 0; i < connections->size(); ++i) {
+		if ((*connections)[i]->GetId() == target->theInteger) {
+			dec.target = (*connections)[i];
+		}
+	}
+
+	// debug fact info
+	dataObject = environment.Eval("(facts)");			// run this if you want to see all facts
+	char* text = "";
+	dataObject.String(text);
+	printf(text);
+	std::cout << std::endl << "DECISION: " << decString << " -> " << decTarget << std::endl;
+	getchar();
+
 	return dec;
-	//return (Decision) ( (rand() % 10 + time(NULL) % 25 + graphInfo ) % (int)(Decision::DECISION_COUNT) );
 }
 
 void CLIPSPlayer::AssertPlayerID(uint32_t ID) {
