@@ -3,6 +3,7 @@
 
 #include "Headers.h"
 #include "clipscpp.h"
+#include <iostream>
 
 class CLIPSPlayer : public Player
 {
