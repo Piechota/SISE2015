@@ -39,10 +39,10 @@ public:
 
 protected:
     std::string name;
+	uint32_t id;
 
 private:
 	Colour color;
-    uint32_t id;
 	static uint32_t idCounter;
 };
 

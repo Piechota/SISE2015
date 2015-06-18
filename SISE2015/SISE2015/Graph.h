@@ -6,6 +6,18 @@
 #include "Globals.h"
 #include "Node.h"
 
+struct DistanceToPlayer
+{
+	DistanceToPlayer(uint32_t _distance, uint32_t _playerID) :
+		distance(_distance),
+		playerID(_playerID)
+	{
+		
+	}
+	uint32_t distance;
+	uint32_t playerID;
+};
+
 struct NodeInfo
 {
 public:
@@ -14,7 +26,7 @@ public:
 		this->myId = myId;
 	}
 	uint32_t myId;
-	std::vector<uint32_t> distanceToPlayers;
+	std::vector<DistanceToPlayer> distanceToPlayers;
 	std::vector<uint32_t> neighborIds;
 };
 

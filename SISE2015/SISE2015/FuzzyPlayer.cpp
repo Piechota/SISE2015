@@ -115,7 +115,8 @@ size_t FuzzyPlayer::AddVariables(const std::string* playersNames, const NodeInfo
 
 	for (size_t i = 0; i < loop_stop; ++i)
 	{
-		engine->getInputVariable(playersNames[i])->setInputValue(checkNode->distanceToPlayers.at(i));
+		if (checkNode->distanceToPlayers.at(i).playerID == id) continue;
+		engine->getInputVariable(playersNames[i])->setInputValue(checkNode->distanceToPlayers.at(i).distance);
 	}
 	return loop_stop;
 }

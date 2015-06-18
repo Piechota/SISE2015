@@ -147,7 +147,7 @@ std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint
 		}
 		for (uint32_t j = 0; j < playerCount; ++j)
 		{
-			resultInfos[i].distanceToPlayers.push_back(-1);
+			resultInfos[i].distanceToPlayers.push_back(DistanceToPlayer(-1, -1));
 		}
 	}
 
@@ -160,13 +160,13 @@ std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint
 		for (uint32_t i = 0; i < nodeCount; ++i)
 		{
 			visited[i] = false;
-			resultInfos[i].distanceToPlayers[playerIndex] = -1;
+			resultInfos[i].distanceToPlayers[playerIndex] = DistanceToPlayer(-1, playerIndex);
 		}
 		uint32_t startingIndex = playerNodeIds[playerIndex];
 		
 		Node* currentNode;
 		
-		resultInfos[startingIndex].distanceToPlayers[playerIndex] = 0;
+		resultInfos[startingIndex].distanceToPlayers[playerIndex] = DistanceToPlayer(0, playerIndex);
 		toVisit.push((*tmpNodes)[startingIndex]);
 		visited[startingIndex] = true;
 
@@ -176,16 +176,16 @@ std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint
 			toVisit.pop();
 
 			uint32_t currentId = currentNode->GetId();
-			uint32_t currentDistance = resultInfos[currentId].distanceToPlayers[playerIndex];
+			uint32_t currentDistance = resultInfos[currentId].distanceToPlayers[playerIndex].distance;
 			tmpNeighbors = currentNode->GetConnections();
 			uint32_t neighborCount = tmpNeighbors->size();
 			for (uint32_t i = 0; i < neighborCount; ++i)
 			{
 				uint32_t tmpId = (*tmpNeighbors)[i]->GetId();
 				//resultInfos[currentId].neighborIds.push_back(tmpId);
-				if (!visited[tmpId] || resultInfos[tmpId].distanceToPlayers[playerIndex] > currentDistance + 1 || resultInfos[tmpId].distanceToPlayers[playerIndex] == -1)
+				if (!visited[tmpId] || resultInfos[tmpId].distanceToPlayers[playerIndex].distance > currentDistance + 1 || resultInfos[tmpId].distanceToPlayers[playerIndex].distance == -1)
 				{
-					resultInfos[tmpId].distanceToPlayers[playerIndex] = currentDistance + 1;
+					resultInfos[tmpId].distanceToPlayers[playerIndex].distance = currentDistance + 1;
 				}
 
 				if (!visited[tmpId])
