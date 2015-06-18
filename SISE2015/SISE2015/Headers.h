@@ -31,6 +31,7 @@
 #include "HumanPlayer.h"
 #include "FuzzyPlayer.h"
 #include "PiechotaFuzzy.h"
+#include "SpierekFuzzy.h"
 #include "Stats.h"
 #include "GameController.h"
 

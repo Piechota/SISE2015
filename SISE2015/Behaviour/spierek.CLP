@@ -66,7 +66,7 @@
 )
 
 (defrule DecideEscape "First, decide on running away"
-	(declare (salience 50))
+	(declare (salience 50)) 
 
 	(FurthestNode ?nodeID ?distance)
 	

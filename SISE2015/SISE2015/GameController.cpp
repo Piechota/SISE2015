@@ -64,10 +64,9 @@ void GameController::NextRound()
 	currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
 	currentGraph->Generate();
 
-    //SubmitPlayer(new HumanPlayer("gracz #1", Colours::blue));
 	SubmitPlayer(new CLIPSPlayer("gracz #2", Colours::white, "../Behaviour/spierek.clp"));
-	//SubmitPlayer(new CLIPSPlayer("gracz #3", Colours::green, "../Behaviour/spierek.clp"));
-	SubmitPlayer(new PiechotaFuzzy("gracz #4", Colours::red));
+	SubmitPlayer(new SpierekFuzzy("gracz #4", Colours::red));
+	//SubmitPlayer(new PiechotaFuzzy("gracz #4", Colours::red));
 }
 
 GameController::~GameController()
@@ -159,7 +158,9 @@ void GameController::SubmitPlayer(Player* const player)
 
     std::vector<Node*>* const nodes = currentGraph->GetNodes();
     size_t nodeIndex = 0;
-    nodeIndex = (rand() % (nodes->size() - 1)) + 1;
+	do {
+		nodeIndex = (rand() % (nodes->size() - 1)) + 1;
+	} while ((*nodes)[nodeIndex]->GetPawn() != NULL);
 
     pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
     (*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
