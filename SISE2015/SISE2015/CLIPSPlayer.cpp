@@ -17,21 +17,23 @@ DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const
 	environment.Reset();
 
 	// assert player ID
-	AssertPlayerID(this->GetId());
+	AssertPlayerID(GetId());
+
+	const size_t graphInfoSize = graphInfo.size();
 
 	// assert distance info
-	for (uint32_t i = 0; i < graphInfo.size(); ++i) 
+	for (size_t i = 0; i < graphInfoSize; ++i)
 	{
-		for (uint32_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a) 
+		for (size_t a = 0; a < graphInfo[i].distanceToPlayers.size(); ++a)
 		{
 			AssertNodeDistance(i, a, graphInfo[i].distanceToPlayers[a].distance);
 		}
 	}
 
 	// assert neighbor info
-	for (uint32_t i = 0; i < graphInfo.size(); ++i) 
+	for (size_t i = 0; i < graphInfoSize; ++i)
 	{
-		for (uint32_t a = 0; a < graphInfo[i].neighborIds.size(); ++a) 
+		for (size_t a = 0; a < graphInfo[i].neighborIds.size(); ++a)
 		{
 			AssertNodeNeighbor(i, graphInfo[i].neighborIds[a]);
 		}
@@ -65,15 +67,26 @@ DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const
 	const CLIPS::IntegerValue* const target = dynamic_cast<CLIPS::IntegerValue*>(dataObject.GetDOValue());
 	const __int64 decTarget = target->theInteger;
 
+	// This validation is not only not needed, it is actually wrong,
+	// but we currently don't have any convenient way of getting node pointer by its id from here.
 	const Node* const myNode = myPawn->GetNode();
 	const std::vector<Node*>* const connections = myNode->GetConnections();
 	const size_t connectionsSize = connections->size();
-	for (uint32_t i = 0; i < connectionsSize; ++i) 
+	bool nodeIdMatched = false;
+	for (size_t i = 0; i < connectionsSize; ++i) 
 	{
 		if ((*connections)[i]->GetId() == target->theInteger) 
 		{
 			dec.target = (*connections)[i];
+			nodeIdMatched = true;
+			break;
 		}
+	}
+
+	if (!nodeIdMatched)
+	{
+		dec.target = (*connections)[0];
+		//dec.target = nullptr;
 	}
 
 	// debug fact info

@@ -39,6 +39,9 @@
     <ClCompile Include="NizikFuzzy.cpp">
       <Filter>Bots</Filter>
     </ClCompile>
+    <ClCompile Include="MatushkaRossiyaFuzzy.cpp">
+      <Filter>Bots</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -76,6 +79,9 @@
       <Filter>Bots</Filter>
     </ClInclude>
     <ClInclude Include="NizikFuzzy.h">
+      <Filter>Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="MatushkaRossiyaFuzzy.h">
       <Filter>Bots</Filter>
     </ClInclude>
   </ItemGroup>

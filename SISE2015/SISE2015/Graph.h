@@ -84,7 +84,7 @@ FORCEINLINE Node* Graph::GetNodeById(const uint32_t id) const
 	{
 		if (n != nullptr)
 		{
-			uint32_t nid = n->GetId();
+			const uint32_t nid = n->GetId();
 			if (nid == id)
 			{
 				node = n;

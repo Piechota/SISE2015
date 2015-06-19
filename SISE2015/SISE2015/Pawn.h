@@ -22,4 +22,14 @@ private:
 	Node* node;
 };
 
+FORCEINLINE Node* Pawn::GetNode() const
+{
+	return node;
+}
+
+FORCEINLINE void Pawn::SetNode(Node* const node)
+{
+	this->node = node;
+}
+
 #endif

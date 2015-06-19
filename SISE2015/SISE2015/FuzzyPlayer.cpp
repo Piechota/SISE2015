@@ -111,12 +111,14 @@ DecisionInfo FuzzyPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const
 
 size_t FuzzyPlayer::AddVariables(const std::string* playersNames, const NodeInfo* const checkNode, const size_t playersCount)
 {
-	static size_t loop_stop = checkNode->distanceToPlayers.size() < playersCount ? checkNode->distanceToPlayers.size() : playersCount;
+	const std::vector<DistanceToPlayer>& distanceToPlayers = checkNode->distanceToPlayers;
+	const size_t loop_stop = distanceToPlayers.size() < playersCount ? distanceToPlayers.size() : playersCount;
 
 	for (size_t i = 0; i < loop_stop; ++i)
 	{
-		if (checkNode->distanceToPlayers.at(i).playerID == id) continue;
-		engine->getInputVariable(playersNames[i])->setInputValue(checkNode->distanceToPlayers.at(i).distance);
+		if (distanceToPlayers[i].playerID == id) continue;
+		engine->getInputVariable(playersNames[i])->setInputValue(distanceToPlayers[i].distance);
 	}
+
 	return loop_stop;
 }

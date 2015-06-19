@@ -91,7 +91,7 @@ void Graph::Generate()
 			nodeX = newNodeX;
 			nodeY = newNodeY;
 
-			Node* const node = new Node(this->nodeIdCounter++, newNodeX, newNodeY);
+			Node* const node = new Node(nodeIdCounter++, newNodeX, newNodeY);
 			nodes.push_back(node);
 		}
 

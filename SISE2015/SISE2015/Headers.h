@@ -33,6 +33,7 @@
 #include "PiechotaFuzzy.h"
 #include "SpierekFuzzy.h"
 #include "NizikFuzzy.h"
+#include "MatushkaRossiyaFuzzy.h"
 #include "Stats.h"
 #include "GameController.h"
 
