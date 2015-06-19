@@ -32,6 +32,7 @@
     <ClCompile Include="FuzzyPlayer.cpp" />
     <ClCompile Include="PiechotaFuzzy.cpp" />
     <ClCompile Include="SpierekFuzzy.cpp" />
+    <ClCompile Include="WrobelFuzzy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -64,6 +65,7 @@
     <ClInclude Include="FuzzyPlayer.h" />
     <ClInclude Include="PiechotaFuzzy.h" />
     <ClInclude Include="SpierekFuzzy.h" />
+    <ClInclude Include="WrobelFuzzy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
