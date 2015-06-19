@@ -164,6 +164,7 @@
     <ClCompile Include="PiechotaFuzzy.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="WrobelFuzzy.cpp" />
     <ClCompile Include="SpierekFuzzy.cpp" />
     <ClCompile Include="Stats.cpp" />
   </ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="PiechotaFuzzy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="WrobelFuzzy.h" />
     <ClInclude Include="SpierekFuzzy.h" />
     <ClInclude Include="Stats.h" />
   </ItemGroup>

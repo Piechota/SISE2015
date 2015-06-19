@@ -32,6 +32,7 @@
 #include "FuzzyPlayer.h"
 #include "PiechotaFuzzy.h"
 #include "SpierekFuzzy.h"
+#include "WrobelFuzzy.h"
 #include "NizikFuzzy.h"
 #include "MatushkaRossiyaFuzzy.h"
 #include "Stats.h"
