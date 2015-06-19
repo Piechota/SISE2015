@@ -15,10 +15,10 @@ public:
 	CLIPS::CLIPSCPPEnv environment;
 	CLIPS::DataObject dataObject;
 
-	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
-	void AssertPlayerID(uint32_t ID);
-	void AssertNodeDistance(uint32_t nodeID, uint32_t playerID, uint32_t distance);
-	void AssertNodeNeighbor(uint32_t nodeID, uint32_t neighborID);
+	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
+	void AssertPlayerID(const uint32_t ID);
+	void AssertNodeDistance(const uint32_t nodeID, const uint32_t playerID, const uint32_t distance);
+	void AssertNodeNeighbor(const uint32_t nodeID, const uint32_t neighborID);
 };
 
 #endif

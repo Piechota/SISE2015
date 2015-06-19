@@ -9,7 +9,7 @@ public:
     HumanPlayer(const std::string& name, const Colour& color);
     ~HumanPlayer();
 
-	virtual DecisionInfo ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
+	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
 
 private:
     void clear() const;

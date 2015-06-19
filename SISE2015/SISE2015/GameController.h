@@ -34,7 +34,7 @@ public:
     Pawn* GetCurrentPawn() const;
 
 private:
-	PlayerInfo* players[MAX_PLAYERS];
+	PlayerInfo** players;
     Pawn* currentPawn;
     Graph* graph;
     Graph* currentGraph;

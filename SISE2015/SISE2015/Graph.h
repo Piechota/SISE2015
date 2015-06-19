@@ -40,7 +40,7 @@ public:
 
 	void Generate();
 	std::vector<Node*>* GetNodes();
-	const std::vector<Node*>* GetConstNodes() const;
+	const std::vector<Node*>* GetNodes() const;
 	Node* GetRoot() const;
 	Node* GetNodeById(const uint32_t id) const;
 	uint32_t GetDepth() const;
@@ -53,7 +53,6 @@ private:
 	Node* root;
 	uint32_t depth;
 	uint32_t players;
-
 	uint32_t nodeIdCounter;
 };
 
@@ -62,9 +61,14 @@ FORCEINLINE std::vector<Node*>* Graph::GetNodes()
 	return &nodes;
 }
 
-FORCEINLINE const std::vector<Node*>* Graph::GetConstNodes() const
+FORCEINLINE const std::vector<Node*>* Graph::GetNodes() const
 {
 	return &nodes;
+}
+
+FORCEINLINE uint32_t Graph::GetNodeCount() const
+{
+	return nodeIdCounter;
 }
 
 FORCEINLINE Node* Graph::GetRoot() const
@@ -101,7 +105,5 @@ FORCEINLINE uint32_t Graph::GetPlayers() const
 {
 	return players;
 }
-
-
 
 #endif

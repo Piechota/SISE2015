@@ -1,8 +1,10 @@
 #include "Headers.h"
 
-PiechotaFuzzy::PiechotaFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
-PiechotaFuzzy::~PiechotaFuzzy(){}
-DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+NizikFuzzy::NizikFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
+
+NizikFuzzy::~NizikFuzzy(){}
+
+DecisionInfo NizikFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 
@@ -86,7 +88,7 @@ DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, con
 	else
 	{
 		dec.type = Decision::Type::MOVE;
-		dec.target = choice;
+		dec.target = shootChoice;
 	}
 	return dec;
 }

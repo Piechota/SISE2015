@@ -13,6 +13,17 @@ void GameController::Init()
 {
 	rounds = MAX_ROUNDS;
 	currentRound = 0;
+
+	players = new PlayerInfo*[MAX_PLAYERS];
+	for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
+	{
+		players[i] = nullptr;
+	}
+
+	stats = nullptr;
+	graph = nullptr;
+	currentGraph = nullptr;
+
 	NextRound();
 }
 
@@ -22,8 +33,10 @@ void GameController::NextRound()
     numberOfPlayers = 0;
 	turns = 0;
 
-	for (PlayerInfo* p : players)
+	for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
 	{
+		PlayerInfo* p = players[i];
+
 		if (p != nullptr)
 		{
 			if (p->player != nullptr)
@@ -83,8 +96,10 @@ GameController::~GameController()
         currentGraph = nullptr;
     }
 
-    for (PlayerInfo* p : players)
-    {
+	for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
+	{
+		PlayerInfo* p = players[i];
+
         if (p != nullptr)
         {
             if (p->player != nullptr)

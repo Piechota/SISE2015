@@ -11,7 +11,7 @@ Node::Node(const uint32_t id, const int32_t x, const int32_t y)
 Node::Node(const Node& other)
 {
 	id = other.GetId();
-	neighbors = std::vector<Node*>(*other.GetConstConnections());
+	neighbors = std::vector<Node*>(*other.GetConnections());
 	positionX = other.GetPositionX();
 	positionY = other.GetPositionY();
 	pawn = other.GetPawn();
@@ -22,7 +22,7 @@ Node& Node::operator=(const Node& other)
 	if (this != &other)
 	{
 		id = other.GetId();
-		neighbors = std::vector<Node*>(*other.GetConstConnections());
+		neighbors = std::vector<Node*>(*other.GetConnections());
 		positionX = other.GetPositionX();
 		positionY = other.GetPositionY();
 		pawn = other.GetPawn();
