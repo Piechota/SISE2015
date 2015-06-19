@@ -77,10 +77,14 @@ void GameController::NextRound()
 	currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
 	currentGraph->Generate();
 
-    SubmitPlayer(new WrobelFuzzy("gracz #1", Colours::blue));
-    SubmitPlayer(new NizikFuzzy("gracz #2", Colours::white));
-	SubmitPlayer(new LewandowskiFuzzy("gracz #4", Colours::green));
-	//SubmitPlayer(new PiechotaFuzzy("gracz #4", Colours::red));
+	SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
+	SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
+	//SubmitPlayer(new CLIPSPlayer("Nizik", Colours::red, "../Behaviour/nizik.clp")); // Hangs?
+	SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::green, "../Behaviour/rossiya.clp"));
+	//SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
+	//SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
+	//SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
+	//SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::green));
 }
 
 GameController::~GameController()
@@ -198,13 +202,13 @@ void GameController::StartTurn()
 {
     printf("\nStart phase started (%d)\n", turns);
 
-	uint32_t* playerNodeIds = new uint32_t[this->numberOfPlayers];
+	uint32_t* playerNodeIds = new uint32_t[numberOfPlayers];
 	for (uint32_t i = 0; i < numberOfPlayers; ++i)
 	{
-		playerNodeIds[i] = this->players[i]->pawn->GetNode()->GetId();
+		playerNodeIds[i] = players[i]->pawn->GetNode()->GetId();
 	}
 
-	std::vector<NodeInfo> turnGraphInfo = this->currentGraph->GenerateNodesForLogic(playerNodeIds, this->numberOfPlayers);
+	std::vector<NodeInfo> turnGraphInfo = currentGraph->GenerateNodesForLogic(playerNodeIds, numberOfPlayers);
 
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {

@@ -10,16 +10,6 @@ Pawn::~Pawn()
 
 }
 
-Node* Pawn::GetNode() const
-{
-	return node;
-}
-
-void Pawn::SetNode(Node* const node)
-{
-	this->node = node;
-}
-
 void Pawn::Die()
 {
 	isAlive = false;

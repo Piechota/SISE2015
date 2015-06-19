@@ -34,6 +34,7 @@
 #include "SpierekFuzzy.h"
 #include "WrobelFuzzy.h"
 #include "NizikFuzzy.h"
+#include "MatushkaRossiyaFuzzy.h"
 #include "LewandowskiFuzzy.h"
 #include "Stats.h"
 #include "GameController.h"

@@ -25,18 +25,3 @@ void Player::ResetIdIndexing()
 {
 	Player::idCounter = 0;
 }
-
-uint32_t Player::GetId() const
-{
-	return id;
-}
-
-const std::string& Player::GetName() const
-{
-	return name;
-}
-
-const Colour& Player::GetColor() const
-{
-	return color;
-}

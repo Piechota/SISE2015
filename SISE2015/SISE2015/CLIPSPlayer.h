@@ -11,14 +11,16 @@ public:
 	CLIPSPlayer(const std::string& name, const Colour& color, char* file);
 	CLIPSPlayer(const CLIPSPlayer& other);
 
-	char* AIfile;
-	CLIPS::CLIPSCPPEnv environment;
-	CLIPS::DataObject dataObject;
-
 	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) override;
+
+private:
 	void AssertPlayerID(const uint32_t ID);
 	void AssertNodeDistance(const uint32_t nodeID, const uint32_t playerID, const uint32_t distance);
 	void AssertNodeNeighbor(const uint32_t nodeID, const uint32_t neighborID);
+
+	char* AIfile;
+	CLIPS::CLIPSCPPEnv environment;
+	CLIPS::DataObject dataObject;
 };
 
 #endif

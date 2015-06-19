@@ -46,4 +46,19 @@ private:
 	static uint32_t idCounter;
 };
 
+FORCEINLINE uint32_t Player::GetId() const
+{
+	return id;
+}
+
+FORCEINLINE const std::string& Player::GetName() const
+{
+	return name;
+}
+
+FORCEINLINE const Colour& Player::GetColor() const
+{
+	return color;
+}
+
 #endif //_PLAYER_H_
