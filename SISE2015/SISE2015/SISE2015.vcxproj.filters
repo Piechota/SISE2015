@@ -39,6 +39,10 @@
     <ClCompile Include="NizikFuzzy.cpp">
       <Filter>Bots</Filter>
     </ClCompile>
+    <ClCompile Include="WrobelFuzzy.cpp">
+      <Filter>Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="LewandowskiFuzzy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -78,6 +82,10 @@
     <ClInclude Include="NizikFuzzy.h">
       <Filter>Bots</Filter>
     </ClInclude>
+    <ClInclude Include="WrobelFuzzy.h">
+      <Filter>Bots</Filter>
+    </ClInclude>
+    <ClInclude Include="LewandowskiFuzzy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

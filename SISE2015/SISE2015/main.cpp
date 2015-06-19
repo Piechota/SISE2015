@@ -44,6 +44,7 @@ void CloseSDL()
 
 int main(int argc, char* args[])
 {
+    srand(time(nullptr));
     if (!InitSDL(300, 300))
     {
         return 1;

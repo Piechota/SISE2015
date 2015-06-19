@@ -72,7 +72,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\libs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -156,6 +156,7 @@
     <ClCompile Include="GraphRenderer.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="LewandowskiFuzzy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NizikFuzzy.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Headers.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="LewandowskiFuzzy.h" />
     <ClInclude Include="NizikFuzzy.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Pawn.h" />

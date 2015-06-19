@@ -11,7 +11,7 @@
 #include <string>
 #include <fl/Headers.h>
 #include <clips.h>
-
+#include <thread>
 #include <SDL.h>
 #include <SDL_mixer.h>
 
@@ -34,6 +34,7 @@
 #include "SpierekFuzzy.h"
 #include "WrobelFuzzy.h"
 #include "NizikFuzzy.h"
+#include "LewandowskiFuzzy.h"
 #include "Stats.h"
 #include "GameController.h"
 

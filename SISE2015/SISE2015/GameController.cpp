@@ -77,8 +77,9 @@ void GameController::NextRound()
 	currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
 	currentGraph->Generate();
 
-	SubmitPlayer(new CLIPSPlayer("gracz #2", Colours::white, "../Behaviour/spierek.clp"));
-	SubmitPlayer(new SpierekFuzzy("gracz #4", Colours::red));
+    SubmitPlayer(new WrobelFuzzy("gracz #1", Colours::blue));
+    SubmitPlayer(new NizikFuzzy("gracz #2", Colours::white));
+	SubmitPlayer(new LewandowskiFuzzy("gracz #4", Colours::green));
 	//SubmitPlayer(new PiechotaFuzzy("gracz #4", Colours::red));
 }
 
@@ -225,6 +226,7 @@ void GameController::StartTurn()
 		{
             currentPlayer->pawn->Die();
         }
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
 
