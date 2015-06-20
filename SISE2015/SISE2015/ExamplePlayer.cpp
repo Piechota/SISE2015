@@ -10,7 +10,7 @@ ExamplePlayer::ExamplePlayer(const ExamplePlayer& other) : Player(other)
 	
 }
 
-DecisionInfo ExamplePlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo ExamplePlayer::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	//throw 0;
 	Decision dec;

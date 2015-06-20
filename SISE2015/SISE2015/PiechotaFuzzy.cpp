@@ -2,7 +2,7 @@
 
 PiechotaFuzzy::PiechotaFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
 PiechotaFuzzy::~PiechotaFuzzy(){}
-DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 

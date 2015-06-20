@@ -8,11 +8,9 @@ MatushkaRossiyaFuzzy::~MatushkaRossiyaFuzzy()
 {
 }
 
-DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
-
-	const std::string name[] = { "Scum" };
 
 	InputVariable* const input = new InputVariable();
 	input->setName("Scum");
@@ -76,7 +74,7 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo> graphIn
 
 void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>* const nodes, const std::vector<NodeInfo>& graphInfo, Node*& target, float& targetValue)
 {
-	const std::string name[] = { "Scum" };
+	const std::string variableName[] = { "Scum" };
 
 	const size_t nodesSize = nodes->size();
 	const size_t graphInfoSize = graphInfo.size();
@@ -99,7 +97,7 @@ void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>*
 			}
 		}
 
-		AddVariables(name, temporaryTargetInfo, 1);
+		AddVariables(variableName, temporaryTargetInfo, 1);
 		engine->process();
 		const float outputValue = (float)outputVariable->getOutputValue();
 

@@ -123,22 +123,22 @@ void Graph::Generate()
 std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint32_t playerCount)
 {
 	const uint32_t nodeCount = GetNodeCount();
-	const std::vector<Node*>* tmpNodes = GetNodes();
+	const std::vector<Node*>* const tmpNodes = GetNodes();
 	const std::vector<Node*>* tmpNeighbors = nullptr;
 
 	std::vector<NodeInfo> resultInfos;
 
-	for (uint32_t i = 0; i < nodeCount; ++i)
+	for (size_t i = 0; i < nodeCount; ++i)
 	{
 		resultInfos.push_back(NodeInfo((*tmpNodes)[i]->GetId()));
 		tmpNeighbors = (*tmpNodes)[i]->GetConnections();
 		const size_t neightborCount = tmpNeighbors->size();
 
-		for (uint32_t j = 0; j < neightborCount; ++j)
+		for (size_t j = 0; j < neightborCount; ++j)
 		{
 			resultInfos[i].neighborIds.push_back((*tmpNeighbors)[j]->GetId());
 		}
-		for (uint32_t j = 0; j < playerCount; ++j)
+		for (size_t j = 0; j < playerCount; ++j)
 		{
 			resultInfos[i].distanceToPlayers.push_back(DistanceToPlayer(-1, -1));
 		}
@@ -148,9 +148,9 @@ std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint
 	std::queue<Node*> toVisit;
 
 	uint32_t tmpPlayerNodeId = -1;
-	for (uint32_t playerIndex = 0; playerIndex < playerCount; tmpPlayerNodeId = ++playerIndex)
+	for (size_t playerIndex = 0; playerIndex < playerCount; tmpPlayerNodeId = ++playerIndex)
 	{
-		for (uint32_t i = 0; i < nodeCount; ++i)
+		for (size_t i = 0; i < nodeCount; ++i)
 		{
 			visited[i] = false;
 			resultInfos[i].distanceToPlayers[playerIndex] = DistanceToPlayer(-1, playerIndex);
@@ -172,7 +172,7 @@ std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint
 			tmpNeighbors = currentNode->GetConnections();
 			const size_t neighborCount = tmpNeighbors->size();
 
-			for (uint32_t i = 0; i < neighborCount; ++i)
+			for (size_t i = 0; i < neighborCount; ++i)
 			{
 				const uint32_t tmpId = (*tmpNeighbors)[i]->GetId();
 				//resultInfos[currentId].neighborIds.push_back(tmpId);

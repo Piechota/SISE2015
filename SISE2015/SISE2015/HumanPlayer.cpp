@@ -51,7 +51,7 @@ HumanPlayer::~HumanPlayer()
 //
 //}
 
-DecisionInfo HumanPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo HumanPlayer::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	clear();
 	const Node* const my_node = myPawn->GetNode();

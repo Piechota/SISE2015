@@ -208,7 +208,7 @@ void GameController::StartTurn()
 		playerNodeIds[i] = players[i]->pawn->GetNode()->GetId();
 	}
 
-	std::vector<NodeInfo> turnGraphInfo = currentGraph->GenerateNodesForLogic(playerNodeIds, numberOfPlayers);
+	const std::vector<NodeInfo> turnGraphInfo = currentGraph->GenerateNodesForLogic(playerNodeIds, numberOfPlayers);
 
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
@@ -230,7 +230,8 @@ void GameController::StartTurn()
 		{
             currentPlayer->pawn->Die();
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+        //std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
 

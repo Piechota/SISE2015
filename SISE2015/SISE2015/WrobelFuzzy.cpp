@@ -2,7 +2,7 @@
 
 WrobelFuzzy::WrobelFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
 WrobelFuzzy::~WrobelFuzzy(){}
-DecisionInfo WrobelFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo WrobelFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 
@@ -63,7 +63,7 @@ DecisionInfo WrobelFuzzy::ProcessAI(std::vector<NodeInfo> graphInfo, const Pawn*
 
 	engine->configure("AlgebraicProduct", "AlgebraicSum", "Minimum", "Maximum", "Centroid");
 
-	NodeInfo* myNodeInfo = &graphInfo[myPawn->GetNode()->GetId()];
+	const NodeInfo* myNodeInfo = &graphInfo[myPawn->GetNode()->GetId()];
 
 	engine->setInputValue(movementName, myNodeInfo->neighborIds.size());
 

@@ -10,7 +10,7 @@ CLIPSPlayer::CLIPSPlayer(const CLIPSPlayer& other) : Player(other)
 	AIfile = other.AIfile;
 }
 
-DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) {
+DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn) {
 	// load data (rules), reset
 	environment.Clear();
 	environment.Load(AIfile);

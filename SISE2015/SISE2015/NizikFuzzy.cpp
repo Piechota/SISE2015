@@ -4,7 +4,7 @@ NizikFuzzy::NizikFuzzy(const std::string& name, const Colour& color) : FuzzyPlay
 
 NizikFuzzy::~NizikFuzzy(){}
 
-DecisionInfo NizikFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo NizikFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 

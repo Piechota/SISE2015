@@ -40,7 +40,7 @@ FuzzyPlayer::~FuzzyPlayer()
 {
 }
 
-DecisionInfo FuzzyPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo FuzzyPlayer::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 	const std::string names[] = { "Player1", "Player2" };

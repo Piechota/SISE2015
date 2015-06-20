@@ -3,7 +3,7 @@
 LewandowskiFuzzy::LewandowskiFuzzy(const std::string& name, const Colour& color) :FuzzyPlayer(name, color) {}
 LewandowskiFuzzy::~LewandowskiFuzzy(){}
 
-Decision LewandowskiFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+Decision LewandowskiFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
     engine->restart();
 
@@ -124,7 +124,7 @@ Decision LewandowskiFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, cons
     engine->removeRuleBlock(0);
 
 
-    delete neighbours;
+    delete[] neighbours;
     return d;
 }
 

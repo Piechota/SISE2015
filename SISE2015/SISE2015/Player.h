@@ -28,14 +28,14 @@ public:
 
 	Player(const std::string& name, const Colour& color);
 	Player(const Player& other);
-	~Player();
+	virtual ~Player();
 
 	uint32_t GetId() const;
 	const std::string& GetName() const;
 	const Colour& GetColor() const;
 
 	//method called to launch thought process of the pawn, returns decision
-	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn) = 0;
+	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn) = 0;
 
 protected:
     std::string name;

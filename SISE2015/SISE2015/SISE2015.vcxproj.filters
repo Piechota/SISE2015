@@ -45,7 +45,9 @@
     <ClCompile Include="WrobelFuzzy.cpp">
       <Filter>Bots</Filter>
     </ClCompile>
-    <ClCompile Include="LewandowskiFuzzy.cpp" />
+    <ClCompile Include="LewandowskiFuzzy.cpp">
+      <Filter>Bots</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h" />
@@ -91,7 +93,9 @@
     <ClInclude Include="WrobelFuzzy.h">
       <Filter>Bots</Filter>
     </ClInclude>
-    <ClInclude Include="LewandowskiFuzzy.h" />
+    <ClInclude Include="LewandowskiFuzzy.h">
+      <Filter>Bots</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

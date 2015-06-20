@@ -3,7 +3,7 @@
 SpierekFuzzy::SpierekFuzzy(const std::string& name, const Colour& color) : FuzzyPlayer(name, color){}
 SpierekFuzzy::~SpierekFuzzy(){}
 
-DecisionInfo SpierekFuzzy::ProcessAI(const std::vector<NodeInfo> graphInfo, const Pawn* const myPawn)
+DecisionInfo SpierekFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
 	engine->restart();
 
