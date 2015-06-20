@@ -65,17 +65,15 @@ DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const
 	// get target node
 	dataObject = environment.Eval("?*Target*");
 	const CLIPS::IntegerValue* const target = dynamic_cast<CLIPS::IntegerValue*>(dataObject.GetDOValue());
-	const __int64 decTarget = target->theInteger;
+	const uint64_t targetId = target->theInteger;
 
-	// This validation is not only not needed, it is actually wrong,
-	// but we currently don't have any convenient way of getting node pointer by its id from here.
 	const Node* const myNode = myPawn->GetNode();
 	const std::vector<Node*>* const connections = myNode->GetConnections();
 	const size_t connectionsSize = connections->size();
 	bool nodeIdMatched = false;
 	for (size_t i = 0; i < connectionsSize; ++i) 
 	{
-		if ((*connections)[i]->GetId() == target->theInteger) 
+		if ((*connections)[i]->GetId() == targetId)
 		{
 			dec.target = (*connections)[i];
 			nodeIdMatched = true;
@@ -83,6 +81,7 @@ DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const
 		}
 	}
 
+	// If no node matched the returned target ID, assign a default one.
 	if (!nodeIdMatched)
 	{
 		dec.target = (*connections)[0];
@@ -94,7 +93,7 @@ DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo> graphInfo, const
 	//char* text = "";
 	//dataObject.String(text);
 	//printf(text);
-	std::cout << std::endl << "DECISION: " << decString << " -> " << decTarget << std::endl;
+	std::cout << std::endl << "DECISION: " << decString << " -> " << targetId << std::endl;
 	getchar();
 
 	return dec;
