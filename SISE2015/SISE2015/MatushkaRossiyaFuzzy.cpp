@@ -29,7 +29,7 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphI
 	output->setDefaultValue(fl::nan);
 	engine->addOutputVariable(output);
 
-	RuleBlock* const rules = new RuleBlock;
+	RuleBlock* const rules = new RuleBlock();
 	rules->addRule(Rule::parse("if Scum is CLOSE then Glory is HIGH", engine));
 	rules->addRule(Rule::parse("if Scum is MIDDLE then Glory is MEDIUM", engine));
 	rules->addRule(Rule::parse("if Scum is FAR then Glory is LOW", engine));

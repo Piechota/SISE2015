@@ -62,9 +62,8 @@ void Graph::Generate()
 	root = nullptr;
 
 	static const uint32_t distance = (uint32_t)(screen_height / (depth * 2.5));
-
-	const int32_t rootPosX = screen_width / 2;
-	const int32_t rootPosY = screen_height / 2;
+	static const int32_t rootPosX = screen_width / 2;
+	static const int32_t rootPosY = screen_height / 2;
 
 	// initial node
 	root = new Node(Graph::nodeIdCounter++, rootPosX, rootPosY);
@@ -72,7 +71,7 @@ void Graph::Generate()
 
 	// ring-shaped nodes
 	uint32_t currDistance = distance;
-	float angle = 360.0f / players;
+	float angle = 360.0f / (float)players;
 	angle *= 0.01745f;
 
 	for (size_t i = 0; i < depth; ++i)
@@ -120,7 +119,7 @@ void Graph::Generate()
 	}
 }
 
-std::vector<NodeInfo> Graph::GenerateNodesForLogic(uint32_t* playerNodeIds, uint32_t playerCount)
+std::vector<NodeInfo> Graph::GenerateNodesForLogic(const uint32_t* const playerNodeIds, const uint32_t playerCount) const
 {
 	const uint32_t nodeCount = GetNodeCount();
 	const std::vector<Node*>* const tmpNodes = GetNodes();

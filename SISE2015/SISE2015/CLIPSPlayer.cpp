@@ -94,7 +94,8 @@ DecisionInfo CLIPSPlayer::ProcessAI(const std::vector<NodeInfo>& graphInfo, cons
 	//dataObject.String(text);
 	//printf(text);
 	std::cout << std::endl << "DECISION: " << decString << " -> " << targetId << std::endl;
-	getchar();
+
+	//getchar();
 
 	return dec;
 }

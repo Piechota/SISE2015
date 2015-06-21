@@ -21,6 +21,8 @@ public:
 	const std::vector<Node*>* GetConnections() const;
 	void AddConnection(Node* const node);
 	bool IsConnectedTo(const Node* const node) const;
+	void SetPositionX(const int32_t x);
+	void SetPositionY(const int32_t y);
 	int32_t GetPositionX() const;
 	int32_t GetPositionY() const;
 	void SetPawn(Pawn* const pawn);
@@ -64,6 +66,16 @@ FORCEINLINE bool Node::IsConnectedTo(const Node* const node) const
 	}
 
 	return false;
+}
+
+FORCEINLINE void Node::SetPositionX(const int32_t x)
+{
+	positionX = x;
+}
+
+FORCEINLINE void Node::SetPositionY(const int32_t y)
+{
+	positionY = y;
 }
 
 FORCEINLINE int32_t Node::GetPositionX() const

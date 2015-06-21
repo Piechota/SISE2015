@@ -11,7 +11,7 @@ bool InitSDL(const int& w, const int& h)
         return false;
     }
 
-    window = SDL_CreateWindow("SISE2015", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("SISE2015 - Unicorn edition", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
     if (window == nullptr)
     {
         printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -44,8 +44,8 @@ void CloseSDL()
 
 int main(int argc, char* args[])
 {
-    srand(time(nullptr));
-    if (!InitSDL(300, 300))
+    srand((unsigned int)time(nullptr));
+    if (!InitSDL(640, 640))
     {
         return 1;
     }

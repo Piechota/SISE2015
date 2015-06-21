@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-#define MAX_ROUNDS 3
+#define MAX_ROUNDS 100
 #define MAX_TURNS_PER_ROUND 100
 #define GRAPH_DEPTH 2
 #define GRAPH_PLAYERS 8
@@ -202,8 +202,8 @@ void GameController::StartTurn()
 {
     printf("\nStart phase started (%d)\n", turns);
 
-	uint32_t* playerNodeIds = new uint32_t[numberOfPlayers];
-	for (uint32_t i = 0; i < numberOfPlayers; ++i)
+	uint32_t* const playerNodeIds = new uint32_t[numberOfPlayers];
+	for (size_t i = 0; i < numberOfPlayers; ++i)
 	{
 		playerNodeIds[i] = players[i]->pawn->GetNode()->GetId();
 	}

@@ -21,6 +21,10 @@ extern Audio* audio;
 extern Keyboard* keyboard;
 extern GameController* game;
 
+extern uint32_t lastTime;
+extern uint32_t currentTime;
+extern uint32_t deltaTime;
+
 void RefreshInputAndScreen();
 
 #ifdef _MSC_VER

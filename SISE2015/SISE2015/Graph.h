@@ -46,7 +46,7 @@ public:
 	uint32_t GetDepth() const;
 	uint32_t GetPlayers() const;
 	uint32_t GetNodeCount() const;
-	std::vector<NodeInfo> GenerateNodesForLogic(uint32_t* playerNodeIds, uint32_t playerCount);
+	std::vector<NodeInfo> GenerateNodesForLogic(const uint32_t* const playerNodeIds, const uint32_t playerCount) const;
 
 private:
 	std::vector<Node*> nodes;
