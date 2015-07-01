@@ -55,30 +55,24 @@ int main(int argc, char* args[])
     keyboard = new Keyboard();
     game = new GameController();
     game->Init();
-
     audio->Play();
-
     while (run)
     {
         RefreshInputAndScreen();
-
         game->MainLoop();
-
-        if (game->GetIsGameOver()) {
+        if (game->GetIsGameOver())
+        {
             run = false;
         }
     }
 
     game->SaveStats();
     delete game;
-
     danceMat->CloseDanceMat();
     delete danceMat;
     audio->Stop();
     delete audio;
-
     delete keyboard;
     CloseSDL();
-
     return 0;
 }
