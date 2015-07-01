@@ -2,7 +2,7 @@
 
 Stats::Stats(const std::string& filename)
 {
-	file.open(filename);
+	file.open(filename, std::ofstream::app);
 }
 
 Stats::~Stats()
@@ -53,7 +53,7 @@ void Stats::SaveToFile()
 		}
 		file << "\n";
 
-		file << "Processing time sum";
+		/*file << "Processing time sum";
 		for (auto& kv : stats)
 		{
 			file << ";";
@@ -75,7 +75,7 @@ void Stats::SaveToFile()
 			file << ";";
 			file << kv.second->turns;
 		}
-		file << "\n";
+		file << "\n";*/
 
 		file.flush();
 	}

@@ -34,7 +34,7 @@ public:
     Pawn* GetCurrentPawn() const;
 
 private:
-	PlayerInfo** players;
+    std::vector<PlayerInfo*> players;
     Pawn* currentPawn;
     Graph* graph;
     Graph* currentGraph;

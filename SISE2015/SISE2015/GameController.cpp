@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-#define MAX_ROUNDS 100
+#define MAX_ROUNDS 15
 #define MAX_TURNS_PER_ROUND 100
 #define GRAPH_DEPTH 2
 #define GRAPH_PLAYERS 8
@@ -11,99 +11,32 @@ GameController::GameController()
 
 void GameController::Init()
 {
-	rounds = MAX_ROUNDS;
-	currentRound = 0;
+    rounds = MAX_ROUNDS;
+    currentRound = 0;
 
-	players = new PlayerInfo*[MAX_PLAYERS];
-	for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
-	{
-		players[i] = nullptr;
-	}
+    //players = new PlayerInfo*[MAX_PLAYERS];
+    players.resize(MAX_PLAYERS, nullptr);
+    //for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
+    //{
+    //	players[i] = nullptr;
+    //}
 
-	stats = nullptr;
-	graph = nullptr;
-	currentGraph = nullptr;
+    stats = nullptr;
+    graph = nullptr;
+    currentGraph = nullptr;
 
-	NextRound();
+    NextRound();
 }
 
-void GameController::NextRound() 
+void GameController::NextRound()
 {
-	currentRound++;
+    currentRound++;
     numberOfPlayers = 0;
-	turns = 0;
+    turns = 0;
 
-	for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
-	{
-		PlayerInfo* p = players[i];
-
-		if (p != nullptr)
-		{
-			if (p->player != nullptr)
-			{
-				delete p->player;
-				p->player = nullptr;
-			}
-
-			if (p->pawn != nullptr)
-			{
-				delete p->pawn;
-				p->pawn = nullptr;
-			}
-
-			delete p;
-			p = nullptr;
-		}
-	}
-
-	if (stats != nullptr)
-	{
-		delete stats;
-	}
-	stats = new Stats("stats.csv");
-
-	if (graph != nullptr)
-	{
-		delete graph;
-		graph = nullptr;
-	}
-
-	if (currentGraph != nullptr)
-	{
-		delete currentGraph;
-		currentGraph = nullptr;
-	}
-
-	currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
-	currentGraph->Generate();
-
-	SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
-	SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
-	//SubmitPlayer(new CLIPSPlayer("Nizik", Colours::red, "../Behaviour/nizik.clp")); // Hangs?
-	SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::green, "../Behaviour/rossiya.clp"));
-	//SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
-	//SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
-	//SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
-	//SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::green));
-}
-
-GameController::~GameController()
-{
-    if (graph != nullptr)
+    for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
     {
-        delete graph;
-        graph = nullptr;
-    }
-
-    if (currentGraph != nullptr)
-    {
-        delete currentGraph;
-        currentGraph = nullptr;
-    }
-
-	for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
-	{
-		PlayerInfo* p = players[i];
+        PlayerInfo* p = players[i];
 
         if (p != nullptr)
         {
@@ -124,11 +57,83 @@ GameController::~GameController()
         }
     }
 
-	if (stats != nullptr)
-	{
-		delete stats;
-		stats = nullptr;
-	}
+    if (stats != nullptr)
+    {
+        delete stats;
+    }
+    stats = new Stats("stats.csv");
+
+    if (graph != nullptr)
+    {
+        delete graph;
+        graph = nullptr;
+    }
+
+    if (currentGraph != nullptr)
+    {
+        delete currentGraph;
+        currentGraph = nullptr;
+    }
+
+    currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
+    currentGraph->Generate();
+
+    SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
+    SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Nizik", Colours::red, "../Behaviour/nizik.clp")); // Hangs?
+    //SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::red, "../Behaviour/rossiya.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Lewandowski", Colours::green, "../Behaviour/lewandowski.clp"));
+
+    //SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
+    //SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
+    //SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
+    //SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
+    //SubmitPlayer(new WrobelFuzzy("Wrobel Fuzzy", Colours::white));
+    //SubmitPlayer(new LewandowskiFuzzy("Lewandowski Fuzzy", Colours::green));
+}
+
+GameController::~GameController()
+{
+    if (graph != nullptr)
+    {
+        delete graph;
+        graph = nullptr;
+    }
+
+    if (currentGraph != nullptr)
+    {
+        delete currentGraph;
+        currentGraph = nullptr;
+    }
+
+    for (uint16_t i = 0; i < MAX_PLAYERS; ++i)
+    {
+        PlayerInfo* p = players[i];
+
+        if (p != nullptr)
+        {
+            if (p->player != nullptr)
+            {
+                delete p->player;
+                p->player = nullptr;
+            }
+
+            if (p->pawn != nullptr)
+            {
+                delete p->pawn;
+                p->pawn = nullptr;
+            }
+
+            delete p;
+            p = nullptr;
+        }
+    }
+
+    if (stats != nullptr)
+    {
+        delete stats;
+        stats = nullptr;
+    }
 }
 
 void GameController::Render() const
@@ -154,8 +159,8 @@ bool GameController::GetIsQuitting() const
 
 void GameController::MainLoop()
 {
-    if (!isGameOver && !isQuitting) 
-	{
+    if (!isGameOver && !isQuitting)
+    {
         StartTurn();
         Turn();
         EndTurn();
@@ -171,16 +176,18 @@ void GameController::SubmitPlayer(Player* const player)
     pPlayer->pawn = new Pawn();
     pPlayer->pawn->color = player->GetColor();
 
-	stats->AddPlayer(player);
+    stats->AddPlayer(player);
     printf("Submitted new player: %s (%u)\n", pPlayer->player->GetName().c_str(), numberOfPlayers);
 
     numberOfPlayers++;
 
     std::vector<Node*>* const nodes = currentGraph->GetNodes();
     size_t nodeIndex = 0;
-	do {
-		nodeIndex = (rand() % (nodes->size() - 1)) + 1;
-	} while ((*nodes)[nodeIndex]->GetPawn() != NULL);
+    do
+    {
+        nodeIndex = (rand() % (nodes->size() - 1)) + 1;
+    }
+    while ((*nodes)[nodeIndex]->GetPawn() != NULL);
 
     pPlayer->pawn->SetNode((*nodes)[nodeIndex]);
     (*nodes)[nodeIndex]->SetPawn(pPlayer->pawn);
@@ -188,46 +195,46 @@ void GameController::SubmitPlayer(Player* const player)
     printf("%s's pawn spawned at node %u\n", pPlayer->player->GetName().c_str(), pPlayer->pawn->GetNode()->GetId());
 }
 
-Pawn* GameController::GetCurrentPawn() const 
+Pawn* GameController::GetCurrentPawn() const
 {
-	return currentPawn;
+    return currentPawn;
 }
 
-uint8_t GameController::GetCurrentRoundID() const 
+uint8_t GameController::GetCurrentRoundID() const
 {
-	return currentRound;
+    return currentRound;
 }
 
 void GameController::StartTurn()
 {
-    printf("\nStart phase started (%d)\n", turns);
+    printf("\nStart phase started (%d) of game(%d)\n", turns, currentRound);
 
-	uint32_t* const playerNodeIds = new uint32_t[numberOfPlayers];
-	for (size_t i = 0; i < numberOfPlayers; ++i)
-	{
-		playerNodeIds[i] = players[i]->pawn->GetNode()->GetId();
-	}
+    uint32_t* const playerNodeIds = new uint32_t[numberOfPlayers];
+    for (size_t i = 0; i < numberOfPlayers; ++i)
+    {
+        playerNodeIds[i] = players[i]->pawn->GetNode()->GetId();
+    }
 
-	const std::vector<NodeInfo> turnGraphInfo = currentGraph->GenerateNodesForLogic(playerNodeIds, numberOfPlayers);
+    const std::vector<NodeInfo> turnGraphInfo = currentGraph->GenerateNodesForLogic(playerNodeIds, numberOfPlayers);
 
     for (size_t i = 0; i < numberOfPlayers; ++i)
     {
         PlayerInfo* const currentPlayer = players[i];
 
-        if (!isQuitting) 
-		{
-			currentPawn = currentPlayer->pawn;
+        if (!isQuitting)
+        {
+            currentPawn = currentPlayer->pawn;
 
-			if (currentPawn->isAlive)
-			{
+            if (currentPawn->isAlive)
+            {
                 //RenewData();
-				printf("%s is processing AI", currentPlayer->player->GetName().c_str());
-				currentPlayer->currentDecision = currentPlayer->player->ProcessAI(turnGraphInfo, currentPawn);
-				stats->AddSurvival(currentPlayer->player);
+                printf("%s is processing AI\n", currentPlayer->player->GetName().c_str());
+                currentPlayer->currentDecision = currentPlayer->player->ProcessAI(turnGraphInfo, currentPawn);
+                stats->AddSurvival(currentPlayer->player);
             }
         }
-        else 
-		{
+        else
+        {
             currentPlayer->pawn->Die();
         }
 
@@ -249,7 +256,7 @@ void GameController::Turn()
         {
             printf("%s commited a suicide\n", pPlayer->player->GetName().c_str());
             pPlayer->pawn->Die();
-			stats->AddDeath(pPlayer->player);
+            stats->AddDeath(pPlayer->player);
         }
     }
 
@@ -295,7 +302,7 @@ void GameController::Turn()
                         if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
                         {
                             players[j]->die = true;
-							stats->AddKill(pPlayer->player);
+                            stats->AddKill(pPlayer->player);
                             printf("%s killed player %s\n", pPlayer->player->GetName().c_str(), players[j]->player->GetName().c_str());
                             break;
                         }
@@ -321,7 +328,7 @@ void GameController::EndTurn()
             if (pPlayer->die)
             {
                 pPlayer->pawn->Die();
-				stats->AddDeath(pPlayer->player);
+                stats->AddDeath(pPlayer->player);
                 printf("%s died\n", pPlayer->player->GetName().c_str());
             }
         }
@@ -339,7 +346,7 @@ void GameController::EndTurn()
 
     turns++;
 
-	if (countAlive <= 1 || turns >= MAX_TURNS_PER_ROUND)
+    if (countAlive <= 1 || turns >= MAX_TURNS_PER_ROUND)
     {
         printf("\nGame Over\n");
 
@@ -347,12 +354,12 @@ void GameController::EndTurn()
         {
             printf("No more than one player is alive\n");
 
-			for (size_t i = 0; i < numberOfPlayers; ++i)
+            for (size_t i = 0; i < numberOfPlayers; ++i)
             {
-				if (players[i]->pawn->isAlive)
-				{
-					printf("%s (%u)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
-				}
+                if (players[i]->pawn->isAlive)
+                {
+                    printf("%s (%u)\n", players[i]->player->GetName().c_str(), players[i]->player->GetId());
+                }
             }
         }
         else
@@ -364,17 +371,17 @@ void GameController::EndTurn()
     }
 }
 
-void GameController::FinishRound() 
-{
-	if (currentRound < rounds) 
-	{
-		NextRound();
-	}
-	else 
-	{
-		GameOver();
-		// TODO: sum up results
-	}
+void GameController::FinishRound()
+{    
+    if (currentRound < rounds)
+    {
+        NextRound();
+    }
+    else
+    {
+        GameOver();
+        // TODO: sum up results
+    }
 }
 
 void GameController::GameOver()
@@ -383,15 +390,15 @@ void GameController::GameOver()
     std::cout << "\n\nGAME OVER\n\n";
 }
 
-void GameController::ForceQuit() 
+void GameController::ForceQuit()
 {
     isQuitting = true;
-	currentRound = rounds;
+    currentRound = rounds;
 }
 
 void GameController::RenewData()
 {
-	// Currently doesn't work properly, requires graph deep copy!
+    // Currently doesn't work properly, requires graph deep copy!
     if (graph != nullptr)
     {
         delete graph;
