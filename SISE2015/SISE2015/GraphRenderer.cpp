@@ -21,7 +21,7 @@ void GraphRenderer::RenderBackground()
 	SDL_SetRenderDrawColor(renderer, Colours::background.r, Colours::background.g, Colours::background.b, SDL_ALPHA_OPAQUE);
 }
 
-void GraphRenderer::RenderGraph(Graph* const graph) 
+void GraphRenderer::RenderGraph(const Graph* const graph) 
 {
 	SDL_RenderClear(renderer);
 
