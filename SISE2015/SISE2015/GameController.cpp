@@ -85,12 +85,11 @@ void GameController::NextRound()
     //SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::red, "../Behaviour/rossiya.clp"));
     //SubmitPlayer(new CLIPSPlayer("Lewandowski", Colours::green, "../Behaviour/lewandowski.clp"));
 
-    //SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
-    //SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
-    SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
-    SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
+    SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
+    SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
+    //SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
     //SubmitPlayer(new WrobelFuzzy("Wrobel Fuzzy", Colours::white));
-    //SubmitPlayer(new LewandowskiFuzzy("Lewandowski Fuzzy", Colours::green));
+    //SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
 }
 
 GameController::~GameController()
