@@ -8,7 +8,7 @@ FuzzyPlayer::FuzzyPlayer(const std::string& name, const Colour& color) : Player(
 
 FuzzyPlayer::~FuzzyPlayer()
 {
-	delete engine;
+		//delete engine;
 }
 
 DecisionInfo FuzzyPlayer::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)

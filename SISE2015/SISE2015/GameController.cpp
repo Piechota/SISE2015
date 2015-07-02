@@ -80,16 +80,17 @@ void GameController::NextRound()
     currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
     currentGraph->Generate();
 
-    SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
-    SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
+	//SubmitPlayer(new CLIPSPlayer("Wrobel", Colours::black, "../Behaviour/wrobel.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
     //SubmitPlayer(new CLIPSPlayer("Nizik", Colours::red, "../Behaviour/nizik.clp")); // Hangs?
     //SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::red, "../Behaviour/rossiya.clp"));
     //SubmitPlayer(new CLIPSPlayer("Lewandowski", Colours::green, "../Behaviour/lewandowski.clp"));
 
     //SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
     //SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
-    //SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
-    //SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
+    SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
+    SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
     //SubmitPlayer(new WrobelFuzzy("Wrobel Fuzzy", Colours::white));
     //SubmitPlayer(new LewandowskiFuzzy("Lewandowski Fuzzy", Colours::green));
 }
