@@ -79,7 +79,8 @@ void GameController::NextRound()
     currentGraph->Generate();
 
     SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
-    SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
+	SubmitPlayer(new CLIPSPlayer("Wrobel", Colours::black, "../Behaviour/wrobel.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
     //SubmitPlayer(new CLIPSPlayer("Nizik", Colours::red, "../Behaviour/nizik.clp")); // Hangs?
     //SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::red, "../Behaviour/rossiya.clp"));
     //SubmitPlayer(new CLIPSPlayer("Lewandowski", Colours::green, "../Behaviour/lewandowski.clp"));
