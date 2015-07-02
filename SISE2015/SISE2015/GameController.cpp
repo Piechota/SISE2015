@@ -1,6 +1,6 @@
 #include "Headers.h"
 
-#define MAX_ROUNDS 15
+#define MAX_ROUNDS 5
 #define MAX_TURNS_PER_ROUND 100
 #define GRAPH_DEPTH 2
 #define GRAPH_PLAYERS 8
@@ -80,17 +80,17 @@ void GameController::NextRound()
     currentGraph = new Graph(GRAPH_DEPTH, GRAPH_PLAYERS);
     currentGraph->Generate();
 
-    //SubmitPlayer(new CLIPSPlayer("Spierek", Colours::white, "../Behaviour/spierek.clp"));
-	//SubmitPlayer(new CLIPSPlayer("Wrobel", Colours::black, "../Behaviour/wrobel.clp"));
-    //SubmitPlayer(new CLIPSPlayer("Piechota", Colours::black, "../Behaviour/piechota.clp"));
-    //SubmitPlayer(new CLIPSPlayer("Nizik", Colours::red, "../Behaviour/nizik.clp")); // Hangs?
-    //SubmitPlayer(new CLIPSPlayer("MatushkaRossiya", Colours::red, "../Behaviour/rossiya.clp"));
-    //SubmitPlayer(new CLIPSPlayer("Lewandowski", Colours::green, "../Behaviour/lewandowski.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Spierek CLIPS", Colours::white, "../Behaviour/spierek.clp"));
+	//SubmitPlayer(new CLIPSPlayer("Wrobel CLIPS", Colours::black, "../Behaviour/wrobel.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Piechota CLIPS", Colours::black, "../Behaviour/piechota.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Nizik CLIPS", Colours::red, "../Behaviour/nizik.clp")); //Hangs
+    //SubmitPlayer(new CLIPSPlayer("MatushkaRossiya CLIPS", Colours::red, "../Behaviour/rossiya.clp"));
+    //SubmitPlayer(new CLIPSPlayer("Lewandowski CLIPS", Colours::green, "../Behaviour/lewandowski.clp"));
 
-    //SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
-    //SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
-    SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red));
-    SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
+    SubmitPlayer(new SpierekFuzzy("Spierek Fuzzy", Colours::white));
+    SubmitPlayer(new PiechotaFuzzy("Piechota Fuzzy", Colours::black));
+    //SubmitPlayer(new NizikFuzzy("Nizik Fuzzy", Colours::red)); //Crashes
+    //SubmitPlayer(new MatushkaRossiyaFuzzy("MatushkaRossiya Fuzzy", Colours::red));
     //SubmitPlayer(new WrobelFuzzy("Wrobel Fuzzy", Colours::white));
     //SubmitPlayer(new LewandowskiFuzzy("Lewandowski Fuzzy", Colours::green));
 }

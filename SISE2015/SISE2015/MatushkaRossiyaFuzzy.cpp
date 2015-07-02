@@ -10,6 +10,8 @@ MatushkaRossiyaFuzzy::~MatushkaRossiyaFuzzy()
 
 DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn)
 {
+	std::cout << std::endl << "For the Motherland!";
+
 	engine->restart();
 
 	InputVariable* const input = new InputVariable();
@@ -69,10 +71,20 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphI
 	dec.target = target;
 	if (targetValue > 0.1f) {
 		dec.type = Decision::Type::SHOOT;
+
+		std::cout << std::endl << "I will open fire!";
 	}
 	else {
 		dec.type = Decision::Type::MOVE;
+
+		std::cout << std::endl << "I shall charge forward!";
 	}
+
+	//delete input;
+	//delete output;
+	//delete rules;
+
+	std::cout << std::endl << "Onwards, for glory!" << std::endl << std::endl;
 
 	return dec;
 }
@@ -113,8 +125,8 @@ void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>*
 		{
 			target = temporaryTarget;
 			targetValue = outputValue;
-		}
 
-		std::cout << std::endl << "OUTPUT: " << outputValue;
+			std::cout << std::endl << "Target acquired: " << outputValue << "!";
+		}
 	}
 }
