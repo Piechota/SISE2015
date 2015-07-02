@@ -6,10 +6,10 @@ DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, co
 {
 	engine->restart();
 
-	Node* choice;
+    Node* choice = myPawn->GetNode()->GetConnections()->at(0);
 	double value = 10.0;
 
-	Node* shootChoice;
+    Node* shootChoice = myPawn->GetNode()->GetConnections()->at(0);
 	double shootValue = -1.0;
 
 	const std::string playersNames[] = { "Player1" };
@@ -78,6 +78,7 @@ DecisionInfo PiechotaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, co
 	engine->removeOutputVariable("Danger");
 	engine->removeRuleBlock(0);
 	Decision dec;
+
 	if (shootValue >= 1.4f)
 	{
 		dec.type = Decision::Type::SHOOT;

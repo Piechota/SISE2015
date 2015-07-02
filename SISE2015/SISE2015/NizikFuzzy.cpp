@@ -11,7 +11,7 @@ DecisionInfo NizikFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, const
 	Node* choice;
 	double value = 10.0;
 
-	Node* shootChoice;
+    Node* shootChoice = myPawn->GetNode()->GetConnections()->at(0);
 	double shootValue = -1.0;
 
 	const std::string playersNames[] = { "Player1" };

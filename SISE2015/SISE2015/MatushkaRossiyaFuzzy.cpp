@@ -66,7 +66,10 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphI
 	engine->removeInputVariable("Scum");
 	engine->removeOutputVariable("Glory");
 	engine->removeRuleBlock(0);
-
+    if (target==nullptr)
+    {
+        target = myPawn->GetNode()->GetConnections()->at(0);
+    }
 	Decision dec;
 	dec.target = target;
 	if (targetValue > 0.1f) {
