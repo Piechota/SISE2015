@@ -39,13 +39,13 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphI
 	Node* target = nullptr;
 	float targetValue = 0.0f;
 
-	this->outputVariable = output;
-
 	const Node* const myNode = myPawn->GetNode();
 	const std::vector<Node*>* const connections = myNode->GetConnections();
 	const size_t connectionsSize = connections->size();
 
-	AnalyzeBattlefieldSituation(connections, graphInfo, target, targetValue);
+	AnalyzeBattlefieldSituation(connections, graphInfo, output, target, targetValue);
+
+	Node* targetCopy = target;
 
 	for (size_t i = 0; i < connectionsSize; ++i) 
 	{
@@ -53,7 +53,12 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphI
 		const std::vector<Node*>* const neighborConnections = neighbor->GetConnections();
 		const size_t neighborConnectionsSize = neighborConnections->size();
 
-		AnalyzeBattlefieldSituation(neighborConnections, graphInfo, target, targetValue);
+		AnalyzeBattlefieldSituation(neighborConnections, graphInfo, output, target, targetValue);
+
+		if (target != targetCopy)
+		{
+			target = const_cast<Node*>(neighbor);
+		}
 	}
 
 	engine->removeInputVariable("Scum");
@@ -72,7 +77,7 @@ DecisionInfo MatushkaRossiyaFuzzy::ProcessAI(const std::vector<NodeInfo>& graphI
 	return dec;
 }
 
-void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>* const nodes, const std::vector<NodeInfo>& graphInfo, Node*& target, float& targetValue)
+void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>* const nodes, const std::vector<NodeInfo>& graphInfo, const OutputVariable* const outputVariable, Node*& target, float& targetValue)
 {
 	const std::string variableName[] = { "Scum" };
 
@@ -80,13 +85,14 @@ void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>*
 	const size_t graphInfoSize = graphInfo.size();
 
 	Node* temporaryTarget = nullptr;
-	float temporaryTargetValue = 0.0f;
 	const NodeInfo* temporaryTargetInfo = nullptr;
 
 	for (size_t i = 0; i < nodesSize; ++i)
 	{
 		temporaryTarget = (*nodes)[i];
 		const uint32_t temporaryTargetId = temporaryTarget->GetId();
+
+		temporaryTargetInfo = nullptr;
 
 		for (size_t j = 0; j < graphInfoSize; ++j)
 		{
@@ -97,15 +103,16 @@ void MatushkaRossiyaFuzzy::AnalyzeBattlefieldSituation(const std::vector<Node*>*
 			}
 		}
 
+		if (temporaryTargetInfo == nullptr) continue;
+
 		AddVariables(variableName, temporaryTargetInfo, 1);
 		engine->process();
 		const float outputValue = (float)outputVariable->getOutputValue();
 
-		if (outputValue > targetValue && temporaryTargetValue < outputValue)
+		if (outputValue > targetValue)
 		{
-			temporaryTargetValue = outputValue;
 			target = temporaryTarget;
-			targetValue = temporaryTargetValue;
+			targetValue = outputValue;
 		}
 
 		std::cout << std::endl << "OUTPUT: " << outputValue;

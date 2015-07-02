@@ -10,8 +10,7 @@ public:
 	virtual DecisionInfo ProcessAI(const std::vector<NodeInfo>& graphInfo, const Pawn* const myPawn) override;
 
 private:
-	void AnalyzeBattlefieldSituation(const std::vector<Node*>* const nodes, const std::vector<NodeInfo>& graphInfo, Node*& target, float& targetValue);
-	OutputVariable* outputVariable;
+	void AnalyzeBattlefieldSituation(const std::vector<Node*>* const nodes, const std::vector<NodeInfo>& graphInfo, const OutputVariable* const outputVariable, Node*& target, float& targetValue);
 };
 
 #endif

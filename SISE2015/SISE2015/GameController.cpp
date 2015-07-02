@@ -21,9 +21,11 @@ void GameController::Init()
     //	players[i] = nullptr;
     //}
 
-    stats = nullptr;
+    //stats = nullptr;
     graph = nullptr;
     currentGraph = nullptr;
+
+	stats = new Stats("stats.csv");
 
     NextRound();
 }
@@ -57,11 +59,11 @@ void GameController::NextRound()
         }
     }
 
-    if (stats != nullptr)
+    /*if (stats != nullptr)
     {
         delete stats;
     }
-    stats = new Stats("stats.csv");
+    stats = new Stats("stats.csv");*/
 
     if (graph != nullptr)
     {
@@ -176,7 +178,7 @@ void GameController::SubmitPlayer(Player* const player)
     pPlayer->pawn = new Pawn();
     pPlayer->pawn->color = player->GetColor();
 
-    stats->AddPlayer(player);
+    stats->AddPlayer(player->GetName());
     printf("Submitted new player: %s (%u)\n", pPlayer->player->GetName().c_str(), numberOfPlayers);
 
     numberOfPlayers++;
@@ -230,7 +232,7 @@ void GameController::StartTurn()
                 //RenewData();
                 printf("%s is processing AI\n", currentPlayer->player->GetName().c_str());
                 currentPlayer->currentDecision = currentPlayer->player->ProcessAI(turnGraphInfo, currentPawn);
-                stats->AddSurvival(currentPlayer->player);
+				stats->AddSurvival(currentPlayer->player->GetName());
             }
         }
         else
@@ -256,7 +258,7 @@ void GameController::Turn()
         {
             printf("%s commited a suicide\n", pPlayer->player->GetName().c_str());
             pPlayer->pawn->Die();
-            stats->AddDeath(pPlayer->player);
+			stats->AddDeath(pPlayer->player->GetName());
         }
     }
 
@@ -302,7 +304,7 @@ void GameController::Turn()
                         if (players[j]->pawn->GetNode() == targetNode->GetPawn()->GetNode())
                         {
                             players[j]->die = true;
-                            stats->AddKill(pPlayer->player);
+							stats->AddKill(pPlayer->player->GetName());
                             printf("%s killed player %s\n", pPlayer->player->GetName().c_str(), players[j]->player->GetName().c_str());
                             break;
                         }
@@ -328,7 +330,7 @@ void GameController::EndTurn()
             if (pPlayer->die)
             {
                 pPlayer->pawn->Die();
-                stats->AddDeath(pPlayer->player);
+				stats->AddDeath(pPlayer->player->GetName());
                 printf("%s died\n", pPlayer->player->GetName().c_str());
             }
         }

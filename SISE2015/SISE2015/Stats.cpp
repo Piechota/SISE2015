@@ -25,7 +25,7 @@ void Stats::SaveToFile()
 		for (auto& kv : stats)
 		{
 			file << ";";
-			file << kv.first->GetName();
+			file << kv.first;
 		}
 		file << "\n";
 
@@ -81,7 +81,7 @@ void Stats::SaveToFile()
 	}
 }
 
-void Stats::AddPlayer(const Player* const player)
+void Stats::AddPlayer(const std::string& player)
 {
 	if (stats.find(player) == stats.end())
 	{
@@ -96,27 +96,27 @@ void Stats::AddPlayer(const Player* const player)
 	}
 }
 
-void Stats::AddKill(const Player* const player)
+void Stats::AddKill(const std::string& player)
 {
 	stats[player]->kills++;
 }
 
-void Stats::AddDeath(const Player* const player)
+void Stats::AddDeath(const std::string& player)
 {
 	stats[player]->deaths++;
 }
 
-void Stats::AddSurvival(const Player* const player)
+void Stats::AddSurvival(const std::string& player)
 {
 	stats[player]->survival++;
 }
 
-void Stats::AddProcessingTime(const Player* const player, const float time)
+void Stats::AddProcessingTime(const std::string& player, const float time)
 {
 	stats[player]->processingTimeSum += time;
 }
 
-void Stats::AddTurn(const Player* const player)
+void Stats::AddTurn(const std::string& player)
 {
 	stats[player]->turns++;
 }
