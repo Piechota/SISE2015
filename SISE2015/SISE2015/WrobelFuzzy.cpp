@@ -96,19 +96,6 @@ DecisionInfo WrobelFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, cons
 	engine->restart();
 
 
-	const std::string decisionName = "input_decision";
-	InputVariable* decision = new InputVariable(decisionName, 0.0f, 1.0f);
-	decision->addTerm(new Triangle("FLEE", 0.0f, 0.0f, decisivePoint));
-	decision->addTerm(new Triangle("ATTACK", decisivePoint, 1.0f, 1.0f));
-	engine->addInputVariable(decision);
-
-	float decisionValue = 1.0f;
-	const std::string decisionRatio = "output_decision";
-	OutputVariable* ratio = new OutputVariable(decisionRatio, -decisionValue, decisionValue);
-	ratio->addTerm(new Trapezoid("FLEE", -decisionValue, -decisionValue, 0.0f, 0.0f));
-	ratio->addTerm(new Trapezoid("ATTACK", 0.0f, 0.0f, decisionValue, decisionValue));
-	engine->addOutputVariable(ratio);
-
 	const std::string nodeDistanceName = "input_nodeDistance";
 	InputVariable* nodeDistance = new InputVariable(nodeDistanceName, minDistance, maxDistance);
 	nodeDistance->addTerm(new Triangle("NEAR", minDistance, minDistance, maxDistance));
@@ -116,7 +103,7 @@ DecisionInfo WrobelFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, cons
 	engine->addInputVariable(nodeDistance);
 
 	const std::string nodeValueName = "output_nodeValue";
-	float maxValue = maxDistance * decisionValue;
+	float maxValue = maxDistance;
 	OutputVariable* nodeValue = new OutputVariable(nodeValueName, 0.0f, maxValue);
 	nodeValue->addTerm(new Triangle("BAD", -maxValue, -maxValue, maxValue));
 	nodeValue->addTerm(new Triangle("GOOD", -maxValue, maxValue, maxValue));
@@ -125,19 +112,20 @@ DecisionInfo WrobelFuzzy::ProcessAI(const std::vector<NodeInfo>& graphInfo, cons
 	const std::string decisionRuleBlockName = "decisionRuleBlock";
 	RuleBlock* decisionRuleBlock = new RuleBlock(decisionRuleBlockName);
 
-	decisionRuleBlock->addRule(Rule::parse("if input_decision is FLEE then output_decision is FLEE", engine));
-	decisionRuleBlock->addRule(Rule::parse("if input_decision is ATTACK then output_decision is ATTACK", engine));
 
-	decisionRuleBlock->addRule(Rule::parse("if output_decision is FLEE and input_nodeDistance is FAR then output_nodeValue is GOOD", engine));
-	decisionRuleBlock->addRule(Rule::parse("if output_decision is FLEE and input_nodeDistance is NEAR then output_nodeValue is BAD", engine));
-	decisionRuleBlock->addRule(Rule::parse("if output_decision is ATTACK and input_nodeDistance is NEAR then output_nodeValue is GOOD", engine));
-	decisionRuleBlock->addRule(Rule::parse("if output_decision is ATTACK and input_nodeDistance is FAR then output_nodeValue is BAD", engine));
+	if (dec.type == Decision::Type::MOVE)
+	{
+		decisionRuleBlock->addRule(Rule::parse("if input_nodeDistance is FAR then output_nodeValue is GOOD", engine));
+		decisionRuleBlock->addRule(Rule::parse("if input_nodeDistance is NEAR then output_nodeValue is BAD", engine));
+	}else{
+		decisionRuleBlock->addRule(Rule::parse("if input_nodeDistance is NEAR then output_nodeValue is GOOD", engine));
+		decisionRuleBlock->addRule(Rule::parse("if input_nodeDistance is FAR then output_nodeValue is BAD", engine));
+	}
+
 
 	engine->addRuleBlock(decisionRuleBlock);
 
 	engine->configure("AlgebraicProduct", "AlgebraicSum", "Minimum", "Maximum", "Centroid");
-
-	engine->setInputValue(decisionName, result);
 
 	uint32_t oponentIndex = 0;
 	playerCount = myNodeInfo->distanceToPlayers.size();
